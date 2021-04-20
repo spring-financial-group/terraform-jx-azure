@@ -115,10 +115,18 @@ variable "dns_enabled" {
   default     = false
   description = "Flag that when set creates an Azure DNS zone for JX"
 }
-variable "apex_domain_name" {
+variable "default_apex_domain_name" {
   type        = string
-  description = "The name of the parent/apex domain in which to create this domain zone, e.g. jenkins-x.io. Required if dns_enabled set to true"
-  default     = ""
+  description = "The name of the parent/apex domain in which to create this domain zone, e.g. jenkins-x.io"
+}
+variable "apex_domain_names" {
+  type        = list(string)
+  description = "The extra names of the parent/apex domains in which to create and certify this cluster to use, e.g. jenkins-x-extra-domains.io"
+}
+variable "domain_name_enabled" {
+  type        = bool
+  default     = true
+  description = "If we should use subdomains or use the root"
 }
 variable "domain_name" {
   type        = string

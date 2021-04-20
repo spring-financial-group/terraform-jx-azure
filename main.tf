@@ -87,7 +87,8 @@ module "dns" {
   source                          = "./terraform-jx-azuredns"
   enabled                         = var.dns_enabled
   apex_domain_integration_enabled = var.apex_domain_integration_enabled
-  apex_domain_name                = var.apex_domain_name
+  default_apex_domain_name        = var.default_apex_domain_name
+  apex_domain_names               = var.apex_domain_names
   apex_resource_group_name        = var.apex_resource_group_name
   cluster_name                    = local.cluster_name
   domain_name                     = var.domain_name

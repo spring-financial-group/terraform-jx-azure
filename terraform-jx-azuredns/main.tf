@@ -9,7 +9,7 @@ terraform {
 
 data "azurerm_dns_zone" "apex_domain_zone" {
   count = var.apex_domain_integration_enabled && var.enabled ? 1 : 0
-  name  = var.apex_domain_name
+  name  = var.default_apex_domain_name
 }
 
 data "azurerm_subscription" "current" {
@@ -23,7 +23,7 @@ resource "azurerm_resource_group" "dns" {
 
 resource "azurerm_dns_zone" "dns" {
   count               = var.enabled ? 1 : 0
-  name                = join(".", [var.domain_name, var.apex_domain_name])
+  name                = join(".", [var.domain_name, var.default_apex_domain_name])
   resource_group_name = azurerm_resource_group.dns.0.name
 }
 
