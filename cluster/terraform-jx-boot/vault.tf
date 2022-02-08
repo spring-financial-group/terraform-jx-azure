@@ -16,4 +16,8 @@ resource "helm_release" "vault-instance" {
   repository = "https://storage.googleapis.com/jenkinsxio/charts"
   version    = "1.0.15"
   depends_on = [helm_release.vault-operator]
+  set {
+    name  = "disable_iss_validation"
+    value = "true"
+  }
 }
