@@ -22,7 +22,6 @@ variable "job_secret_env_vars" {
 }
 variable "install_vault" {
   type        = bool
-  default     = false
   description = "Flag to indicate whether to install Hashicorp Vault charts"
 }
 variable "operator_annotations" {

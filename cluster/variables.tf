@@ -338,6 +338,14 @@ variable "key_vault_sku" {
   default     = "standard"
 }
 
+// ----------------------------------------------------------------------------
+// Install Hashicorp Vault
+// ---------------------------------------------------------------------------
+
+variable "install_vault" {
+  type        = bool
+  description = "Flag to indicate whether to install Hashicorp Vault charts"
+}
 
 // ----------------------------------------------------------------------------
 // Storage variables
