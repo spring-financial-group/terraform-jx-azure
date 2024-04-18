@@ -9,7 +9,7 @@ terraform {
 
 
 data "azurerm_dns_zone" "apex_domain_zone" {
-  count = var.apex_domain != "" && var.data_dns_enabled ? 1 : 0
+  count = var.data_dns_enabled ? 1 : 0
   name  = var.apex_domain
   resource_group_name = var.apex_resource_group_name
 }
