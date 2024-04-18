@@ -54,7 +54,7 @@ data "azurerm_resource_group" "apex_dns" {
 
 resource "azurerm_role_assignment" "Give_ExternalDNS_SP_Contributor_Access_to_ApexResourceGroup" {
   count                = var.apex_domain != "" && var.subdomain == "" ?  1 : 0
-  scope                = azurerm_resource_group.0.id
+  scope                = azurerm_resource_group.dns.0.id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = var.principal_id
 }
