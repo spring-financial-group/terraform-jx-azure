@@ -33,3 +33,9 @@ variable "location" {
   default     = "australiaeast"
   description = "The Azure location in which to create the DNS zone"
 }
+
+variable "data_dns_enabled" {
+  type        = bool
+  default     = false
+  description = "The Azure location in which to create the DNS zone"
+}

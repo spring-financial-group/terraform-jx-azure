@@ -9,7 +9,7 @@ terraform {
 
 
 data "azurerm_dns_zone" "apex_domain_zone" {
-  count = var.apex_domain != "" ? 1 : 0
+  count = var.apex_domain != "" && var.data_dns_enabled ? 1 : 0
   name  = var.apex_domain
   resource_group_name = var.apex_resource_group_name
 }
@@ -41,7 +41,7 @@ resource "azurerm_dns_ns_record" "subdomain_ns_delegation" {
 
 resource "azurerm_role_assignment" "Give_ExternalDNS_SP_Contributor_Access_to_ResourceGroup" {
   count                = var.subdomain != "" ?  1 : 0
-  scope                = azurerm_resource_group.dns.0.id
+  scope                = azurerm_resource_group.dns.id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = var.principal_id
 }
