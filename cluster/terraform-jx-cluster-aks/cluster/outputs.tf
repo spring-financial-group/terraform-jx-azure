@@ -34,3 +34,6 @@ output "kubernetes_cluster" {
 output "microsoft_defender_log_id" {
   value = azurerm_log_analytics_workspace.microsoft_defender.id
 }
+output "cluster_ip" {
+  value = azurerm_kubernetes_cluster.aks.network_profile.load_balancer_profile.0.effective_outbound_ips
+}

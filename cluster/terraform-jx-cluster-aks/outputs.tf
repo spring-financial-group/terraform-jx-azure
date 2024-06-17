@@ -28,3 +28,6 @@ output "kube_config_admin" {
 output "microsoft_defender_log_id" {
   value = module.cluster.microsoft_defender_log_id
 }
+output "cluster_ip" {
+  value = module.cluster.cluster_ip
+}

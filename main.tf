@@ -97,3 +97,7 @@ output "kube_config_admin" {
 output "kubelet_identity_id" {
   value = module.cluster.kubelet_identity_id
 }
+
+output "cluster_ip" {
+  value = module.cluster.cluster_ip
+}
