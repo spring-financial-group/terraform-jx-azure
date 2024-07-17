@@ -47,6 +47,10 @@ resource "azurerm_role_assignment" "Give_ExternalDNS_SP_Contributor_Access_to_Re
   scope                = azurerm_resource_group.dns.0.id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = var.principal_id
+  
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_role_assignment" "Give_ExternalDNS_SP_Contributor_Access_to_ResourceGroup_to_Apex" {
