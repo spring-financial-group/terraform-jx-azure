@@ -20,6 +20,7 @@ acr_enabled                      = true
 install_kuberhealthy             = true
 dns_resources_enabled            = true
 default_suk_bool                 = true
+enable_defender_analytics        = true
 
 # Machines
 min_node_count = 5
