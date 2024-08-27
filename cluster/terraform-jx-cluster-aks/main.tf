@@ -50,7 +50,6 @@ resource "azurerm_resource_group" "cluster" {
 // ----------------------------------------------------------------------------
 // Setup Azure Cluster
 // ----------------------------------------------------------------------------
-
 module "cluster" {
   depends_on                       = [module.vnet]
   source                           = "./cluster"
