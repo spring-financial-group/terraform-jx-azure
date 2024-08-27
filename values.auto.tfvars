@@ -51,7 +51,6 @@ mlbuild_node_size      = "Standard_NC4as_T4_v3"
 min_mlbuild_node_count = 0
 max_mlbuild_node_count = 5
 
-
 # Bot stuff in now in terraform
 
 # External registry not used at the moment
