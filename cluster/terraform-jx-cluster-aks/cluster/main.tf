@@ -8,11 +8,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version  = var.cluster_version
   azure_policy_enabled = var.azure_policy_bool
   http_application_routing_enabled = false
+  automatic_upgrade_channel = "patch"
+  node_os_upgrade_channel = "SecurityPatch"
 
   dynamic "automatic_upgrade_channel" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
-      automatic_upgrade_channel = "patch"
       maintenance_window_auto_upgrade {
         day_of_week  = "Friday"
         start_time   = "19:00"
@@ -26,7 +27,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dynamic "node_os_upgrade_channel" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
-      node_os_upgrade_channel = "SecurityPatch"
       maintenance_window_node_os {
         day_of_week  = "Saturday"
         start_time   = "19:00"
