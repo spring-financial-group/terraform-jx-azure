@@ -26,7 +26,7 @@ data "azurerm_resource_group" "existing_suk" {
 }
 
 data "azurerm_log_analytics_workspace" "microsoft_defender" {
-  count = var.enable_defender_analytics ? 1 : 0
+  count = var.enable_defender_analytics ? 0 : 1
   name = var.microsoft_defender_log_analytics_name
   resource_group_name = azurerm_resource_group.default_suk[0].name
 }
