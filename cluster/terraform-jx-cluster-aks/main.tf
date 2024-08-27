@@ -93,7 +93,7 @@ module "cluster" {
   min_mlbuild_node_count           = var.min_mlbuild_node_count
   max_mlbuild_node_count           = var.max_mlbuild_node_count
   azure_policy_bool                = var.azure_policy_bool
-  microsoft_defender_log_id        = var.enable_defender_analytics ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender[0].id
+  microsoft_defender_log_id        = var.enable_defender_analytics ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender.id
   defender_resource_group          = var.default_suk_bool ? azurerm_resource_group.default_suk[0].name : data.azurerm_resource_group.existing_suk.name
   enable_defender_analytics        = var.enable_defender_analytics
   tenant_id                        = data.azurerm_subscription.current.tenant_id
