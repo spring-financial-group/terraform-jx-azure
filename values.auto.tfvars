@@ -22,6 +22,7 @@ install_kuberhealthy             = true
 dns_resources_enabled            = true
 default_suk_bool                 = true
 enable_defender_analytics        = true
+enable_auto_upgrades             = true
 # Machines
 min_node_count = 5
 max_node_count = 50

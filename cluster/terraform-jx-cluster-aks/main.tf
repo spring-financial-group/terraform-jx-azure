@@ -98,6 +98,7 @@ module "cluster" {
   enable_defender_analytics        = var.enable_defender_analytics
   tenant_id                        = data.azurerm_subscription.current.tenant_id
   orchestrator_version             = var.orchestrator_version
+  enable_auto_upgrades             = var.enable_auto_upgrades
 }
 
 // ----------------------------------------------------------------------------
