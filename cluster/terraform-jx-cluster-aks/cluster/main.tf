@@ -8,33 +8,27 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version  = var.cluster_version
   azure_policy_enabled = var.azure_policy_bool
   http_application_routing_enabled = false
-  automatic_upgrade_channel = "patch"
-  node_os_upgrade_channel = "SecurityPatch"
 
-  dynamic "automatic_upgrade_channel" {
-    for_each = var.enable_auto_upgrades ? [1] : []
-    content {
-      maintenance_window_auto_upgrade {
-        day_of_week  = "Friday"
-        start_time   = "19:00"
-        duration     = 4
-        frequency    = "Weekly"
-        interval     = 1
-      }
-    }
+  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
+
+  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : null
+
+  # Conditional maintenance window for auto upgrade
+  maintenance_window_auto_upgrade {
+    day_of_week  = var.enable_auto_upgrades ? "Friday" : null
+    start_time   = var.enable_auto_upgrades ? "19:00" : null
+    duration     = var.enable_auto_upgrades ? 4 : null
+    frequency    = var.enable_auto_upgrades ? "Weekly" : null
+    interval     = var.enable_auto_upgrades ? 1 : null
   }
 
-  dynamic "node_os_upgrade_channel" {
-    for_each = var.enable_auto_upgrades ? [1] : []
-    content {
-      maintenance_window_node_os {
-        day_of_week  = "Saturday"
-        start_time   = "19:00"
-        duration     = 4
-        frequency    = "Weekly"
-        interval     = 1
-      }
-    }
+  # Conditional maintenance window for node OS upgrade
+  maintenance_window_node_os {
+    day_of_week  = var.enable_auto_upgrades ? "Saturday" : null
+    start_time   = var.enable_auto_upgrades ? "19:00" : null
+    duration     = var.enable_auto_upgrades ? 4 : null
+    frequency    = var.enable_auto_upgrades ? "Weekly" : null
+    interval     = var.enable_auto_upgrades ? 1 : null
   }
 
   azure_active_directory_role_based_access_control {
