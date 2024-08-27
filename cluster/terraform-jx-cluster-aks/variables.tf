@@ -256,3 +256,7 @@ variable "microsoft_defender_log_analytics_name" {
   type = string
   default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"
 }
+
+variable "enable_auto_upgrades" {
+  type = bool
+}

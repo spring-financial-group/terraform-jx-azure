@@ -238,3 +238,7 @@ variable "enable_defender_analytics" {
 variable "tenant_id" {
   type = string
 }
+
+variable "enable_auto_upgrades" {
+  type = bool
+}

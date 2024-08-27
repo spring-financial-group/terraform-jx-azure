@@ -78,6 +78,7 @@ module "cluster" {
   default_suk_bool                     = var.default_suk_bool
   enable_defender_analytics            = var.enable_defender_analytics
   orchestrator_version                 = var.orchestrator_version
+  enable_auto_upgrades                 = var.enable_auto_upgrades
 }
 
 output "connect" {
