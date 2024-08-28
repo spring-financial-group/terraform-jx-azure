@@ -9,28 +9,32 @@ resource "azurerm_kubernetes_cluster" "aks" {
   azure_policy_enabled = var.azure_policy_bool
   http_application_routing_enabled = false
 
-  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
+  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : ""
 
-  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : null
+  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : ""
 
-  # Conditional maintenance window for auto upgrade
-  maintenance_window_auto_upgrade {
-    day_of_week  = var.enable_auto_upgrades ? "Friday" : null
-    start_time   = var.enable_auto_upgrades ? "19:00" : null
-    duration     = var.enable_auto_upgrades ? 4 : null
-    frequency    = var.enable_auto_upgrades ? "Weekly" : null
-    interval     = var.enable_auto_upgrades ? 1 : null
-  }
-
-  # Conditional maintenance window for node OS upgrade
-  maintenance_window_node_os {
-    day_of_week  = var.enable_auto_upgrades ? "Saturday" : null
-    start_time   = var.enable_auto_upgrades ? "19:00" : null
-    duration     = var.enable_auto_upgrades ? 4 : null
-    frequency    = var.enable_auto_upgrades ? "Weekly" : null
-    interval     = var.enable_auto_upgrades ? 1 : null
-  }
-
+  dynamic "maintenance_window_node_os" {
+    for_each = var.enable_auto_upgrades ? [1] : []
+    content {
+        day_of_week  = "Saturday"
+        start_time   = "19:00"
+        duration     = 4
+        frequency    = "Weekly"
+        interval     = 1
+      }
+    }
+  
+  dynamic "maintenance_window_auto_upgrade" {
+    for_each = var.enable_auto_upgrades ? [1] : []
+    content {
+        day_of_week  = "Friday"
+        start_time   = "19:00"
+        duration     = 4
+        frequency    = "Weekly"
+        interval     = 1
+      }
+    }
+  
   azure_active_directory_role_based_access_control {
    azure_rbac_enabled = false
     tenant_id = var.tenant_id
@@ -50,14 +54,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
   
   default_node_pool {
     name                 = "default"
-    scale_down_mode              = "Deallocate"
+    scale_down_mode      = "Deallocate"
     vm_size              = var.node_size
     vnet_subnet_id       = var.vnet_subnet_id
     node_count           = var.node_count
     min_count            = var.min_node_count
     max_count            = var.max_node_count
     orchestrator_version = var.orchestrator_version
-    auto_scaling_enabled  = var.max_node_count == null ? false : true
+    auto_scaling_enabled = var.max_node_count == null ? false : true
     upgrade_settings {
       max_surge = "25%"
     }
