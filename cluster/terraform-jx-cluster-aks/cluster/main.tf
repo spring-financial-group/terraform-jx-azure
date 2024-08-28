@@ -9,7 +9,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   azure_policy_enabled             = var.azure_policy_bool
   http_application_routing_enabled = false
   image_cleaner_interval_hours     = 48
-  image_cleaner_enabled            = true 
+  image_cleaner_enabled            = false
 
   automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
 
