@@ -1,13 +1,15 @@
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = var.cluster_name
-  sku_tier            = var.sku_tier
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  node_resource_group = var.node_resource_group_name
-  dns_prefix          = var.dns_prefix
-  kubernetes_version  = var.cluster_version
-  azure_policy_enabled = var.azure_policy_bool
+  name                             = var.cluster_name
+  sku_tier                         = var.sku_tier
+  location                         = var.location
+  resource_group_name              = var.resource_group_name
+  node_resource_group              = var.node_resource_group_name
+  dns_prefix                       = var.dns_prefix
+  kubernetes_version               = var.cluster_version
+  azure_policy_enabled             = var.azure_policy_bool
   http_application_routing_enabled = false
+  image_cleaner_interval_hours     = 48
+  image_cleaner_enabled            = true 
 
   automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
 
@@ -16,30 +18,30 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
-        day_of_week  = "Saturday"
-        start_time   = "19:00"
-        duration     = 4
-        frequency    = "Weekly"
-        interval     = 1
-      }
+      day_of_week = "Saturday"
+      start_time  = "19:00"
+      duration    = 4
+      frequency   = "Weekly"
+      interval    = 1
     }
-  
+  }
+
   dynamic "maintenance_window_auto_upgrade" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
-        day_of_week  = "Friday"
-        start_time   = "19:00"
-        duration     = 4
-        frequency    = "Weekly"
-        interval     = 1
-      }
+      day_of_week = "Friday"
+      start_time  = "19:00"
+      duration    = 4
+      frequency   = "Weekly"
+      interval    = 1
     }
-  
-  azure_active_directory_role_based_access_control {
-   azure_rbac_enabled = false
-    tenant_id = var.tenant_id
   }
-  
+
+  azure_active_directory_role_based_access_control {
+    azure_rbac_enabled = false
+    tenant_id          = var.tenant_id
+  }
+
   microsoft_defender {
     log_analytics_workspace_id = var.microsoft_defender_log_id
   }
@@ -47,11 +49,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dynamic "oms_agent" {
     for_each = var.enable_log_analytics ? [""] : []
     content {
-     # enabled                    = var.enable_log_analytics
+      # enabled                    = var.enable_log_analytics
       log_analytics_workspace_id = var.enable_log_analytics ? azurerm_log_analytics_workspace.cluster[0].id : ""
     }
   }
-  
+
   default_node_pool {
     name                 = "default"
     scale_down_mode      = "Deallocate"
@@ -66,7 +68,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
       max_surge = "25%"
     }
   }
-  
+
   network_profile {
     network_plugin = var.cluster_network_model
   }
@@ -90,10 +92,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   max_count             = var.max_ml_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_ml_node_count == null ? false : true
-  node_taints = ["sku=gpu:NoSchedule"]
-  node_labels = {key = "gpu_ready"}
+  node_taints           = ["sku=gpu:NoSchedule"]
+  node_labels           = { key = "gpu_ready" }
 
-  lifecycle {ignore_changes = [node_taints, node_count, node_labels, orchestrator_version]}
+  lifecycle { ignore_changes = [node_taints, node_count, node_labels, orchestrator_version] }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
@@ -110,9 +112,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
   max_count             = var.max_build_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_build_node_count == null ? false : true
-  node_taints = ["sku=build:NoSchedule"]
+  node_taints           = ["sku=build:NoSchedule"]
 
-  lifecycle {ignore_changes = [node_taints, node_count, orchestrator_version]}
+  lifecycle { ignore_changes = [node_taints, node_count, orchestrator_version] }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
@@ -129,9 +131,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
   max_count             = var.max_infra_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_infra_node_count == null ? false : true
-  node_taints = ["sku=infra:NoSchedule"]
+  node_taints           = ["sku=infra:NoSchedule"]
 
-  lifecycle {ignore_changes = [node_taints, node_count, orchestrator_version]}
+  lifecycle { ignore_changes = [node_taints, node_count, orchestrator_version] }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
@@ -148,8 +150,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
   max_count             = var.max_mlbuild_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_mlbuild_node_count == null ? false : true
-  node_taints = ["sku=mlbuild:NoSchedule"]
-  node_labels = {key = "gpu_ready"}
-  
-  lifecycle {ignore_changes = [node_taints, node_count, node_labels, orchestrator_version]}
+  node_taints           = ["sku=mlbuild:NoSchedule"]
+  node_labels           = { key = "gpu_ready" }
+
+  lifecycle { ignore_changes = [node_taints, node_count, node_labels, orchestrator_version] }
 }
