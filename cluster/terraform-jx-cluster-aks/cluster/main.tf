@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
 
-  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : null
+  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
