@@ -9,9 +9,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   azure_policy_enabled = var.azure_policy_bool
   http_application_routing_enabled = false
 
-  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : ""
+  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
 
-  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : ""
+  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : null
 
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
