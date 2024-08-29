@@ -90,6 +90,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   node_count            = var.use_spot_ml ? 0 : var.ml_node_count
   min_count             = var.min_ml_node_count
   max_count             = var.max_ml_node_count
+  orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_ml_node_count == null ? false : true
   node_taints           = ["sku=gpu:NoSchedule"]
   node_labels           = { key = "gpu_ready" }
