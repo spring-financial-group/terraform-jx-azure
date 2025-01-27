@@ -146,6 +146,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
   vm_size               = var.mlbuild_node_size
   vnet_subnet_id        = var.vnet_subnet_id
   orchestrator_version  = var.orchestrator_version
+  node_count            = var.use_spot_mlbuild ? 0 : var.mlbuild_node_count
+  min_count             = var.min_mlbuild_node_count
+  max_count             = var.max_mlbuild_node_count
   auto_scaling_enabled  = var.max_mlbuild_node_count == null ? false : true
   node_taints           = ["sku=mlbuild:NoSchedule"]
   node_labels           = { key = "gpu_ready" }
