@@ -48,11 +48,19 @@ resource "azurerm_role_assignment" "acrpush" {
   principal_id         = var.principal_id
 }
 
-resource "azurerm_container_registry_cache_rule" "cache_rule" {
+resource "azurerm_container_registry_cache_rule" "dockerhub_cache_rule" {
   count = var.acr_enabled && var.external_registry_url == "" && var.use_existing_acr_name == null ? 1 : 0
   name                  = "docker-io"
   container_registry_id = azurerm_container_registry.acr[0].id
   target_repo           = "docker-io/*"
   source_repo           = "docker.io/*"
   credential_set_id = "${azurerm_container_registry.acr[0].id}/credentialSets/dockerhub-cred"
+}
+
+resource "azurerm_container_registry_cache_rule" "quay_cache_rule" {
+  count = var.acr_enabled && var.external_registry_url == "" && var.use_existing_acr_name == null ? 1 : 0
+  name                  = "quay-io"
+  container_registry_id = azurerm_container_registry.acr[0].id
+  target_repo           = "quay-io/*"
+  source_repo           = "quay.io/*"
 }
