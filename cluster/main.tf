@@ -166,6 +166,7 @@ module "storage" {
   cluster_name         = local.cluster_name
   location             = var.location
   storage_principal_id = module.cluster.kubelet_identity_id
+  logs_container_name = var.logs_container_name
 }
 
 output "connect" {

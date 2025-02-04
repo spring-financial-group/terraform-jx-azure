@@ -29,7 +29,7 @@ resource "azurerm_storage_account" "storage" {
 }
 
 resource "azurerm_storage_container" "logs" {
-  name                 = "logs"
+  name                 = var.logs_container_name
   storage_account_id = azurerm_storage_account.storage.id
 }
 

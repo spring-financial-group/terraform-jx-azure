@@ -10,6 +10,11 @@ variable "location" {
   description = "The Azure region in to which to provision the cluster"
 }
 
+variable "logs_container_name" {
+  type = string
+  default = "logs"
+}
+
 // ----------------------------------------------------------------------------
 // JX Boot variables
 // ----------------------------------------------------------------------------

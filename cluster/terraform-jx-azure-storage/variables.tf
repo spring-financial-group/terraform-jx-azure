@@ -11,6 +11,9 @@ variable "resource_group_name" {
 variable "cluster_name" {
   type = string
 }
+variable "logs_container_name" {
+  type = string
+}
 variable "storage_principal_id" {
   type        = string
   description = "The id of the service principal that should be granted permission on the storage account"
