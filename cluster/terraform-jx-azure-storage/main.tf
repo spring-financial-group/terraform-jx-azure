@@ -31,7 +31,6 @@ resource "azurerm_storage_account" "storage" {
 resource "azurerm_storage_container" "logs" {
   name                 = "logs"
   storage_account_id = azurerm_storage_account.storage.id
-  storage_account_name = "${azurerm_storage_account.storage.name}"
 }
 
 resource "azurerm_role_assignment" "storage" {
