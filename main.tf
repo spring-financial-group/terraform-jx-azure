@@ -79,7 +79,6 @@ module "cluster" {
   enable_defender_analytics            = var.enable_defender_analytics
   orchestrator_version                 = var.orchestrator_version
   enable_auto_upgrades                 = var.enable_auto_upgrades
-  logs_container_name                  = var.logs_container_name
 }
 
 output "connect" {
