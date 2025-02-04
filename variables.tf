@@ -12,6 +12,7 @@ variable "location" {
 
 variable "logs_container_name" {
   type = string
+  default = "logs"
 }
 
 // ----------------------------------------------------------------------------
