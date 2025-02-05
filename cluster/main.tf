@@ -35,6 +35,9 @@ provider "kubernetes" {
 }
 
 provider "helm" {
+  experiments {
+    manifest = true
+  }
   kubernetes {
 
     host = module.cluster.cluster_endpoint
