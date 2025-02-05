@@ -30,4 +30,9 @@ resource "helm_release" "vault-instance" {
     name = "bankVaultsImage"
     value = "ghcr.io/bank-vaults/bank-vaults:v1.31.2"
   }
+
+  set {
+    name = "pvc.size"
+    value = "2Gi"
+  }
 }
