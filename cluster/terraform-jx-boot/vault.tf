@@ -3,8 +3,8 @@ resource "helm_release" "vault-operator" {
   name             = "vault-operator"
   chart            = "vault-operator"
   namespace        = "jx-vault"
-  repository       = "https://kubernetes-charts.banzaicloud.com"
-  version          = "1.20.0"
+  repository       = "oci://ghcr.io/bank-vaults/helm-charts"
+  version          = "1.22.3"
   create_namespace = true
 
   set {
@@ -12,9 +12,9 @@ resource "helm_release" "vault-operator" {
     value = "512Mi"
   }
   set {
-      name = "resources.requests.memory"
-      value = "256Mi"
-    }
+    name = "resources.requests.memory"
+    value = "256Mi"
+  }
 }
 
 resource "helm_release" "vault-instance" {
@@ -23,11 +23,11 @@ resource "helm_release" "vault-instance" {
   chart      = "vault-instance"
   namespace  = "jx-vault"
   repository = "https://jenkins-x-charts.github.io/repo"
-  version    = "1.0.27"
-  
-  set {
-    name = "pvc.size"
-    value = "2Gi"
-  }
+  version    = "1.0.28"
   depends_on = [helm_release.vault-operator]
+
+  set {
+    name = "bankVaultsImage"
+    value = "ghcr.io/bank-vaults/bank-vaults:v1.31.2"
+  }
 }
