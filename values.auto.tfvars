@@ -14,7 +14,7 @@ dns_resource_group_name          = "jx3build-dns-rsg"
 key_vault_enabled                = false
 key_vault_resource_group_name    = "jx3key-vault-rsg"
 key_vault_name                   = "k8secrets-vault"
-cluster_version                  = "1.31.3"
+cluster_version                  = "1.31.5"
 orchestrator_version             = "1.31.2"
 azure_policy_bool                = false
 acr_enabled                      = true
@@ -43,7 +43,7 @@ max_build_node_count = 6
 #Infra Node
 use_spot_infra       = false
 infra_node_size      = "Standard_D8s_v3"
-min_infra_node_count = 0
+min_infra_node_count = 2
 max_infra_node_count = 6
 
 # MLbuild Node
