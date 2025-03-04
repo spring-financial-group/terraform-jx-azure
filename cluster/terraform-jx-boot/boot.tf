@@ -16,11 +16,11 @@ resource "helm_release" "jx-git-operator" {
   }
   set {
     name = "resources.limits.cpu"
-    value = "200m"
+    value = "500m"
   }
   set {
       name = "resources.requests.cpu"
-      value = "160m"
+      value = "300m"
   }
 
   set {
