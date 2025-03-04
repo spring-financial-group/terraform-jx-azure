@@ -3,8 +3,25 @@ resource "helm_release" "jx-git-operator" {
   chart            = "jx-git-operator"
   namespace        = "jx-git-operator"
   repository       = "https://jenkins-x-charts.github.io/repo"
-  version          = "0.1.9"
+  version          = "0.2.1"
   create_namespace = true
+
+  set {
+    name = "resources.limits.memory"
+    value = "512Mi"
+  }
+  set {
+      name = "resources.requests.memory"
+      value = "256Mi"
+  }
+  set {
+    name = "resources.limits.cpu"
+    value = "200m"
+  }
+  set {
+      name = "resources.requests.cpu"
+      value = "160m"
+  }
 
   set {
     name  = "bootServiceAccount.enabled"
