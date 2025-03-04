@@ -8,19 +8,19 @@ resource "helm_release" "jx-git-operator" {
 
   set {
     name = "resources.limits.memory"
-    value = "512Mi"
+    value = "768Mi"
   }
   set {
       name = "resources.requests.memory"
-      value = "256Mi"
+      value = "512Mi"
   }
   set {
     name = "resources.limits.cpu"
-    value = "500m"
+    value = "750m"
   }
   set {
       name = "resources.requests.cpu"
-      value = "300m"
+      value = "500m"
   }
 
   set {
