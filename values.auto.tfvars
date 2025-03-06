@@ -43,7 +43,7 @@ max_build_node_count = 6
 #Infra Node
 use_spot_infra       = false
 infra_node_size      = "Standard_D8s_v3"
-min_infra_node_count = 2
+min_infra_node_count = 3
 max_infra_node_count = 6
 
 # MLbuild Node
