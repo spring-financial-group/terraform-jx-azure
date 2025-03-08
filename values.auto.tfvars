@@ -26,11 +26,11 @@ enable_auto_upgrades             = true
 # Machines
 min_node_count = 5
 max_node_count = 50
-node_size      = "Standard_D4s_v3"
+node_size      = "Standard_D8s_v6"
 
 # Ml nodes
 use_spot_ml       = true
-ml_node_size      = "Standard_NV4as_v4"
+ml_node_size      = "Standard_NV24s_v3"
 min_ml_node_count = 2
 max_ml_node_count = 6
 
