@@ -30,19 +30,19 @@ node_size      = "Standard_D4s_v3"
 
 # Ml nodes
 use_spot_ml       = true
-ml_node_size      = "Standard_NV24s_v3"
+ml_node_size      = "Standard_NV4as_v4"
 min_ml_node_count = 2
 max_ml_node_count = 6
 
 # Build Spot Nodes
 use_spot             = true
-build_node_size      = "Standard_D8s_v4"
+build_node_size      = "Standard_D8s_v6"
 min_build_node_count = 0
 max_build_node_count = 6
 
 #Infra Node
 use_spot_infra       = false
-infra_node_size      = "Standard_D8s_v3"
+infra_node_size      = "Standard_D8s_v6"
 min_infra_node_count = 3
 max_infra_node_count = 6
 
