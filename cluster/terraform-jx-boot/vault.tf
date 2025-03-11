@@ -15,6 +15,10 @@ resource "helm_release" "vault-operator" {
       name = "resources.requests.memory"
       value = "256Mi"
     }
+  set {
+    name = "image.repository"
+    value = "jx3mqubebuild.azurecr.io/docker-io"
+  }
 }
 
 resource "helm_release" "vault-instance" {
