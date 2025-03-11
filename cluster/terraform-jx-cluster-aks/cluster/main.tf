@@ -26,17 +26,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
-  dynamic "maintenance_window_auto_upgrade" {
-    for_each = var.enable_auto_upgrades ? [1] : []
-    content {
-      day_of_week = "Friday"
-      start_time  = "19:00"
-      duration    = 4
-      frequency   = "Weekly"
-      interval    = 1
-    }
-  }
-
   azure_active_directory_role_based_access_control {
     azure_rbac_enabled = false
     tenant_id          = var.tenant_id
