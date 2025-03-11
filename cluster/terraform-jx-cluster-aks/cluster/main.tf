@@ -56,6 +56,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     upgrade_settings {
       max_surge = "25%"
     }
+    temporary_name_for_rotation = "tempk8spool"
   }
 
   network_profile {
