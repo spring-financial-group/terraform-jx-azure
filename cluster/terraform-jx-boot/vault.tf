@@ -9,7 +9,7 @@ resource "helm_release" "vault-operator" {
 
   set {
     name = "resources.limits.memory"
-    value = "51git
+    value = "512Mi"
   }
   set {
       name = "resources.requests.memory"
