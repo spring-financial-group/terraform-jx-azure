@@ -33,6 +33,6 @@ resource "helm_release" "vault-instance" {
 
   set {
     name = "pvc.size"
-    value = "2Gi"
+    value = "4Gi"
   }
 }
