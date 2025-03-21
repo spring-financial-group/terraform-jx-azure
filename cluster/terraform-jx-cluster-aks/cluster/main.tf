@@ -11,8 +11,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
 
-  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
-
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
   dynamic "maintenance_window_node_os" {
@@ -83,6 +81,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   auto_scaling_enabled  = var.max_ml_node_count == null ? false : true
   node_taints           = ["sku=gpu:NoSchedule"]
   node_labels           = { key = "gpu_ready" }
+  temporary_name_for_rotation = "tempml"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
@@ -102,6 +101,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_build_node_count == null ? false : true
   node_taints           = ["sku=build:NoSchedule"]
+  temporary_name_for_rotation = "tempbuild"
 
   lifecycle { ignore_changes = [node_taints, node_count] }
 }
@@ -121,6 +121,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_infra_node_count == null ? false : true
   node_taints           = ["sku=infra:NoSchedule"]
+  temporary_name_for_rotation = "tempinfra"
 
   lifecycle { ignore_changes = [node_taints, node_count] }
 }
@@ -141,6 +142,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
   auto_scaling_enabled  = var.max_mlbuild_node_count == null ? false : true
   node_taints           = ["sku=mlbuild:NoSchedule"]
   node_labels           = { key = "gpu_ready" }
+  temporary_name_for_rotation = "tempmlbuild"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
