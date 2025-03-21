@@ -11,8 +11,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
 
-  automatic_upgrade_channel = var.enable_auto_upgrades ? "patch" : null
-
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
   dynamic "maintenance_window_node_os" {
