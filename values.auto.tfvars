@@ -28,6 +28,11 @@ min_node_count = 5
 max_node_count = 50
 node_size      = "Standard_D16s_v6"
 
+# Kubesystem
+kubesystem_node_size      = "Standard_D16s_v3"
+min_kubesystem_node_count = 2
+max_kubesystem_node_count = 6
+
 # Ml nodes
 use_spot_ml       = true
 ml_node_size      = "Standard_NV24s_v3"

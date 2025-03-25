@@ -202,6 +202,45 @@ variable "max_mlbuild_node_count" {
 }
 
 // ----------------------------------------------------------------------------
+// kubesystem nodepool variables
+// ----------------------------------------------------------------------------
+variable "use_spot_kubesystem" {
+  type        = bool
+  default     = true
+  description = "Should we use spot instances for the kubesystem nodes"
+}
+
+variable "spot_max_price_kubesystem" {
+  type        = number
+  default     = -1
+  description = "The maximum price you're willing to pay in USD per virtual machine, -1 to go to the maximum price"
+}
+
+variable "kubesystem_node_size" {
+  type        = string
+  default     = ""
+  description = "The size of the kubesystem node to use for the cluster"
+}
+
+variable "kubesystem_node_count" {
+  description = "The number of kubesystem nodes to use for the cluster"
+  type        = number
+  default     = null
+}
+
+variable "min_kubesystem_node_count" {
+  description = "The minimum number of kubesystem nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
+variable "max_kubesystem_node_count" {
+  description = "The maximum number of kubesystem nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
+// ----------------------------------------------------------------------------
 // Cluster variables
 // ----------------------------------------------------------------------------
 variable "sku_tier" {

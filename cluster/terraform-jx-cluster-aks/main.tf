@@ -92,6 +92,10 @@ module "cluster" {
   mlbuild_node_count               = var.mlbuild_node_count
   min_mlbuild_node_count           = var.min_mlbuild_node_count
   max_mlbuild_node_count           = var.max_mlbuild_node_count
+  kubesystem_node_size             = var.kubesystem_node_size
+  min_kubesystem_node_count        = var.min_kubesystem_node_count
+  max_kubesystem_node_count        = var.max_kubesystem_node_count
+  kubesystem_node_count            = var.kubesystem_node_count
   azure_policy_bool                = var.azure_policy_bool
   microsoft_defender_log_id        = var.enable_defender_analytics ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender.id
   defender_resource_group          = var.default_suk_bool ? azurerm_resource_group.default_suk[0].name : data.azurerm_resource_group.existing_suk.name
