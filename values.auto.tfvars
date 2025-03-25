@@ -29,7 +29,7 @@ max_node_count = 50
 node_size      = "Standard_D16s_v6"
 
 # Kubesystem
-kubesystem_node_size      = "Standard_D16s_v3"
+kubesystem_node_size      = "Standard_D8s_v4"
 min_kubesystem_node_count = 2
 max_kubesystem_node_count = 6
 
