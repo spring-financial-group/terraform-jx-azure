@@ -147,7 +147,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "kubesystem" {
   count                 = var.kubesystem_node_size == "" ? 0 : 1
-  name                  = "kubesystemnode"
+  name                  = "kubesystem"
   priority              = "Regular"
   eviction_policy       = "Deallocate"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
