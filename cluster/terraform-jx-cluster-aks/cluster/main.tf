@@ -142,3 +142,26 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
+
+resource "azurerm_kubernetes_cluster_node_pool" "kubesystem" {
+  count                 = var.kubesystem_node_size == "" ? 0 : 1
+  name                  = "kubesystem"
+  priority              = "Regular"
+  eviction_policy       = "Delete"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+  vm_size               = var.kubesystem_node_size
+  vnet_subnet_id        = var.vnet_subnet_id
+  orchestrator_version  = var.orchestrator_version
+  node_count            = var.kubesystem_node_count
+  min_count             = var.min_kubesystem_node_count
+  max_count             = var.max_kubesystem_node_count
+  auto_scaling_enabled  = var.max_kubesystem_node_count == null ? false : true
+  mode                  = "System"
+  node_taints           = ["CriticalAddonsOnly=true:NoSchedule"]
+
+  node_labels = {
+    "nodepool" = "kubesystem"
+  }
+
+  lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
+} 
