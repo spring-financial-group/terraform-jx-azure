@@ -10,6 +10,10 @@ terraform {
     azurerm = {
       version = ">=3.0.0"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.7.0"
+    }
   }
 }
 
@@ -34,9 +38,15 @@ provider "kubernetes" {
   )
 }
 
+provider "kubectl" {
+  host                   = module.cluster.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.cluster.ca_certificate)
+  client_key = base64decode(module.cluster.client_key)
+  load_config_file       = false
+}
+
 provider "helm" {
   kubernetes {
-
     host = module.cluster.cluster_endpoint
     cluster_ca_certificate = base64decode(
       module.cluster.ca_certificate,
