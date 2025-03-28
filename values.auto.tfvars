@@ -14,7 +14,7 @@ dns_resource_group_name          = "jx3build-dns-rsg"
 key_vault_enabled                = false
 key_vault_resource_group_name    = "jx3key-vault-rsg"
 key_vault_name                   = "k8secrets-vault"
-cluster_version                  = "1.31.5"
+cluster_version                  = "1.31.6"
 orchestrator_version             = "1.31.5"
 azure_policy_bool                = false
 acr_enabled                      = true
@@ -26,7 +26,7 @@ enable_auto_upgrades             = true
 # Machines
 min_node_count = 5
 max_node_count = 50
-node_size      = "Standard_D8s_v6"
+node_size      = "Standard_D8s_v5"
 
 # Ml nodes
 use_spot_ml       = true
