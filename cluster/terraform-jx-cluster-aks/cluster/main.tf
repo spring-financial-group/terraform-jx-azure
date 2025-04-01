@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   default_node_pool {
-    name                 = "default"
+    name                 = "system"
     vm_size              = var.node_size
     vnet_subnet_id       = var.vnet_subnet_id
     node_count           = var.node_count
@@ -53,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     upgrade_settings {
       max_surge = "25%"
     }
-    temporary_name_for_rotation = "tempk8spool"
+    temporary_name_for_rotation = "tempSystem"
   }
 
   network_profile {
@@ -63,6 +63,25 @@ resource "azurerm_kubernetes_cluster" "aks" {
   identity {
     type = "SystemAssigned"
   }
+}
+
+resource "azurerm_kubernetes_cluster_node_pool" "defaultnode" {
+  count                 = var.default_node_size == "" ? 0 : 1
+  name                  = "default"
+  priority              = var.use_spot_default ? "Spot" : "Regular"
+  eviction_policy       = var.use_spot_default ? "Deallocate" : null
+  spot_max_price        = var.use_spot_default ? var.spot_max_price_ml : null
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+  vm_size               = var.default_node_size
+  vnet_subnet_id        = var.vnet_subnet_id
+  node_count            = var.use_spot_default ? 0 : var.default_node_count
+  min_count             = var.min_default_node_count
+  max_count             = var.max_default_node_count
+  orchestrator_version  = var.orchestrator_version
+  auto_scaling_enabled  = var.max_default_node_count == null ? false : true
+  temporary_name_for_rotation = "tempDefault"
+
+  lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {

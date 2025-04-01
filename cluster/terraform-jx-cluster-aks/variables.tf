@@ -129,6 +129,39 @@ variable "max_infra_node_count" {
 }
 
 // ----------------------------------------------------------------------------
+// default nodepool variables
+// ----------------------------------------------------------------------------
+variable "use_spot_default" {
+  type        = bool
+  default     = false
+  description = "Should we use spot instances for the default nodes"
+}
+
+variable "default_node_size" {
+  type        = string
+  default     = ""
+  description = "The size of the default node to use for the cluster"
+}
+
+variable "default_node_count" {
+  description = "The number of default nodes to use for the cluster"
+  type        = number
+  default     = null
+}
+
+variable "min_default_node_count" {
+  description = "The minimum number of default nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
+variable "max_default_node_count" {
+  description = "The maximum number of default nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
+// ----------------------------------------------------------------------------
 // mlbuild nodepool variables
 // ----------------------------------------------------------------------------
 variable "use_spot_mlbuild" {

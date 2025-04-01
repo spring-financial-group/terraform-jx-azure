@@ -91,6 +91,11 @@ module "cluster" {
   mlbuild_node_count               = var.mlbuild_node_count
   min_mlbuild_node_count           = var.min_mlbuild_node_count
   max_mlbuild_node_count           = var.max_mlbuild_node_count
+  use_spot_default                 = var.use_spot_default
+  default_node_size                = var.default_node_size
+  default_node_count               = var.default_node_count
+  min_default_node_count           = var.min_default_node_count
+  max_default_node_count           = var.max_default_node_count
   subnet_name                      = var.subnet_name
   subnet_cidr                      = var.subnet_cidr
   vnet_cidr                        = var.vnet_cidr
