@@ -50,7 +50,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     max_count            = var.max_node_count
     orchestrator_version = var.orchestrator_version
     auto_scaling_enabled = var.max_node_count == null ? false : true
-    temporary_name_for_rotation = "tempSystem"
+    temporary_name_for_rotation = "tempsystem"
   }
 
   network_profile {
