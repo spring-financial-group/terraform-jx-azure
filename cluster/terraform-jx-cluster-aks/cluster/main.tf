@@ -51,6 +51,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     orchestrator_version = var.orchestrator_version
     auto_scaling_enabled = var.max_node_count == null ? false : true
     temporary_name_for_rotation = "tempsystem"
+
+    upgrade_settings {
+      max_surge = "25%"
+    }
   }
 
   network_profile {
@@ -64,7 +68,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "defaultnode" {
   count                 = var.default_node_size == "" ? 0 : 1
-  name                  = "default"
+  name                  = "system"
   priority              = var.use_spot_default ? "Spot" : "Regular"
   eviction_policy       = var.use_spot_default ? "Deallocate" : null
   spot_max_price        = var.use_spot_default ? var.spot_max_price_ml : null
@@ -76,12 +80,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "defaultnode" {
   max_count             = var.max_default_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_default_node_count == null ? false : true
-  temporary_name_for_rotation = "tempdefault"
-
-  upgrade_settings {
-    max_surge = "25%"
-  }
-
+  temporary_name_for_rotation = "tempsystem"
+  node_taints = ["CriticalAddonsOnly=true:NoSchedule"]
+  
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
 
