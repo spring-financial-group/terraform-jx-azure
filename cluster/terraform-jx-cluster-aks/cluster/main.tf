@@ -50,9 +50,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     max_count            = var.max_node_count
     orchestrator_version = var.orchestrator_version
     auto_scaling_enabled = var.max_node_count == null ? false : true
-    upgrade_settings {
-      max_surge = "25%"
-    }
     temporary_name_for_rotation = "tempSystem"
   }
 
@@ -80,6 +77,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "defaultnode" {
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_default_node_count == null ? false : true
   temporary_name_for_rotation = "tempdefault"
+
+  upgrade_settings {
+    max_surge = "25%"
+  }
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
