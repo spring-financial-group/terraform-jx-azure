@@ -51,7 +51,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     orchestrator_version = var.orchestrator_version
     auto_scaling_enabled = var.max_node_count == null ? false : true
     temporary_name_for_rotation = "tempdefault"
-    node_taints = ["CriticalAddonsOnly=true:NoSchedule"]
+    only_critical_addons_enabled = true
   }
 
   network_profile {
