@@ -50,11 +50,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     max_count            = var.max_node_count
     orchestrator_version = var.orchestrator_version
     auto_scaling_enabled = var.max_node_count == null ? false : true
-    temporary_name_for_rotation = "tempsystem"
-
-    upgrade_settings {
-      max_surge = "25%"
-    }
+    temporary_name_for_rotation = "tempdefault"
+    node_taints = ["CriticalAddonsOnly=true:NoSchedule"]
   }
 
   network_profile {
@@ -66,22 +63,25 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "defaultnode" {
-  count                 = var.default_node_size == "" ? 0 : 1
-  name                  = "system"
-  priority              = var.use_spot_default ? "Spot" : "Regular"
-  eviction_policy       = var.use_spot_default ? "Deallocate" : null
-  spot_max_price        = var.use_spot_default ? var.spot_max_price_ml : null
+resource "azurerm_kubernetes_cluster_node_pool" "applicationnode" {
+  count                 = var.application_node_size == "" ? 0 : 1
+  name                  = "applicationnode"
+  priority              = var.use_spot_application ? "Spot" : "Regular"
+  eviction_policy       = var.use_spot_application ? "Delete" : null
+  spot_max_price        = var.use_spot_application ? var.spot_max_price_application : null
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
-  vm_size               = var.default_node_size
+  vm_size               = var.application_node_size
   vnet_subnet_id        = var.vnet_subnet_id
-  node_count            = var.use_spot_default ? 0 : var.default_node_count
-  min_count             = var.min_default_node_count
-  max_count             = var.max_default_node_count
+  node_count            = var.use_spot_application ? 0 : var.application_node_count
+  min_count             = var.min_application_node_count
+  max_count             = var.max_application_node_count
   orchestrator_version  = var.orchestrator_version
-  auto_scaling_enabled  = var.max_default_node_count == null ? false : true
-  temporary_name_for_rotation = "tempsystem"
-  node_taints = ["CriticalAddonsOnly=true:NoSchedule"]
+  auto_scaling_enabled  = var.max_application_node_count == null ? false : true
+  temporary_name_for_rotation = "tempapplication"
+
+  upgrade_settings {
+    max_surge = "25%"
+  }
   
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }

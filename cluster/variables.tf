@@ -168,34 +168,40 @@ variable "max_infra_node_count" {
 }
 
 // ----------------------------------------------------------------------------
-// default nodepool variables
+// application nodepool variables
 // ----------------------------------------------------------------------------
-variable "use_spot_default" {
+variable "use_spot_application" {
   type        = bool
   default     = false
-  description = "Should we use spot instances for the default nodes"
+  description = "Should we use spot instances for the application nodes"
 }
 
-variable "default_node_size" {
+variable "spot_max_price_application" {
+  type        = number
+  default     = -1
+  description = "The maximum price you're willing to pay in USD per virtual machine, -1 to go to the maximum price"
+}
+
+variable "application_node_size" {
   type        = string
   default     = ""
-  description = "The size of the default node to use for the cluster"
+  description = "The size of the application node to use for the cluster"
 }
 
-variable "default_node_count" {
-  description = "The number of default nodes to use for the cluster"
+variable "application_node_count" {
+  description = "The number of application nodes to use for the cluster"
   type        = number
   default     = null
 }
 
-variable "min_default_node_count" {
-  description = "The minimum number of default nodes to use for the cluster if autoscaling is enabled"
+variable "min_application_node_count" {
+  description = "The minimum number of application nodes to use for the cluster if autoscaling is enabled"
   type        = number
   default     = null
 }
 
-variable "max_default_node_count" {
-  description = "The maximum number of default nodes to use for the cluster if autoscaling is enabled"
+variable "max_application_node_count" {
+  description = "The maximum number of application nodes to use for the cluster if autoscaling is enabled"
   type        = number
   default     = null
 }

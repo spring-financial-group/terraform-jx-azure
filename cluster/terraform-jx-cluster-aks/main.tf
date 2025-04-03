@@ -92,11 +92,11 @@ module "cluster" {
   mlbuild_node_count               = var.mlbuild_node_count
   min_mlbuild_node_count           = var.min_mlbuild_node_count
   max_mlbuild_node_count           = var.max_mlbuild_node_count
-  use_spot_default                 = var.use_spot_default
-  default_node_size                = var.default_node_size
-  default_node_count               = var.default_node_count
-  min_default_node_count           = var.min_default_node_count
-  max_default_node_count           = var.max_default_node_count
+  use_spot_application             = var.use_spot_application
+  application_node_size            = var.application_node_size
+  application_node_count           = var.application_node_count
+  min_application_node_count       = var.min_application_node_count
+  max_application_node_count       = var.max_application_node_count
   azure_policy_bool                = var.azure_policy_bool
   microsoft_defender_log_id        = var.enable_defender_analytics ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender.id
   defender_resource_group          = var.default_suk_bool ? azurerm_resource_group.default_suk[0].name : data.azurerm_resource_group.existing_suk.name

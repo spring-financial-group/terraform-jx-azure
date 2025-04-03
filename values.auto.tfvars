@@ -24,14 +24,14 @@ default_suk_bool                 = true
 enable_defender_analytics        = true
 enable_auto_upgrades             = true
 # System
-min_node_count = 5
-max_node_count = 50
+min_node_count = 2
+max_node_count = 5
 node_size      = "Standard_D8s_v5"
 
 # Default
-default_node_size = "Standard_D8s_v5" 
-min_default_node_count =  2
-max_default_node_count =  5
+application_node_size = "Standard_D8s_v5" 
+min_application_node_count =  2
+max_application_node_count =  50
 
 # Ml nodes
 use_spot_ml       = true
