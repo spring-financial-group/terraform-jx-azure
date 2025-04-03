@@ -22,10 +22,15 @@ dns_resources_enabled            = true
 default_suk_bool                 = true
 enable_defender_analytics        = true
 enable_auto_upgrades             = true
-# Machines
-min_node_count = 5
-max_node_count = 50
+# System
+min_node_count = 2
+max_node_count = 5
 node_size      = "Standard_D8s_v5"
+
+# Application
+application_node_size = "Standard_D8s_v5" 
+min_application_node_count =  2
+max_application_node_count =  50
 
 # Ml nodes
 use_spot_ml       = true

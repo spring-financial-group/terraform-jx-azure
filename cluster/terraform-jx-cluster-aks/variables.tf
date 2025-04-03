@@ -129,6 +129,39 @@ variable "max_infra_node_count" {
 }
 
 // ----------------------------------------------------------------------------
+// application nodepool variables
+// ----------------------------------------------------------------------------
+variable "use_spot_application" {
+  type        = bool
+  default     = false
+  description = "Should we use spot instances for the application nodes"
+}
+
+variable "application_node_size" {
+  type        = string
+  default     = ""
+  description = "The size of the application node to use for the cluster"
+}
+
+variable "application_node_count" {
+  description = "The number of application nodes to use for the cluster"
+  type        = number
+  default     = null
+}
+
+variable "min_application_node_count" {
+  description = "The minimum number of application nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
+variable "max_application_node_count" {
+  description = "The maximum number of application nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
+// ----------------------------------------------------------------------------
 // mlbuild nodepool variables
 // ----------------------------------------------------------------------------
 variable "use_spot_mlbuild" {
