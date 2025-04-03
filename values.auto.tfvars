@@ -28,7 +28,7 @@ min_node_count = 2
 max_node_count = 5
 node_size      = "Standard_D8s_v5"
 
-# Default
+# Application
 application_node_size = "Standard_D8s_v5" 
 min_application_node_count =  2
 max_application_node_count =  50
