@@ -65,7 +65,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "applicationnode" {
   count                 = var.application_node_size == "" ? 0 : 1
-  name                  = "applicationnode"
+  name                  = "appnode"
   priority              = var.use_spot_application ? "Spot" : "Regular"
   eviction_policy       = var.use_spot_application ? "Delete" : null
   spot_max_price        = var.use_spot_application ? var.spot_max_price_application : null
@@ -77,7 +77,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "applicationnode" {
   max_count             = var.max_application_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_application_node_count == null ? false : true
-  temporary_name_for_rotation = "tempapplication"
+  temporary_name_for_rotation = "tempapp"
 
   upgrade_settings {
     max_surge = "25%"
