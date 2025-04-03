@@ -208,7 +208,7 @@ variable "max_mlbuild_node_count" {
 // ----------------------------------------------------------------------------
 variable "sku_tier" {
   description = "The SKU tier of the cluster to use (uptime SLA)."
-  default     = "Free"
+  default     = "Standard"
   type        = string
 }
 variable "dns_prefix" {
