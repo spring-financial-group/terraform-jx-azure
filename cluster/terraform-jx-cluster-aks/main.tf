@@ -16,9 +16,9 @@ locals {
     var.default_suk_bool ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender.id
   ) : null
 
-  defender_resource_group_name = var.default_suk_bool ?
-    azurerm_resource_group.default_suk.name :
-    data.azurerm_resource_group.existing_suk.name
+  defender_resource_group_name = (
+    var.default_suk_bool ? azurerm_resource_group.default_suk.name : data.azurerm_resource_group.existing_suk.name
+  )
 }
 
 // ----------------------------------------------------------------------------
