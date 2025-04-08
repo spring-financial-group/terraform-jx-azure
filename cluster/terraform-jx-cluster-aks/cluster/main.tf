@@ -53,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     upgrade_settings {
       max_surge = "25%"
     }
-    temporary_name_for_rotation = "tempSystem"
+    temporary_name_for_rotation = "tempsystem"
   }
 
   network_profile {
@@ -79,7 +79,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "defaultnode" {
   max_count             = var.max_default_node_count
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_default_node_count == null ? false : true
-  temporary_name_for_rotation = "tempDefault"
+  temporary_name_for_rotation = "tempdefault"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
