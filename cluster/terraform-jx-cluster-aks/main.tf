@@ -13,15 +13,16 @@ terraform {
 
 locals {
   log = {
-    microsoft_defender_log_id = var.enable_defender_analytics && var.default_suk_bool ?
-      module.cluster.microsoft_defender_log_id :
+    microsoft_defender_log_id = (
+      var.enable_defender_analytics && var.default_suk_bool ? module.cluster.microsoft_defender_log_id :
         var.enable_defender_analytics ? data.azurerm_log_analytics_workspace.microsoft_defender[0].id :
         null
+    )
   }
   defender_rg = {
     defender_resource_group_name = var.default_suk_bool ?
       azurerm_resource_group.default_suk[0].name :
-      (try(data.azurerm_resource_group.existing_suk[0].name, var.default_rg))
+      data.azurerm_resource_group.existing_suk[0].name
   }
 }
 
