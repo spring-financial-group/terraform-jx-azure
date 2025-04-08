@@ -22,6 +22,7 @@ data "azurerm_subscription" "current" {
 // ----------------------------------------------------------------------------
 
 data "azurerm_resource_group" "existing_suk" {
+  count = var.default_suk_bool ? 0 : 1
   name = var.default_rg
 }
 
