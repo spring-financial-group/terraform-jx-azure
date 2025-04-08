@@ -11,6 +11,20 @@ terraform {
   }
 }
 
+locals {
+  log = {
+    microsoft_defender_log_id = var.enable_defender_analytics && var.default_suk_bool ?
+      module.cluster.microsoft_defender_log_id :
+        var.enable_defender_analytics ? data.azurerm_log_analytics_workspace.microsoft_defender[0].id :
+        null
+  }
+  defender_rg = {
+    defender_resource_group_name = var.default_suk_bool ?
+      azurerm_resource_group.default_suk[0].name :
+      (try(data.azurerm_resource_group.existing_suk[0].name, var.default_rg))
+  }
+}
+
 // ----------------------------------------------------------------------------
 // Retrieve active subscription resources are being created in
 // ----------------------------------------------------------------------------
@@ -22,7 +36,8 @@ data "azurerm_subscription" "current" {
 // ----------------------------------------------------------------------------
 
 data "azurerm_resource_group" "existing_suk" {
-  name = var.default_rg
+  count = var.default_suk_bool ? 0 : 1
+  name  = var.default_rg
 }
 
 data "azurerm_log_analytics_workspace" "microsoft_defender" {
@@ -98,8 +113,8 @@ module "cluster" {
   min_default_node_count           = var.min_default_node_count
   max_default_node_count           = var.max_default_node_count
   azure_policy_bool                = var.azure_policy_bool
-  microsoft_defender_log_id        = var.enable_defender_analytics ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender.id
-  defender_resource_group          = var.default_suk_bool ? azurerm_resource_group.default_suk[0].name : data.azurerm_resource_group.existing_suk.name
+  microsoft_defender_log_id        = local.log.microsoft_defender_log_id
+  defender_resource_group          = local.defender_rg.defender_resource_group_name
   enable_defender_analytics        = var.enable_defender_analytics
   tenant_id                        = data.azurerm_subscription.current.tenant_id
   orchestrator_version             = var.orchestrator_version
