@@ -17,8 +17,8 @@ locals {
   ) : null
 
   defender_resource_group_name = var.default_suk_bool ?
-    azurerm_resource_group.default_suk[0].name :
-    data.azurerm_resource_group.existing_suk[0].name
+    azurerm_resource_group.default_suk.name :
+    data.azurerm_resource_group.existing_suk.name
 }
 
 // ----------------------------------------------------------------------------
