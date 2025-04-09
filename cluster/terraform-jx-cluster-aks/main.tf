@@ -22,11 +22,13 @@ data "azurerm_subscription" "current" {
 // ----------------------------------------------------------------------------
 
 data "azurerm_resource_group" "existing_suk" {
+  count = var.default_suk_bool ? 0 : 1
   name = var.default_rg
 }
 
 data "azurerm_log_analytics_workspace" "microsoft_defender" {
-  name = var.microsoft_defender_log_analytics_name
+  count               = var.enable_defender_analytics && !var.default_suk_bool ? 1 : 0
+  name                = var.microsoft_defender_log_analytics_name
   resource_group_name = var.default_rg
 }
 
@@ -93,8 +95,8 @@ module "cluster" {
   min_mlbuild_node_count           = var.min_mlbuild_node_count
   max_mlbuild_node_count           = var.max_mlbuild_node_count
   azure_policy_bool                = var.azure_policy_bool
-  microsoft_defender_log_id        = var.enable_defender_analytics ? module.cluster.microsoft_defender_log_id : data.azurerm_log_analytics_workspace.microsoft_defender.id
-  defender_resource_group          = var.default_suk_bool ? azurerm_resource_group.default_suk[0].name : data.azurerm_resource_group.existing_suk.name
+  microsoft_defender_log_id        = local.microsoft_defender_log_id
+  defender_resource_group          = local.defender_resource_group_name
   enable_defender_analytics        = var.enable_defender_analytics
   tenant_id                        = data.azurerm_subscription.current.tenant_id
   orchestrator_version             = var.orchestrator_version
