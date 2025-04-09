@@ -281,9 +281,9 @@ variable "azure_policy_bool" {
 }
 
 variable "microsoft_defender_log_analytics_name" {
-  type = string
+  type    = string
+  default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"
 }
-
 // ----------------------------------------------------------------------------
 // DNS variables
 // ---------------------------------------------------------------------------
