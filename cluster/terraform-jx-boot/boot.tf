@@ -7,20 +7,20 @@ resource "helm_release" "jx-git-operator" {
   create_namespace = true
 
   set {
-    name = "resources.limits.memory"
+    name  = "resources.limits.memory"
     value = "512Mi"
   }
   set {
-      name = "resources.requests.memory"
-      value = "256Mi"
+    name  = "resources.requests.memory"
+    value = "256Mi"
   }
   set {
-    name = "resources.limits.cpu"
+    name  = "resources.limits.cpu"
     value = "200m"
   }
   set {
-      name = "resources.requests.cpu"
-      value = "160m"
+    name  = "resources.requests.cpu"
+    value = "160m"
   }
 
   set {

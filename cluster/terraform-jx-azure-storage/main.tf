@@ -17,19 +17,19 @@ resource "azurerm_resource_group" "storage" {
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = local.account_name
-  location                 = var.location
-  resource_group_name      = azurerm_resource_group.storage.name
-  account_replication_type = "RAGRS"
-  account_tier             = "Standard"
-  account_kind             = "StorageV2"
-  is_hns_enabled           = true
-  allow_nested_items_to_be_public = false
+  name                             = local.account_name
+  location                         = var.location
+  resource_group_name              = azurerm_resource_group.storage.name
+  account_replication_type         = "RAGRS"
+  account_tier                     = "Standard"
+  account_kind                     = "StorageV2"
+  is_hns_enabled                   = true
+  allow_nested_items_to_be_public  = false
   cross_tenant_replication_enabled = true
 }
 
 resource "azurerm_storage_container" "logs" {
-  name                 = "logs"
+  name               = "logs"
   storage_account_id = azurerm_storage_account.storage.id
 }
 

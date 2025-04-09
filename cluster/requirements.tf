@@ -1,7 +1,7 @@
 locals {
   jx_requirements_interpolated_content = templatefile("${path.module}/jx-requirements.yml.tpl", {
 
-    registry_name         = module.registry.registry_name
+    registry_name        = module.registry.registry_name
     domain               = module.dns.domain
     apex_domain          = var.apex_domain
     subdomain            = var.subdomain

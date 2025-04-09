@@ -12,12 +12,12 @@ terraform {
 }
 
 resource "azurerm_container_registry" "oss_acr" {
-  name                = var.oss_registry_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  sku                 = var.sku
+  name                   = var.oss_registry_name
+  resource_group_name    = var.resource_group_name
+  location               = var.location
+  sku                    = var.sku
   anonymous_pull_enabled = local.anonymous_pull_enabled
-  admin_enabled       = local.admin_enabled
+  admin_enabled          = local.admin_enabled
 }
 
 resource "azurerm_role_assignment" "oss_push" {

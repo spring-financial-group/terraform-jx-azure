@@ -19,6 +19,6 @@ variable "principal_id" {
 }
 variable "sku" {
   description = "SKU of the container registry"
-  type       = string
-  default = "Standard"
+  type        = string
+  default     = "Standard"
 }

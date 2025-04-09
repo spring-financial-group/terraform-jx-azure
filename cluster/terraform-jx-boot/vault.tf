@@ -8,13 +8,13 @@ resource "helm_release" "vault-operator" {
   create_namespace = true
 
   set {
-    name = "resources.limits.memory"
+    name  = "resources.limits.memory"
     value = "512Mi"
   }
   set {
-      name = "resources.requests.memory"
-      value = "256Mi"
-    }
+    name  = "resources.requests.memory"
+    value = "256Mi"
+  }
 }
 
 resource "helm_release" "vault-instance" {
@@ -27,12 +27,12 @@ resource "helm_release" "vault-instance" {
   depends_on = [helm_release.vault-operator]
 
   set {
-    name = "bankVaultsImage"
+    name  = "bankVaultsImage"
     value = "ghcr.io/bank-vaults/bank-vaults:v1.31.2"
   }
 
   set {
-    name = "pvc.size"
+    name  = "pvc.size"
     value = "4Gi"
   }
 }

@@ -207,7 +207,7 @@ variable "max_mlbuild_node_count" {
 variable "sku_tier" {
   description = "The SKU tier of the cluster to use (uptime SLA)."
   default     = "Free"
-  type = string
+  type        = string
 }
 variable "dns_prefix" {
   type        = string
@@ -222,7 +222,7 @@ variable "cluster_version" {
 
 variable "orchestrator_version" {
   description = "Kubernetes orchestrator version"
-  type = string
+  type        = string
 }
 
 variable "network_resource_group_name" {
@@ -280,6 +280,10 @@ variable "azure_policy_bool" {
   type = bool
 }
 
+variable "microsoft_defender_log_analytics_name" {
+  type    = string
+  default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"
+}
 // ----------------------------------------------------------------------------
 // DNS variables
 // ---------------------------------------------------------------------------
@@ -366,7 +370,7 @@ variable "storage_resource_group_name" {
 
 variable "external_registry_url" {
   default = ""
-  type = string
+  type    = string
 }
 
 variable "use_existing_acr_name" {
@@ -393,7 +397,7 @@ variable "acr_enabled" {
 }
 
 variable "dns_resources_enabled" {
-  type = bool
+  type        = bool
   description = "THis is an additional variable toggle to enable/disable the creation of DNS resources."
 }
 
