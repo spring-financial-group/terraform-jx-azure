@@ -35,6 +35,6 @@ variable "location" {
 }
 
 variable "dns_resources_enabled" {
-  type = bool
+  type        = bool
   description = "This is an additional variable toggle to enable/disable the creation of DNS resources."
 }

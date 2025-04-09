@@ -171,19 +171,19 @@ variable "cluster_name" {
 }
 variable "sku_tier" {
   description = "The SKU tier of the cluster to use (uptime SLA)."
-  type = string
+  type        = string
 }
 variable "dns_prefix" {
   type    = string
   default = ""
 }
 variable "cluster_version" {
-  type    = string
+  type = string
 }
 
 variable "orchestrator_version" {
   description = "Kubernetes orchestrator version"
-  type = string
+  type        = string
 }
 
 variable "location" {
@@ -240,7 +240,7 @@ variable "microsoft_defender_log_id" {
 }
 
 variable "default_rg" {
-  type = string
+  type    = string
   default = "DefaultResourceGroup-SUK"
 }
 
@@ -253,7 +253,7 @@ variable "enable_defender_analytics" {
 }
 
 variable "microsoft_defender_log_analytics_name" {
-  type = string
+  type    = string
   default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"
 }
 

@@ -224,7 +224,7 @@ variable "cluster_version" {
 
 variable "orchestrator_version" {
   description = "Kubernetes orchestrator version"
-  type = string
+  type        = string
 }
 
 variable "network_resource_group_name" {
@@ -389,7 +389,7 @@ variable "acr_enabled" {
 }
 
 variable "dns_resources_enabled" {
-  type = bool
+  type        = bool
   description = "THis is an additional variable toggle to enable/disable the creation of DNS resources."
 }
 
@@ -403,4 +403,8 @@ variable "enable_defender_analytics" {
 
 variable "enable_auto_upgrades" {
   type = bool
+}
+
+variable "microsoft_defender_log_analytics_name" {
+  type = string
 }

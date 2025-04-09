@@ -17,7 +17,7 @@ data "azurerm_dns_zone" "apex_domain_zone" {
 
 data "azurerm_resource_group" "apex_resource_group" {
   count = local.enabled && local.with_subdomain && var.apex_domain_integration_enabled ? 1 : 0
-  name = var.apex_resource_group_name
+  name  = var.apex_resource_group_name
 }
 
 resource "azurerm_resource_group" "dns" {

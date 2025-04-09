@@ -171,7 +171,7 @@ variable "cluster_name" {
 }
 variable "sku_tier" {
   description = "The SKU tier of the cluster to use (uptime SLA)."
-  type = string
+  type        = string
 }
 variable "cluster_version" {
   description = "Kubernetes version to use for the AKS cluster."
@@ -180,7 +180,7 @@ variable "cluster_version" {
 
 variable "orchestrator_version" {
   description = "Kubernetes orchestrator version"
-  type = string
+  type        = string
 }
 
 
@@ -219,7 +219,7 @@ variable "azure_policy_bool" {
 
 
 variable "microsoft_defender_log_analytics_name" {
-  type = string
+  type    = string
   default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"
 }
 
