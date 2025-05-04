@@ -121,7 +121,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
   orchestrator_version  = var.orchestrator_version
   auto_scaling_enabled  = var.max_infra_node_count == null ? false : true
   node_taints           = ["sku=infra:NoSchedule"]
-  node_labels = { environment = "infra" }
+  node_labels = { node = "infra" }
   temporary_name_for_rotation = "tempinfra"
 
   lifecycle { ignore_changes = [node_taints, node_count] }
