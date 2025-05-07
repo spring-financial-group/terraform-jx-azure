@@ -217,10 +217,8 @@ variable "azure_policy_bool" {
   type = bool
 }
 
-
 variable "microsoft_defender_log_analytics_name" {
-  type    = string
-  default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"
+  type = string
 }
 
 variable "microsoft_defender_log_id" {
