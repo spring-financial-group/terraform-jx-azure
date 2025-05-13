@@ -63,6 +63,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   identity {
     type = "SystemAssigned"
   }
+
+  lifecycle { ignore_changes = [maintenance_window_node_os.utc_offset] }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
