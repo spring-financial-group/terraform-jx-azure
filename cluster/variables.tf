@@ -270,12 +270,6 @@ variable "enable_log_analytics" {
   default     = false
   description = "Flag to indicate whether to enable Log Analytics integration for cluster"
 }
-
-variable "cost_analysis_bool" {
-  type        = bool
-  default     = false
-  description = "Flag to indicate whether to enable cost analysis for cluster"
-}
 variable "logging_retention_days" {
   type        = number
   default     = 30

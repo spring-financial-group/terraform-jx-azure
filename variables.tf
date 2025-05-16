@@ -282,12 +282,6 @@ variable "azure_policy_bool" {
   type = bool
 }
 
-variable "cost_analysis_bool" {
-  type = bool
-  default = false
-  description = "Flag to indicate whether to enable cost analysis for the cluster"
-}
-
 // ----------------------------------------------------------------------------
 // DNS variables
 // ---------------------------------------------------------------------------

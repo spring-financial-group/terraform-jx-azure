@@ -72,7 +72,6 @@ module "cluster" {
   subnet_name                           = var.subnet_name
   vnet_cidr                             = var.vnet_cidr
   azure_policy_bool                     = var.azure_policy_bool
-  cost_analysis_bool                    = var.cost_analysis_bool
   acr_enabled                           = var.acr_enabled
   install_kuberhealthy                  = var.install_kuberhealthy
   dns_resources_enabled                 = var.dns_resources_enabled
