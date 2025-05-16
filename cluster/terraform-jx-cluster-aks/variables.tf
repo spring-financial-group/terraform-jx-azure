@@ -235,6 +235,10 @@ variable "azure_policy_bool" {
   type = bool
 }
 
+variable "cost_analysis_bool" {
+  type = bool
+}
+
 variable "microsoft_defender_log_id" {
   type = string
 }
