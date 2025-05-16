@@ -7,6 +7,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix                       = var.dns_prefix
   kubernetes_version               = var.cluster_version
   azure_policy_enabled             = var.azure_policy_bool
+  cost_analysis_enabled            = var.cost_analysis_bool
   http_application_routing_enabled = false
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false

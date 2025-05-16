@@ -280,6 +280,12 @@ variable "azure_policy_bool" {
   type = bool
 }
 
+variable "cost_analysis_bool" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to enable cost analysis for cluster"
+}
+
 variable "microsoft_defender_log_analytics_name" {
   type    = string
   default = "DefaultWorkspace-5429b748-8754-45b3-bbab-036e0cc418ee-SUK"

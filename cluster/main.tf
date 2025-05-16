@@ -95,6 +95,7 @@ module "cluster" {
   subnet_cidr                           = var.subnet_cidr
   vnet_cidr                             = var.vnet_cidr
   azure_policy_bool                     = var.azure_policy_bool
+  cost_analysis_bool                    = var.cost_analysis_bool
   microsoft_defender_log_id             = module.cluster.microsoft_defender_log_id
   default_suk_bool                      = var.default_suk_bool
   enable_defender_analytics             = var.enable_defender_analytics
