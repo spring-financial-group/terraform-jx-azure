@@ -89,6 +89,7 @@ module "cluster" {
   min_mlbuild_node_count                = var.min_mlbuild_node_count
   max_mlbuild_node_count                = var.max_mlbuild_node_count
   azure_policy_bool                     = var.azure_policy_bool
+  cost_analysis_bool                    = var.cost_analysis_bool
   microsoft_defender_log_id             = module.cluster.microsoft_defender_log_id
   defender_resource_group               = local.defender_resource_group_name
   enable_defender_analytics             = var.enable_defender_analytics
