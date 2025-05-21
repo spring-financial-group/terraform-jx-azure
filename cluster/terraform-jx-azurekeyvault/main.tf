@@ -41,6 +41,16 @@ resource "azurerm_key_vault" "jx" {
   resource_group_name = azurerm_resource_group.key_vault.0.name
   sku_name            = var.key_vault_sku
   tenant_id           = local.tenant_id
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices" # Optional but recommended if you use Azure services like backup or automation
+
+    # Optional: Add these only if you want to allow access from specific IPs or VNets
+    ip_rules = []
+
+    virtual_network_subnet_ids = []
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "jx" {

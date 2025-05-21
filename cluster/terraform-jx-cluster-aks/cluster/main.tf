@@ -14,6 +14,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
+  api_server_access_profile {
+    authorized_ip_ranges = ["203.0.113.10/32"]
+  }
+
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
