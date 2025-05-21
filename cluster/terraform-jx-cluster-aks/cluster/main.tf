@@ -14,6 +14,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
+  # tfsec:ignore:azure-container-limit-authorized-ips
+  # Reason: API server is restricted to a specific IP
   api_server_access_profile {
     authorized_ip_ranges = ["203.0.113.10/32"]
   }
