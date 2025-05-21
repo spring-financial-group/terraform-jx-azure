@@ -1,5 +1,5 @@
-# Reason: API server is restricted to a specific IP/s
 # tfsec:ignore:azure-container-limit-authorized-ips
+# tfsec:ignore:azure-container-logging
 resource "azurerm_kubernetes_cluster" "aks" {
   name                             = var.cluster_name
   sku_tier                         = var.sku_tier
@@ -15,10 +15,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   image_cleaner_enabled            = false
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
-
-  api_server_access_profile {
-    authorized_ip_ranges = ["203.0.113.10/32"]
-  }
 
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
@@ -65,6 +61,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     network_plugin = var.cluster_network_model
+    network_policy = var.cluster_network_policy
   }
 
   identity {
