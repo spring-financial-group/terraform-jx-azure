@@ -1,5 +1,5 @@
-# tfsec:ignore:azure-container-limit-authorized-ips
 # Reason: API server is restricted to a specific IP/s
+# tfsec:ignore:azure-container-limit-authorized-ips
 resource "azurerm_kubernetes_cluster" "aks" {
   name                             = var.cluster_name
   sku_tier                         = var.sku_tier
