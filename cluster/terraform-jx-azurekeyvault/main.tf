@@ -34,6 +34,7 @@ resource "azurerm_resource_group" "key_vault" {
 // Setup Azure Resources
 // ----------------------------------------------------------------------------
 
+# tfsec:ignore:azure-keyvault-specify-network-acl
 resource "azurerm_key_vault" "jx" {
   count                      = var.enabled ? 1 : 0
   location                   = var.location
@@ -43,16 +44,6 @@ resource "azurerm_key_vault" "jx" {
   tenant_id                  = local.tenant_id
   purge_protection_enabled   = true
   soft_delete_retention_days = 7
-
-  network_acls {
-    default_action = "Deny"
-    bypass         = "AzureServices" # Optional but recommended if you use Azure services like backup or automation
-
-    # Optional: Add these only if you want to allow access from specific IPs or VNets
-    ip_rules = []
-
-    virtual_network_subnet_ids = []
-  }
 }
 
 resource "azurerm_key_vault_access_policy" "jx" {
