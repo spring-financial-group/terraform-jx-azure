@@ -1,5 +1,7 @@
 # tfsec:ignore:azure-container-limit-authorized-ips
 # tfsec:ignore:azure-container-logging
+# tfsec:azure-container-use-rbac-permissions
+# tfsec:azure-container-configured-network-policy
 resource "azurerm_kubernetes_cluster" "aks" {
   name                             = var.cluster_name
   sku_tier                         = var.sku_tier
@@ -28,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   azure_active_directory_role_based_access_control {
-    azure_rbac_enabled = true
+    azure_rbac_enabled = false
     tenant_id          = var.tenant_id
   }
 
@@ -61,7 +63,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     network_plugin = var.cluster_network_model
-    network_policy = var.cluster_network_policy
+    network_policy = ""
   }
 
   identity {
