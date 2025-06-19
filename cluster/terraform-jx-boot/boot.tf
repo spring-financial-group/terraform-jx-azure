@@ -6,48 +6,43 @@ resource "helm_release" "jx-git-operator" {
   version          = "0.2.1"
   create_namespace = true
 
-  set = [
-    {
-      name  = "resources.limits.memory"
-      value = "512Mi"
-    },
-    {
-      name  = "resources.requests.memory"
-      value = "256Mi"
-    },
-    {
-      name  = "resources.limits.cpu"
-      value = "200m"
-    },
-    {
-      name  = "resources.requests.cpu"
-      value = "160m"
-    },
-    {
-      name  = "bootServiceAccount.enabled"
-      value = true
-    },
-    {
-      name  = "env.NO_RESOURCE_APPLY"
-      value = true
-    },
-    {
-      name  = "url"
-      value = var.jx_git_url
-    },
-    {
-      name  = "username"
-      value = var.jx_bot_username
-    }
-  ]
+  set {
+    name  = "resources.limits.memory"
+    value = "512Mi"
+  }
+  set {
+    name  = "resources.requests.memory"
+    value = "256Mi"
+  }
+  set {
+    name  = "resources.limits.cpu"
+    value = "200m"
+  }
+  set {
+    name  = "resources.requests.cpu"
+    value = "160m"
+  }
 
-  set_sensitive = [
-    {
-      name  = "password"
-      value = var.jx_bot_token
-    }
-  ]
-
+  set {
+    name  = "bootServiceAccount.enabled"
+    value = true
+  }
+  set {
+    name  = "env.NO_RESOURCE_APPLY"
+    value = true
+  }
+  set {
+    name  = "url"
+    value = var.jx_git_url
+  }
+  set {
+    name  = "username"
+    value = var.jx_bot_username
+  }
+  set_sensitive {
+    name  = "password"
+    value = var.jx_bot_token
+  }
   dynamic "set_sensitive" {
     for_each = var.job_secret_env_vars
     content {
