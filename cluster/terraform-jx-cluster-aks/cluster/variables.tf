@@ -206,6 +206,11 @@ variable "cluster_network_model" {
   type    = string
   default = "kubenet"
 }
+variable "cluster_network_policy" {
+  type        = string
+  default     = "calico"  # "azure" or "calico" depending on your setup
+  description = "The network policy to use with AKS"
+}
 variable "enable_log_analytics" {
   type = bool
 }
