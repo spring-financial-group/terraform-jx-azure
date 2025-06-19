@@ -38,7 +38,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes = {
+  kubernetes {
 
     host = module.cluster.cluster_endpoint
     cluster_ca_certificate = base64decode(
