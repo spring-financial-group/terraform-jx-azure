@@ -10,6 +10,9 @@ terraform {
     azurerm = {
       version = ">=4.23.0"
     }
+    helm = {
+      version = ">=3.18.3"
+    }
   }
 }
 
