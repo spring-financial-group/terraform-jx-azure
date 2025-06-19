@@ -10,9 +10,6 @@ terraform {
     azurerm = {
       version = ">=4.23.0"
     }
-    helm = {
-      version = ">=3.18.3"
-    }
   }
 }
 
@@ -38,7 +35,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
 
     host = module.cluster.cluster_endpoint
     cluster_ca_certificate = base64decode(
