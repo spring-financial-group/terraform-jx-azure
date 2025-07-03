@@ -1,0 +1,23 @@
+kind: PipelineRun
+metadata:
+  name: sonarqube-scan
+spec:
+  pipelineSpec:
+    tasks:
+    - name: from-build-pack
+      resources: {}
+      taskSpec:
+        metadata: {}
+        stepTemplate:
+          name: ""
+          resources:
+            limits: {}
+          workingDir: /workspace/source
+        steps:
+        - image: uses:spring-financial-group/mqube-pipeline-catalog/tasks/terraform/sonar-scanner-terraform-pr.yaml@main
+          name: ""
+          resources: {}
+  podTemplate: {}
+  serviceAccountName: tekton-bot
+  timeout: 1h0m0s
+status: {}
