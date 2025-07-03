@@ -1,10 +1,16 @@
 apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
 kind: TriggerConfig
 spec:
+  presubmits:
+  - name: sonarqube-scan
+    context: "sonarqube-scan"
+    always_run: true
+    optional: true
+    source: "sonarscan-pr.yaml"
   postsubmits:
   - name: release
     context: "release"
     source: "release.yaml"
     branches:
-    - main
-    - master
+    - ^main$
+    - ^master$
