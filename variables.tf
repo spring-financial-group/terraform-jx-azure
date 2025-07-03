@@ -262,11 +262,11 @@ variable "cluster_network_model" {
   default     = "kubenet"
   description = "Variable to define the network model for the cluster. Valid values are either `kubenet` or `azure`"
 }
-variable "cluster_network_policy" {
-  type        = string
-  default     = "calico"  # "azure" or "calico" depending on your setup
-  description = "The network policy to use with AKS"
-}
+#variable "cluster_network_policy" {
+#  type        = string
+#  default     = "calico"  # "azure" or "calico" depending on your setup
+#  description = "The network policy to use with AKS"
+#}
 variable "subnet_name" {
   type        = string
   default     = ""
