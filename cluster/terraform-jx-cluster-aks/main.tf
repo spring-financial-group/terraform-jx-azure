@@ -57,7 +57,6 @@ module "cluster" {
   resource_group_name                   = azurerm_resource_group.cluster.name
   network_resource_group                = local.network_resource_group_name
   cluster_network_model                 = var.cluster_network_model
-  cluster_network_policy                = var.cluster_network_policy
   node_resource_group_name              = local.cluster_node_resource_group_name
   enable_log_analytics                  = var.enable_log_analytics
   logging_retention_days                = var.logging_retention_days
