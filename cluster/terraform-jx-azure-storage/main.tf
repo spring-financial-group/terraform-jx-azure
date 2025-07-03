@@ -26,7 +26,7 @@ resource "azurerm_storage_account" "storage" {
   is_hns_enabled                   = true
   allow_nested_items_to_be_public  = false
   cross_tenant_replication_enabled = true
-  min_tls_version                  = "1.2"
+  min_tls_version                  = "TLS1_2"
 }
 
 resource "azurerm_storage_container" "logs" {
