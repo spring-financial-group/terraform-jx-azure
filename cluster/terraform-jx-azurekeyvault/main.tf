@@ -43,7 +43,7 @@ resource "azurerm_key_vault" "jx" {
   sku_name                   = var.key_vault_sku
   tenant_id                  = local.tenant_id
   purge_protection_enabled   = true
-  soft_delete_retention_days = 7
+  soft_delete_retention_days = 90
 }
 
 resource "azurerm_key_vault_access_policy" "jx" {
