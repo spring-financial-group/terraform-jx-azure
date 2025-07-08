@@ -63,6 +63,43 @@ variable "max_node_count" {
   type        = number
   default     = null
 }
+
+// ----------------------------------------------------------------------------
+// Large language model nodepool variables
+// ----------------------------------------------------------------------------
+variable "use_spot_llm" {
+  type        = bool
+  default     = true
+  description = "Should we use spot instances for the llm nodes"
+}
+
+variable "spot_max_price_llm" {
+  type        = number
+  default     = -1
+  description = "The maximum price you're willing to pay in USD per virtual machine, -1 to go to the maximum price"
+}
+
+variable "llm_node_size" {
+  type        = string
+  default     = ""
+  description = "The size of the worker node to use for the cluster"
+}
+variable "llm_node_count" {
+  description = "The number of LLM nodes to use for the cluster"
+  type        = number
+  default     = null
+}
+variable "min_llm_node_count" {
+  description = "The minimum number of LLM nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+variable "max_llm_node_count" {
+  description = "The maximum number of LLM nodes to use for the cluster if autoscaling is enabled"
+  type        = number
+  default     = null
+}
+
 // ----------------------------------------------------------------------------
 // Machine learning nodepool variables
 // ----------------------------------------------------------------------------
