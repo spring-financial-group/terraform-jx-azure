@@ -49,6 +49,12 @@ module "cluster" {
   min_ml_node_count                     = var.min_ml_node_count
   max_ml_node_count                     = var.max_ml_node_count
   ml_node_size                          = var.ml_node_size
+  use_spot_llm                          = var.use_spot_llm
+  spot_max_price_llm                    = var.spot_max_price_llm
+  llm_node_count                        = var.llm_node_count
+  min_llm_node_count                    = var.min_llm_node_count
+  max_llm_node_count                    = var.max_llm_node_count
+  llm_node_size                         = var.llm_node_size
   use_spot                              = var.use_spot
   spot_max_price                        = var.spot_max_price
   build_node_size                       = var.build_node_size

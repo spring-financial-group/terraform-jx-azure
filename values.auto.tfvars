@@ -34,6 +34,12 @@ ml_node_size      = "Standard_NV24s_v3"
 min_ml_node_count = 2
 max_ml_node_count = 6
 
+# LLM nodes
+use_spot_llm       = true
+llm_node_size      = "Standard_NC24ads_A100_v4"
+min_llm_node_count = 1
+max_llm_node_count = 6
+
 # Build Spot Nodes
 use_spot             = true
 build_node_size      = "Standard_D8s_v5"
