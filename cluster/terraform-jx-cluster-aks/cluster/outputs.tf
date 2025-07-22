@@ -34,3 +34,6 @@ output "kubernetes_cluster" {
 output "microsoft_defender_log_id" {
   value = length(azurerm_log_analytics_workspace.microsoft_defender) > 0 ? azurerm_log_analytics_workspace.microsoft_defender[0].id : null
 }
+output "cluster_public_ip_address" {
+  value = data.azurerm_public_ip.cluster_public_ip.ip_address
+}
