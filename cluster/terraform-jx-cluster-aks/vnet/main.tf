@@ -13,3 +13,9 @@ resource "azurerm_subnet" "cluster_subnet" {
   address_prefixes                  = [var.subnet_cidr]
   private_endpoint_network_policies = "Enabled"
 }
+
+data "azurerm_public_ip" "cluster_public_ip" {
+  resource_group_name = var.resource_group
+  name                = "cluster-public-ip"
+  depends_on        = [azurerm_subnet.cluster_subnet]
+}
