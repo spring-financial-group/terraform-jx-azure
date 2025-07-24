@@ -93,26 +93,26 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
-  count                       = var.llm_node_size == "" ? 0 : 1
-  name                        = "llmnode"
-  priority                    = var.use_spot_llm ? "Spot" : "Regular"
-  eviction_policy             = var.use_spot_llm ? "Deallocate" : null
-  spot_max_price              = var.use_spot_llm ? var.spot_max_price_llm : null
-  kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
-  vm_size                     = var.llm_node_size
-  vnet_subnet_id              = var.vnet_subnet_id
-  node_count                  = var.use_spot_llm ? 0 : var.llm_node_count
-  min_count                   = var.min_llm_node_count
-  max_count                   = var.max_llm_node_count
-  orchestrator_version        = var.orchestrator_version
-  auto_scaling_enabled        = var.max_llm_node_count == null ? false : true
-  node_taints                 = ["sku=gpu:NoSchedule"]
-  node_labels                 = { key = "gpu_ready" }
-  temporary_name_for_rotation = "templlm"
+# resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
+#   count                       = var.llm_node_size == "" ? 0 : 1
+#   name                        = "llmnode"
+#   priority                    = var.use_spot_llm ? "Spot" : "Regular"
+#   eviction_policy             = var.use_spot_llm ? "Deallocate" : null
+#   spot_max_price              = var.use_spot_llm ? var.spot_max_price_llm : null
+#   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
+#   vm_size                     = var.llm_node_size
+#   vnet_subnet_id              = var.vnet_subnet_id
+#   node_count                  = var.use_spot_llm ? 0 : var.llm_node_count
+#   min_count                   = var.min_llm_node_count
+#   max_count                   = var.max_llm_node_count
+#   orchestrator_version        = var.orchestrator_version
+#   auto_scaling_enabled        = var.max_llm_node_count == null ? false : true
+#   node_taints                 = ["sku=gpu:NoSchedule"]
+#   node_labels                 = { node = "llm" }
+#   temporary_name_for_rotation = "templlm"
 
-  lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
-}
+#   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
+# }
 
 resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
   count                       = var.build_node_size == "" ? 0 : 1
