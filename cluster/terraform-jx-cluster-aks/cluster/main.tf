@@ -107,8 +107,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
   max_count                   = var.max_llm_node_count
   orchestrator_version        = var.orchestrator_version
   auto_scaling_enabled        = var.max_llm_node_count == null ? false : true
-  node_taints                 = ["sku=gpu:NoSchedule", "nvidia.com/gpu:NoSchedule"]
-  node_labels                 = { node = "llm" }
+  node_taints                 = ["sku=gpu:NoSchedule"]
+  node_labels                 = { node = "llm", key = "gpu_ready" }
   temporary_name_for_rotation = "templlm"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
