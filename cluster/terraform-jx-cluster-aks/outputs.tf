@@ -10,6 +10,9 @@ output "kubelet_client_id" {
 output "cluster_endpoint" {
   value = module.cluster.cluster_endpoint
 }
+output "cluster_public_ip_address" {
+  value = module.cluster.cluster_public_ip_address
+}
 output "client_certificate" {
   value = module.cluster.client_certificate
 }
