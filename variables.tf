@@ -101,6 +101,12 @@ variable "max_llm_node_count" {
   default     = null
 }
 
+variable "gpu_driver_llm" {
+  type        = string
+  default = "Install"
+  description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
+}
+
 // ----------------------------------------------------------------------------
 // Machine learning nodepool variables
 // ----------------------------------------------------------------------------
@@ -135,6 +141,12 @@ variable "max_ml_node_count" {
   description = "The maximum number of ML nodes to use for the cluster if autoscaling is enabled"
   type        = number
   default     = null
+}
+
+variable "gpu_driver_ml" {
+  type        = string
+  default = null
+  description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
 // ----------------------------------------------------------------------------

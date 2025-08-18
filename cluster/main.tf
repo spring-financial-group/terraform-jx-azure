@@ -108,6 +108,8 @@ module "cluster" {
   orchestrator_version                  = var.orchestrator_version
   enable_auto_upgrades                  = var.enable_auto_upgrades
   microsoft_defender_log_analytics_name = var.microsoft_defender_log_analytics_name
+  gpu_driver_llm                        = var.gpu_driver_llm
+  gpu_driver_ml                         = var.gpu_driver_ml
 }
 
 module "registry" {
