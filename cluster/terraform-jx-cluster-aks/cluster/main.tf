@@ -81,7 +81,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
   vm_size                     = var.ml_node_size
   fips_enabled                = false
-  gpu_driver                  = "Install"
   vnet_subnet_id              = var.vnet_subnet_id
   node_count                  = var.use_spot_ml ? 0 : var.ml_node_count
   min_count                   = var.min_ml_node_count
