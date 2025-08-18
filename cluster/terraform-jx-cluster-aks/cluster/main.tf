@@ -80,6 +80,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   spot_max_price              = var.use_spot_ml ? var.spot_max_price_ml : null
   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
   vm_size                     = var.ml_node_size
+  gpu_driver                  = var.gpu_driver_ml
   fips_enabled                = false
   vnet_subnet_id              = var.vnet_subnet_id
   node_count                  = var.use_spot_ml ? 0 : var.ml_node_count
@@ -103,7 +104,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
   vm_size                     = var.llm_node_size
   fips_enabled                = false
-  gpu_driver                  = "Install"
+  gpu_driver                  = var.gpu_driver_llm
   vnet_subnet_id              = var.vnet_subnet_id
   node_count                  = var.use_spot_llm ? 0 : var.llm_node_count
   min_count                   = var.min_llm_node_count
