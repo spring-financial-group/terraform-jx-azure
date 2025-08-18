@@ -101,6 +101,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
   spot_max_price              = var.use_spot_llm ? var.spot_max_price_llm : null
   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
   vm_size                     = var.llm_node_size
+  fips_enabled                = false
   vnet_subnet_id              = var.vnet_subnet_id
   node_count                  = var.use_spot_llm ? 0 : var.llm_node_count
   min_count                   = var.min_llm_node_count
