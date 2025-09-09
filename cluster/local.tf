@@ -15,8 +15,13 @@ locals {
   merged_secrets = merge(local.registry_secrets)
 
   job_secret_env_vars = var.key_vault_enabled ? {
-    AZURE_TENANT_ID       = module.secrets.tenant_id
-    AZURE_SUBSCRIPTION_ID = module.secrets.subscription_id
-    AZURE_CLIENT_ID       = module.secrets.client_id
-  } : {}
+    AZURE_TENANT_ID        = module.secrets.tenant_id
+    AZURE_SUBSCRIPTION_ID  = module.secrets.subscription_id
+    AZURE_CLIENT_ID        = module.secrets.client_id
+    JX_REPOSITORY_USERNAME = module.registry.registry_token_name
+    JX_REPOSITORY_PASSWORD = module.registry.registry_token_password
+  } : {
+    JX_REPOSITORY_USERNAME = module.registry.registry_token_name
+    JX_REPOSITORY_PASSWORD = module.registry.registry_token_password
+  }
 }

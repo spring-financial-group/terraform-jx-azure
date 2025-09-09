@@ -34,6 +34,33 @@ data "azurerm_container_registry" "acr_existing" {
   resource_group_name = var.use_existing_acr_resource_group_name
 }
 
+resource "azurerm_container_registry_scope_map" "acr_scope_map" {
+  name                    = local.container_registry_scope_map_name
+  container_registry_name = local.container_registry_name
+  resource_group_name     = azurerm_resource_group.acr[0].name
+  actions = [
+    "metadata/read",
+    "metadata/write",
+    "content/read",
+    "content/write",
+    "content/delete"
+  ]
+}
+
+resource "azurerm_container_registry_token" "acr_registry_token" {
+  name                    = local.container_registry_token_name
+  container_registry_name = local.container_registry_name
+  resource_group_name     = azurerm_resource_group.acr[0].name
+  scope_map_id            = azurerm_container_registry_scope_map.acr_scope_map.id
+}
+
+resource "azurerm_container_registry_token_password" "acr_registry_token_password" {
+  container_registry_token_id = azurerm_container_registry_token.acr_registry_token.id
+
+  password1 {
+  }
+}
+
 resource "azurerm_role_assignment" "acrpull" {
   count                = var.acr_enabled && var.external_registry_url == "" ? 1 : 0
   scope                = var.use_existing_acr_name == null ? azurerm_container_registry.acr[0].id : data.azurerm_container_registry.acr_existing[0].id

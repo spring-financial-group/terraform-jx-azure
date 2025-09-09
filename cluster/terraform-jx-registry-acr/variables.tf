@@ -11,6 +11,16 @@ variable "container_registry_name" {
   type        = string
   default     = ""
 }
+variable "container_registry_scope_map_name" {
+  description = "Name of container registry scope map"
+  type        = string
+  default     = ""
+}
+variable "container_registry_token_name" {
+  description = "Name of container registry token"
+  type        = string
+  default     = ""
+}
 variable "resource_group_name" {
   description = "Resource group in which to create registry"
   type        = string
