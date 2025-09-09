@@ -25,3 +25,30 @@ resource "azurerm_role_assignment" "oss_push" {
   role_definition_name = local.AcrPush_definition_name
   principal_id         = var.principal_id
 }
+
+resource "azurerm_container_registry_scope_map" "oss_scope_map" {
+  name                    = local.oss_registry_scope_map_name
+  container_registry_name = var.oss_registry_name
+  resource_group_name     = var.resource_group_name
+  actions = [
+    "metadata/read",
+    "metadata/write",
+    "content/read",
+    "content/write",
+    "content/delete"
+  ]
+}
+
+resource "azurerm_container_registry_token" "oss_registry_token" {
+  name                    = local.oss_registry_token_name
+  container_registry_name = var.oss_registry_name
+  resource_group_name     = var.resource_group_name
+  scope_map_id            = azurerm_container_registry_scope_map.oss_scope_map.id
+}
+
+resource "azurerm_container_registry_token_password" "oss_registry_token_password" {
+  container_registry_token_id = azurerm_container_registry_token.oss_registry_token.id
+
+  password1 {
+  }
+}
