@@ -19,5 +19,5 @@ output "registry_token_name" {
 }
 
 output "registry_token_password" {
-  value = var.external_registry_url != "" ? "" : (var.use_existing_acr_name == null && length(azurerm_container_registry.acr) > 0 ? azurerm_container_registry_token_password.acr_registry_token_password.password1 : "")
+  value = var.external_registry_url != "" ? "" : (var.use_existing_acr_name == null && length(azurerm_container_registry.acr) > 0 ? tostring(azurerm_container_registry_token_password.acr_registry_token_password.password1[0]) : "")
 }
