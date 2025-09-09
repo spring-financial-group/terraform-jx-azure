@@ -18,5 +18,7 @@ locals {
     AZURE_TENANT_ID       = module.secrets.tenant_id
     AZURE_SUBSCRIPTION_ID = module.secrets.subscription_id
     AZURE_CLIENT_ID       = module.secrets.client_id
+    JX_REPOSITORY_USERNAME = module.oss_registry.oss_token_name
+    JX_REPOSITORY_PASSWORD = module.oss_registry.oss_token_password
   } : {}
 }
