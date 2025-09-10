@@ -56,3 +56,19 @@ resource "azurerm_container_registry_cache_rule" "cache_rule" {
   source_repo           = "docker.io/*"
   credential_set_id     = "${azurerm_container_registry.acr[0].id}/credentialSets/dockerhub-cred"
 }
+
+resource "azurerm_container_registry_cache_rule" "cache_rule_mcr" {
+  count                 = var.acr_enabled && var.external_registry_url == "" && var.use_existing_acr_name == null ? 1 : 0
+  name                  = "mcr-microsoft-com"
+  container_registry_id = azurerm_container_registry.acr[0].id
+  target_repo           = "mcr-microsoft-com/*"
+  source_repo           = "mcr.microsoft.com/*"
+}
+
+resource "azurerm_container_registry_cache_rule" "cache_rule_quay" {
+  count                 = var.acr_enabled && var.external_registry_url == "" && var.use_existing_acr_name == null ? 1 : 0
+  name                  = "quay-io"
+  container_registry_id = azurerm_container_registry.acr[0].id
+  target_repo           = "quay-io/*"
+  source_repo           = "quay.io/*"
+}
