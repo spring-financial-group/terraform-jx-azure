@@ -465,3 +465,9 @@ variable "enable_defender_analytics" {
 variable "enable_auto_upgrades" {
   type = bool
 }
+
+variable "acr_chart_registry_enabled" {
+  type        = bool
+  description = "BETA: Flag to enable ACR as an OCI chart registry"
+  default     = false
+}

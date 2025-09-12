@@ -18,6 +18,7 @@ orchestrator_version             = "1.31.6"
 azure_policy_bool                = false
 cost_analysis_bool               = true
 acr_enabled                      = true
+acr_chart_registry_enabled       = true
 install_kuberhealthy             = true
 dns_resources_enabled            = true
 default_suk_bool                 = true

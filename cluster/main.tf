@@ -134,14 +134,15 @@ module "oss_registry" {
 }
 
 module "jx-boot" {
-  source               = "./terraform-jx-boot"
-  depends_on           = [module.cluster]
-  jx_git_url           = var.jx_git_url
-  jx_bot_username      = var.jx_bot_username
-  jx_bot_token         = var.jx_bot_token
-  job_secret_env_vars  = local.job_secret_env_vars
-  install_vault        = !var.key_vault_enabled
-  install_kuberhealthy = var.install_kuberhealthy
+  source                     = "./terraform-jx-boot"
+  depends_on                 = [module.cluster]
+  jx_git_url                 = var.jx_git_url
+  jx_bot_username            = var.jx_bot_username
+  jx_bot_token               = var.jx_bot_token
+  job_secret_env_vars        = local.job_secret_env_vars
+  install_vault              = !var.key_vault_enabled
+  install_kuberhealthy       = var.install_kuberhealthy
+  acr_chart_registry_enabled = var.acr_chart_registry_enabled
 }
 
 module "dns" {

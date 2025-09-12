@@ -407,6 +407,12 @@ variable "use_existing_acr_name" {
   default     = null
 }
 
+variable "acr_chart_registry_enabled" {
+  type        = bool
+  description = "BETA: Flag to enable ACR as an OCI chart registry"
+  default     = false
+}
+
 variable "use_existing_acr_resource_group_name" {
   description = "Name of the resources group of the existing ACR that you would like to use, e.g. use this in multicluster setup, when you want to use DEV cluster ACR."
   type        = string
