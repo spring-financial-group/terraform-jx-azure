@@ -35,9 +35,3 @@ variable "install_kuberhealthy" {
   type        = bool
   default     = true
 }
-
-variable "acr_chart_registry_enabled" {
-  description = "Flag to indicate if the ACR should be used as the chart repository for Jenkins X"
-  type        = bool
-  default     = false
-}
