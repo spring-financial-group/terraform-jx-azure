@@ -35,3 +35,9 @@ variable "install_kuberhealthy" {
   type        = bool
   default     = true
 }
+
+variable "acr_chart_registry_enabled" {
+  description = "Flag to specify if ACR should be used as chart repository"
+  type        = bool
+  default     = false
+}
