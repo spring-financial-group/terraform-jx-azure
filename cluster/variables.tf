@@ -435,13 +435,11 @@ variable "use_existing_acr_name" {
 variable "oss_acr_enabled" {
   description = "Flag to indicate whether to provision Open Source ACR"
   type        = bool
-  default     = false
 }
 
 variable "oss_acr_pull_enabled" {
   description = "Flag to indicate whether to provision OSS ACR pull role assignment"
   type        = bool
-  default     = false
 }
 
 variable "use_existing_acr_resource_group_name" {
