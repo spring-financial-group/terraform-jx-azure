@@ -432,6 +432,13 @@ variable "use_existing_acr_name" {
   default     = null
 }
 
+variable "oss_acr_enabled" {
+  description = "Flag to indicate whether to provision Open Source ACR"
+  type        = bool
+  default     = false
+}
+
+
 variable "use_existing_acr_resource_group_name" {
   description = "Name of the resources group of the existing ACR that you would like to use, e.g. use this in multicluster setup, when you want to use DEV cluster ACR."
   type        = string

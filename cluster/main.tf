@@ -131,6 +131,7 @@ module "oss_registry" {
   resource_group_name = module.registry.resource_group_name
   principal_id        = module.cluster.kubelet_identity_id
   location            = var.location
+  oss_acr_enabled     = var.oss_acr_enabled
 }
 
 module "jx-boot" {
