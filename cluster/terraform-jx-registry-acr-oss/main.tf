@@ -27,7 +27,7 @@ resource "azurerm_role_assignment" "oss_push" {
 }
 
 resource "azurerm_role_assignment" "acrpull" {
-  count                = var.oss_acr_enabled
+  count                = var.oss_acr_enabled ? 1 : 0
   scope                = azurerm_container_registry.oss_acr.id
   role_definition_name = "AcrPull"
   principal_id         = var.principal_id
