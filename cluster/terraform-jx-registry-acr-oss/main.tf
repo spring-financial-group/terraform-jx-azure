@@ -12,6 +12,7 @@ terraform {
 }
 
 resource "azurerm_container_registry" "oss_acr" {
+  count                  = var.oss_acr_enabled ? 1 : 0
   name                   = var.oss_registry_name
   resource_group_name    = var.resource_group_name
   location               = var.location
@@ -21,7 +22,15 @@ resource "azurerm_container_registry" "oss_acr" {
 }
 
 resource "azurerm_role_assignment" "oss_push" {
-  scope                = azurerm_container_registry.oss_acr.id
+  count                = var.oss_acr_enabled ? 1 : 0
+  scope                = azurerm_container_registry.oss_acr[0].id
   role_definition_name = local.AcrPush_definition_name
+  principal_id         = var.principal_id
+}
+
+resource "azurerm_role_assignment" "acrpull" {
+  count                = var.oss_acr_pull_enabled ? 1 : 0
+  scope                = azurerm_container_registry.oss_acr[0].id
+  role_definition_name = "AcrPull"
   principal_id         = var.principal_id
 }
