@@ -23,7 +23,7 @@ resource "azurerm_container_registry" "oss_acr" {
 
 resource "azurerm_role_assignment" "oss_push" {
   count                = var.oss_acr_enabled ? 1 : 0
-  scope                = azurerm_container_registry.oss_acr.id
+  scope                = azurerm_container_registry.oss_acr[0].id
   role_definition_name = local.AcrPush_definition_name
   principal_id         = var.principal_id
 }
