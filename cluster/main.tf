@@ -124,14 +124,14 @@ module "registry" {
 }
 
 module "oss_registry" {
-  source              = "./terraform-jx-registry-acr-oss"
-  count               = var.oss_registry_name != "" && var.use_existing_acr_name == null && var.external_registry_url == "" ? 1 : 0
-  oss_registry_name   = var.oss_registry_name
-  depends_on          = [module.registry]
-  resource_group_name = module.registry.resource_group_name
-  principal_id        = module.cluster.kubelet_identity_id
-  location            = var.location
-  oss_acr_enabled     = var.oss_acr_enabled
+  source               = "./terraform-jx-registry-acr-oss"
+  oss_registry_name    = var.oss_registry_name
+  depends_on           = [module.registry]
+  resource_group_name  = module.registry.resource_group_name
+  principal_id         = module.cluster.kubelet_identity_id
+  location             = var.location
+  oss_acr_enabled      = var.oss_acr_enabled
+  oss_acr_pull_enabled = var.oss_acr_pull_enabled
 }
 
 module "jx-boot" {

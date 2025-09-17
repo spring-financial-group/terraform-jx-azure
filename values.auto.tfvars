@@ -23,6 +23,8 @@ dns_resources_enabled            = true
 default_suk_bool                 = true
 enable_defender_analytics        = true
 enable_auto_upgrades             = true
+oss_acr_enabled                  = true
+oss_acr_pull_enabled             = true
 # Machines
 min_node_count = 5
 max_node_count = 50

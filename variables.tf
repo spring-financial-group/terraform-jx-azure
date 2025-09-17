@@ -419,6 +419,11 @@ variable "oss_acr_enabled" {
   default     = false
 }
 
+variable "oss_acr_pull_enabled" {
+  description = "Flag to indicate whether to provision OSS ACR pull role assignment"
+  type        = bool
+  default     = false
+}
 
 variable "oss_registry_name" {
   description = "Name of the Open Source container registry"
