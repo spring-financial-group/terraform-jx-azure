@@ -39,7 +39,7 @@ max_ml_node_count = 6
 # LLM nodes
 use_spot_llm       = true
 llm_node_size      = "Standard_NC40ads_H100_v5"
-min_llm_node_count = 1
+min_llm_node_count = 0
 max_llm_node_count = 2
 
 # Build Spot Nodes
