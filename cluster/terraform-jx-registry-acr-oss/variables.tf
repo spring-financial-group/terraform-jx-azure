@@ -1,12 +1,12 @@
 variable "resource_group_name" {
   description = "Resource group in which to create registry"
   type        = string
-  default     = ""
+  default     = "rg-registry-jx3-mqube-build"
 }
 variable "oss_registry_name" {
   description = "Name of the Open Source container registry"
   type        = string
-  default     = ""
+  default     = "mqubeoss"
 }
 variable "location" {
   description = "Location in which to create registry"
