@@ -145,7 +145,7 @@ variable "max_ml_node_count" {
 
 variable "gpu_driver_ml" {
   type        = string
-  default = null
+  default = "Install"
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
