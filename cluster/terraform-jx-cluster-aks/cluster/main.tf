@@ -58,6 +58,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     upgrade_settings {
       max_surge = "25%"
     }
+    zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.node_zones
     temporary_name_for_rotation = "tempk8spool"
   }
 
@@ -90,6 +91,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   auto_scaling_enabled        = var.max_ml_node_count == null ? false : true
   node_taints                 = ["sku=gpu:NoSchedule"]
   node_labels                 = { key = "gpu_ready" }
+  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.ml_node_zones
   temporary_name_for_rotation = "tempml"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
@@ -113,6 +115,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
   auto_scaling_enabled        = var.max_llm_node_count == null ? false : true
   node_taints                 = ["sku=gpu:NoSchedule"]
   node_labels                 = { node = "llm", key = "gpu_ready" }
+  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.llm_node_zones
   temporary_name_for_rotation = "templlm"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
@@ -133,6 +136,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
   orchestrator_version        = var.orchestrator_version
   auto_scaling_enabled        = var.max_build_node_count == null ? false : true
   node_taints                 = ["sku=build:NoSchedule"]
+  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.build_node_zones
   temporary_name_for_rotation = "tempbuild"
 
   lifecycle { ignore_changes = [node_taints, node_count] }
@@ -154,6 +158,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
   auto_scaling_enabled        = var.max_infra_node_count == null ? false : true
   node_taints                 = ["sku=infra:NoSchedule"]
   node_labels                 = { node = "infra" }
+  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.infra_node_zones
   temporary_name_for_rotation = "tempinfra"
 
   lifecycle { ignore_changes = [node_taints, node_count] }
@@ -175,6 +180,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
   auto_scaling_enabled        = var.max_mlbuild_node_count == null ? false : true
   node_taints                 = ["sku=mlbuild:NoSchedule"]
   node_labels                 = { key = "gpu_ready" }
+  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.mlbuild_node_zones
   temporary_name_for_rotation = "tempmlbuild"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
