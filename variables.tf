@@ -425,12 +425,6 @@ variable "oss_acr_pull_enabled" {
   default     = false
 }
 
-variable "oss_registry_name" {
-  description = "Name of the Open Source container registry"
-  type        = string
-  default     = ""
-}
-
 // ----------------------------------------------------------------------------
 // Storage variables
 // ---------------------------------------------------------------------------

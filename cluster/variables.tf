@@ -448,12 +448,6 @@ variable "use_existing_acr_resource_group_name" {
   default     = null
 }
 
-variable "oss_registry_name" {
-  description = "Name of the Open Source container registry"
-  type        = string
-  default     = ""
-}
-
 variable "acr_enabled" {
   description = "additional toggle to enable/disable acr creation"
   type        = string

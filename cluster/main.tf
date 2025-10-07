@@ -125,7 +125,6 @@ module "registry" {
 
 module "oss_registry" {
   source               = "./terraform-jx-registry-acr-oss"
-  oss_registry_name    = var.oss_registry_name
   depends_on           = [module.registry]
   resource_group_name  = module.registry.resource_group_name
   principal_id         = module.cluster.kubelet_identity_id

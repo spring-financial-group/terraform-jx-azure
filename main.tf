@@ -29,7 +29,6 @@ module "cluster" {
   use_existing_acr_resource_group_name  = var.use_existing_acr_resource_group_name
   oss_acr_enabled                      = var.oss_acr_enabled
   oss_acr_pull_enabled                 = var.oss_acr_pull_enabled
-  oss_registry_name                     = var.oss_registry_name
   jx_bot_token                          = var.jx_bot_token
   jx_git_url                            = var.jx_git_url
   jx_bot_username                       = var.jx_bot_username
