@@ -15,6 +15,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   http_application_routing_enabled = false
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
+  local_account_disabled = false
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
