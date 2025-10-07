@@ -14,7 +14,7 @@ terraform {
 data "azurerm_container_registry" "oss_acr_existing" {
     count = var.oss_acr_pull_enabled ? 1 : 0
     name                = var.oss_registry_name
-    resource_group_name = var.resource_group_name
+    resource_group_name = "rg-registry-jx3-mqube-build"
 }
 
 resource "azurerm_container_registry" "oss_acr" {
