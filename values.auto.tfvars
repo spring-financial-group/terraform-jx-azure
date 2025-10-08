@@ -25,10 +25,12 @@ enable_defender_analytics        = true
 enable_auto_upgrades             = true
 oss_acr_enabled                  = true
 oss_acr_pull_enabled             = false
+enable_node_zone_spanning        = false
 # Machines
 min_node_count = 5
 max_node_count = 50
 node_size      = "Standard_D8s_v5"
+
 
 # Ml nodes
 use_spot_ml       = true

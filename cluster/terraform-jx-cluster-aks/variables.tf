@@ -25,6 +25,11 @@ variable "max_node_count" {
   type        = number
   default     = null
 }
+variable "node_zones" {
+  description = "The list of availability zones for the node pool (default: Regional zones)"
+  type        = list(string)
+  default     = []
+}
 
 // ----------------------------------------------------------------------------
 // Large language model nodepool variables
@@ -59,6 +64,11 @@ variable "max_llm_node_count" {
   description = "The maximum number of LLM nodes to use for the cluster if autoscaling is enabled"
   type        = number
   default     = null
+}
+variable "llm_node_zones" {
+  description = "The list of availability zones for the LLM node pool (default: Regional zones)"
+  type        = list(string)
+  default     = []
 }
 
 variable "gpu_driver_llm" {
@@ -100,6 +110,11 @@ variable "max_ml_node_count" {
   type        = number
   default     = null
 }
+variable "ml_node_zones" {
+  description = "The list of availability zones for the ML node pool (default: Regional zones)"
+  type        = list(string)
+  default     = []
+}
 
 variable "gpu_driver_ml" {
   type        = string
@@ -139,6 +154,11 @@ variable "max_build_node_count" {
   type        = number
   default     = null
 }
+variable "build_node_zones" {
+  description = "The list of availability zones for the Build node pool (default: Regional zones)"
+  type        = list(string)
+  default     = []
+}
 
 // ----------------------------------------------------------------------------
 // Infra nodepool variables
@@ -173,6 +193,11 @@ variable "max_infra_node_count" {
   type        = number
   default     = null
 }
+variable "infra_node_zones" {
+  description = "The list of availability zones for the infra node pool (default: Regional zones)"
+  type        = list(string)
+  default     = []
+}
 
 // ----------------------------------------------------------------------------
 // mlbuild nodepool variables
@@ -206,6 +231,11 @@ variable "max_mlbuild_node_count" {
   description = "The maximum number of mlbuild nodes to use for the cluster if autoscaling is enabled"
   type        = number
   default     = null
+}
+variable "mlbuild_node_zones" {
+  description = "The list of availability zones for the ML build node pool (default: Regional zones)"
+  type        = list(string)
+  default     = []
 }
 
 // ----------------------------------------------------------------------------
@@ -309,4 +339,9 @@ variable "microsoft_defender_log_analytics_name" {
 
 variable "enable_auto_upgrades" {
   type = bool
+}
+
+variable "enable_node_zone_spanning" {
+  type    = bool
+  default = false
 }
