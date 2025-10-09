@@ -35,6 +35,11 @@ variable "install_kuberhealthy" {
   type        = bool
   default     = true
 }
+variable "enable_acr_chart_registry" {
+    type        = bool
+    default     = false
+    description = "BETA: Flag to indicate whether to pass ACR chart registry credentials to jx boot"
+}
 
 // ----------------------------------------------------------------------------
 // Machine variables
