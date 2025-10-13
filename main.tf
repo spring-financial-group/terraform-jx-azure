@@ -89,6 +89,7 @@ module "cluster" {
   cost_analysis_bool                    = var.cost_analysis_bool
   acr_enabled                           = var.acr_enabled
   install_kuberhealthy                  = var.install_kuberhealthy
+  enable_acr_chart_registry             = var.enable_acr_chart_registry
   dns_resources_enabled                 = var.dns_resources_enabled
   default_suk_bool                      = var.default_suk_bool
   enable_defender_analytics             = var.enable_defender_analytics
