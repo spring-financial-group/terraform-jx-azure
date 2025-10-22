@@ -1,4 +1,8 @@
 locals {
   resource_group_name     = var.resource_group_name != "" ? var.resource_group_name : "rg-registry-${join("", regexall("[A-Za-z0-9\\-_().]", var.cluster_name))}"
   container_registry_name = var.container_registry_name != "" ? var.container_registry_name : substr(join("", regexall("[A-Za-z0-9]", var.cluster_name)), 0, 45)
+  container_registry_scope_map_name = var.container_registry_scope_map_name != "" ? var.container_registry_scope_map_name : "scope-map-${substr(join("", regexall("[A-Za-z0-9]", var.cluster_name)), 0, 33)}"
+  container_registry_token_name = var.container_registry_token_name != "" ? var.container_registry_token_name : "token-${substr(join("", regexall("[A-Za-z0-9]", var.cluster_name)), 0, 38)}"
+  mqube_registry_rg         = "rg-registry-jx3-mqube-build"
+  mqube_chart_registry_name = "jx3mqubebuild"
 }

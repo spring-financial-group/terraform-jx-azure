@@ -20,6 +20,7 @@ cost_analysis_bool               = true
 acr_enabled                      = true
 install_kuberhealthy             = true
 enable_acr_chart_registry        = false
+enable_mqube_tech_acr_readonly   = false
 dns_resources_enabled            = true
 default_suk_bool                 = true
 enable_defender_analytics        = true

@@ -453,6 +453,12 @@ variable "use_existing_acr_resource_group_name" {
   default     = null
 }
 
+variable "enable_mqube_tech_acr_readonly" {
+  description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
+  type        = bool
+  default     = false
+}
+
 variable "oss_acr_enabled" {
   description = "Flag to indicate whether to provision Open Source ACR"
   type        = bool
