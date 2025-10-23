@@ -488,6 +488,13 @@ variable "acr_enabled" {
   type        = string
 }
 
+# Note: enable for SaaS clusters *ONLY*
+variable "enable_mqube_tech_acr_readonly" {
+  description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
+  type        = bool
+  default     = false
+}
+
 variable "dns_resources_enabled" {
   type        = bool
   description = "THis is an additional variable toggle to enable/disable the creation of DNS resources."

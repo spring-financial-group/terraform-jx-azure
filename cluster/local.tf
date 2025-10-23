@@ -10,6 +10,8 @@ locals {
   registry_secrets = {
     jx-dev-registry-username : module.registry.admin_username,
     jx-dev-registry-password : module.registry.admin_password,
+    mqube-tech-registry-username : module.registry.mqube_registry_token_name,
+    mqube-tech-registry-password : module.registry.mqube_registry_token_password,
   }
 
   merged_secrets = merge(local.registry_secrets)
@@ -21,9 +23,18 @@ locals {
   } : {}
 
   job_secret_env_vars_acr = var.enable_acr_chart_registry ? {
+    # used by `jx gitops helm` to interact with ACR
     JX_REPOSITORY_USERNAME = local.registry_secrets["jx-dev-registry-username"]
     JX_REPOSITORY_PASSWORD = local.registry_secrets["jx-dev-registry-password"]
+    # used by `helmfile` to interact with the "dev" chart repository
+    DEV_USERNAME = local.registry_secrets["jx-dev-registry-username"]
+    DEV_PASSWORD = local.registry_secrets["jx-dev-registry-password"]
   } : {}
 
-  job_secret_env_vars = merge({}, local.job_secret_env_vars_vault, local.job_secret_env_vars_acr)
+  job_secret_env_vars_mqube_tech = var.enable_mqube_tech_acr_readonly ? {
+    MQUBE_TECH_USERNAME = local.registry_secrets["mqube-tech-registry-username"]
+    MQUBE_TECH_PASSWORD = local.registry_secrets["mqube-tech-registry-password"]
+  } : {}
+
+  job_secret_env_vars = merge({}, local.job_secret_env_vars_vault, local.job_secret_env_vars_acr, local.job_secret_env_vars_mqube_tech)
 }
