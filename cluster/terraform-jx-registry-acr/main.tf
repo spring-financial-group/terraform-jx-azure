@@ -86,6 +86,7 @@ resource "random_password" "temp_token_password" {
   length                  = 16
   upper                   = true
   lower                   = true
+  special                 = false
 }
 
 # Pullthrough cache rules for public registries
