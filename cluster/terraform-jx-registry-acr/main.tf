@@ -80,15 +80,6 @@ resource "azurerm_container_registry_token_password" "acr_registry_token_passwor
   }
 }
 
-resource "azurerm_container_registry_token_password" "acr_registry_token_password" {
-  # count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
-  count                   = 0
-  container_registry_token_id = azurerm_container_registry_token.acr_registry_token[0].id
-
-  password1 {
-  }
-}
-
 # Random password
 resource "random_password" "temp_token_password" {
   count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
