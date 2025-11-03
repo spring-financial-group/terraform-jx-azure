@@ -10,6 +10,16 @@ variable "jx_bot_token" {
   description = "Bot token used to interact with the Jenkins X cluster git repository"
   type        = string
 }
+variable "acr_token_username" {
+  description = "Username for the ACR pull token"
+  type        = string
+  default     = ""
+}
+variable "acr_token_password" {
+    description = "Password for the ACR pull token"
+    type        = string
+    default     = ""
+}
 variable "terraform_drift_secret_map" {
   type        = map(string)
   default     = {}

@@ -25,6 +25,16 @@ variable "jx_bot_token" {
   description = "Bot token used to interact with the Jenkins X cluster git repository"
   type        = string
 }
+variable "acr_token_username" {
+  description = "Username for the ACR token to allow pushing images to ACR"
+  type        = string
+  default     = ""
+}
+variable "acr_token_password" {
+    description = "Password for the ACR token to allow pushing images to ACR"
+    type        = string
+    default     = ""
+}
 variable "server_side_apply_enabled" {
   type        = bool
   description = "BETA: Flag to indicate to the jx-git-operator that you would like to use server side apply"

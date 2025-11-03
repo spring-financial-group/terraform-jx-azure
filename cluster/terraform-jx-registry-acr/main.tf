@@ -80,15 +80,6 @@ resource "azurerm_container_registry_token_password" "acr_registry_token_passwor
   }
 }
 
-# Random password
-resource "random_password" "temp_token_password" {
-  count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
-  length                  = 16
-  upper                   = true
-  lower                   = true
-  special                 = false
-}
-
 # Pullthrough cache rules for public registries
 
 resource "azurerm_container_registry_cache_rule" "cache_rule" {

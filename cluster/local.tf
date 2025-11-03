@@ -32,8 +32,8 @@ locals {
   } : {}
 
   job_secret_env_vars_mqube_tech = var.enable_mqube_tech_acr_readonly ? {
-    MQUBE_TECH_USERNAME = local.registry_secrets["mqube-tech-registry-username"]
-    MQUBE_TECH_PASSWORD = local.registry_secrets["mqube-tech-registry-password"]
+    MQUBE_TECH_USERNAME = var.acr_token_username
+    MQUBE_TECH_PASSWORD = var.acr_token_password
   } : {}
 
   job_secret_env_vars = merge({}, local.job_secret_env_vars_vault, local.job_secret_env_vars_acr, local.job_secret_env_vars_mqube_tech)
