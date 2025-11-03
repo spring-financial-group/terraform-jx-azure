@@ -58,3 +58,14 @@ variable "enable_mqube_tech_acr_readonly" {
   type        = bool
   default     = false
 }
+
+variable "acr_token_username" {
+  description = "Username for the ACR pull token"
+  type        = string
+  default     = ""
+}
+variable "acr_token_password" {
+  description = "Password for the ACR pull token"
+  type        = string
+  default     = ""
+}
