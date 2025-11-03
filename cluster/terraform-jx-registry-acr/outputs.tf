@@ -15,11 +15,21 @@ output "resource_group_name" {
 }
 
 output "mqube_registry_token_name" {
-  value     = var.enable_mqube_tech_acr_readonly ? azurerm_container_registry_token.acr_registry_token[0].name : ""
+  value     = var.enable_mqube_tech_acr_readonly ? local.container_registry_token_name : ""
   sensitive = true
 }
 
 output "mqube_registry_token_password" {
-  value     = var.enable_mqube_tech_acr_readonly ? azurerm_container_registry_token_password.acr_registry_token_password[0].password1[0].value : ""
+  value     = var.enable_mqube_tech_acr_readonly ? random_password.temp_token_password[0].result : ""
   sensitive = true
 }
+
+# output "mqube_registry_token_name" {
+#   value     = var.enable_mqube_tech_acr_readonly ? azurerm_container_registry_token.acr_registry_token[0].name : ""
+#   sensitive = true
+# }
+
+# output "mqube_registry_token_password" {
+#   value     = var.enable_mqube_tech_acr_readonly ? azurerm_container_registry_token_password.acr_registry_token_password[0].password1[0].value : ""
+#   sensitive = true
+# }
