@@ -48,47 +48,6 @@ resource "azurerm_role_assignment" "acrpush" {
   principal_id         = var.principal_id
 }
 
-# Scope Map to allow pulling of containers and charts from MQube's ACR
-
-resource "azurerm_container_registry_scope_map" "acr_scope_map" {
-  # count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
-  count                   = 0
-  name                    = local.container_registry_scope_map_name
-  container_registry_name = local.mqube_chart_registry_name
-  resource_group_name     = local.mqube_registry_rg
-  actions = [
-    "repositories/spring-financial-group/charts/*/content/read",
-    "repositories/spring-financial-group/charts/*/metadata/read"
-  ]
-}
-
-resource "azurerm_container_registry_token" "acr_registry_token" {
-  # count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
-  count                   = 0
-  name                    = local.container_registry_token_name
-  container_registry_name = local.mqube_chart_registry_name
-  resource_group_name     = local.mqube_registry_rg
-  scope_map_id            = azurerm_container_registry_scope_map.acr_scope_map[0].id
-}
-
-resource "azurerm_container_registry_token_password" "acr_registry_token_password" {
-  # count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
-  count                   = 0
-  container_registry_token_id = azurerm_container_registry_token.acr_registry_token[0].id
-
-  password1 {
-  }
-}
-
-# Random password
-resource "random_password" "temp_token_password" {
-  count                   = var.enable_mqube_tech_acr_readonly ? 1 : 0
-  length                  = 16
-  upper                   = true
-  lower                   = true
-  special                 = false
-}
-
 # Pullthrough cache rules for public registries
 
 resource "azurerm_container_registry_cache_rule" "cache_rule" {

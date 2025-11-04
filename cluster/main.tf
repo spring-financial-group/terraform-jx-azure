@@ -128,7 +128,6 @@ module "registry" {
   use_existing_acr_name                = var.use_existing_acr_name
   use_existing_acr_resource_group_name = var.use_existing_acr_resource_group_name
   acr_enabled                          = var.acr_enabled
-  enable_mqube_tech_acr_readonly       = var.enable_mqube_tech_acr_readonly
 }
 
 module "oss_registry" {
