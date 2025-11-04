@@ -32,6 +32,8 @@ module "cluster" {
   jx_bot_token                          = var.jx_bot_token
   jx_git_url                            = var.jx_git_url
   jx_bot_username                       = var.jx_bot_username
+  acr_token_password                    = var.acr_token_password
+  acr_token_username                    = var.acr_token_username
   key_vault_enabled                     = var.key_vault_enabled
   key_vault_name                        = var.key_vault_name
   key_vault_resource_group_name         = var.key_vault_resource_group_name
