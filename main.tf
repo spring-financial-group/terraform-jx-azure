@@ -88,7 +88,7 @@ module "cluster" {
   azure_policy_bool                     = var.azure_policy_bool
   cost_analysis_bool                    = var.cost_analysis_bool
   acr_enabled                           = var.acr_enabled
-  enable_mqube_tech_acr_readonly        = var.enable_mqube_tech_acr_readonly
+  saas_map                              = var.saas_map
   install_kuberhealthy                  = var.install_kuberhealthy
   enable_acr_chart_registry             = var.enable_acr_chart_registry
   dns_resources_enabled                 = var.dns_resources_enabled
@@ -99,6 +99,8 @@ module "cluster" {
   microsoft_defender_log_analytics_name = var.microsoft_defender_log_analytics_name
   gpu_driver_llm                        = var.gpu_driver_llm
   gpu_driver_ml                         = var.gpu_driver_ml
+  is_saas_org                           = var.is_saas_org
+  saas_org_name                         = var.saas_org_name
 }
 
 output "connect" {

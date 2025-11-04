@@ -53,8 +53,8 @@ variable "acr_enabled" {
   type        = string
 }
 
-variable "enable_mqube_tech_acr_readonly" {
-  description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
-  type        = bool
-  default     = false
+variable "saas_map" {
+  type = map(string)
+  description = "Map of SaaS members to identifiers. Key = name, value = tenant or ID string."
+  default = {}
 }

@@ -11,6 +11,28 @@ variable "location" {
 }
 
 // ----------------------------------------------------------------------------
+// SaaS map
+// ----------------------------------------------------------------------------
+
+variable "saas_map" {
+  type = map(string)
+  description = "Map of SaaS members to identifiers. Key = name, value = tenant or ID string."
+  default = {}
+}
+
+variable "is_saas_org" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether this cluster is being created for a SaaS org"
+}
+
+variable "saas_org_name" {
+  type        = string
+  default     = ""
+  description = "The name of the SaaS org for which this cluster is being created"
+}
+
+// ----------------------------------------------------------------------------
 // JX Boot variables
 // ----------------------------------------------------------------------------
 variable "jx_git_url" {
@@ -451,12 +473,6 @@ variable "use_existing_acr_resource_group_name" {
   description = "Name of the resources group of the existing ACR that you would like to use, e.g. use this in multicluster setup, when you want to use DEV cluster ACR."
   type        = string
   default     = null
-}
-
-variable "enable_mqube_tech_acr_readonly" {
-  description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
-  type        = bool
-  default     = false
 }
 
 variable "oss_acr_enabled" {

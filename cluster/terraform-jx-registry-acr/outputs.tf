@@ -14,22 +14,20 @@ output "resource_group_name" {
   value = var.external_registry_url != "" ? "" : (var.use_existing_acr_resource_group_name == null && length(azurerm_container_registry.acr) > 0 ? azurerm_container_registry.acr[0].resource_group_name : (length(data.azurerm_container_registry.acr_existing) > 0 ? data.azurerm_container_registry.acr_existing[0].resource_group_name : ""))
 }
 
-output "mqube_registry_token_name" {
-  value     = var.enable_mqube_tech_acr_readonly ? local.container_registry_token_name : ""
-  sensitive = true
+output "acr_registry_token_names" {
+  description = "Map of ACR scoped token names per SaaS member"
+  value = {
+    for key, token in azurerm_container_registry_token.acr_registry_token :
+    key => token.name
+  }
+  sensitive = false
 }
 
-output "mqube_registry_token_password" {
-  value     = var.enable_mqube_tech_acr_readonly ? random_password.temp_token_password[0].result : ""
+output "acr_registry_token_passwords" {
+  description = "Map of ACR scoped token passwords per SaaS member"
+  value = {
+    for key, pw in azurerm_container_registry_token_password.acr_registry_token_password :
+    key => pw.password1[0].value
+  }
   sensitive = true
 }
-
-# output "mqube_registry_token_name" {
-#   value     = var.enable_mqube_tech_acr_readonly ? azurerm_container_registry_token.acr_registry_token[0].name : ""
-#   sensitive = true
-# }
-
-# output "mqube_registry_token_password" {
-#   value     = var.enable_mqube_tech_acr_readonly ? azurerm_container_registry_token_password.acr_registry_token_password[0].password1[0].value : ""
-#   sensitive = true
-# }

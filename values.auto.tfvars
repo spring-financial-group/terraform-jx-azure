@@ -15,12 +15,12 @@ key_vault_resource_group_name    = "jx3key-vault-rsg"
 key_vault_name                   = "k8secrets-vault"
 cluster_version                  = "1.31.6"
 orchestrator_version             = "1.31.6"
+saas_map                         = {"monbs" = "monbs", "nbs" = "nbs"}
 azure_policy_bool                = false
 cost_analysis_bool               = true
 acr_enabled                      = true
 install_kuberhealthy             = true
-enable_acr_chart_registry        = false
-enable_mqube_tech_acr_readonly   = false
+enable_acr_chart_registry        = true
 dns_resources_enabled            = true
 default_suk_bool                 = true
 enable_defender_analytics        = true

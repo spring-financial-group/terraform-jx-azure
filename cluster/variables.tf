@@ -41,6 +41,12 @@ variable "enable_acr_chart_registry" {
     description = "BETA: Flag to indicate whether to pass ACR chart registry credentials to jx boot"
 }
 
+variable "saas_map" {
+  type = map(string)
+  description = "Map of SaaS members to identifiers. Key = name, value = tenant or ID string."
+  default = {}
+}
+
 // ----------------------------------------------------------------------------
 // Machine variables
 // ----------------------------------------------------------------------------
@@ -489,10 +495,16 @@ variable "acr_enabled" {
 }
 
 # Note: enable for SaaS clusters *ONLY*
-variable "enable_mqube_tech_acr_readonly" {
-  description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
+variable "is_saas_org" {
+  description = "If true, import registry TF state from MQube"
   type        = bool
   default     = false
+}
+
+variable "saas_org_name" {
+  description = "Name of the SaaS instance, e.g. monbs, nbs, etc."
+  type        = string
+  default     = ""
 }
 
 variable "dns_resources_enabled" {
