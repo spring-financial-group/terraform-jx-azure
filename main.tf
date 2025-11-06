@@ -91,6 +91,8 @@ module "cluster" {
   enable_mqube_tech_acr_readonly        = var.enable_mqube_tech_acr_readonly
   install_kuberhealthy                  = var.install_kuberhealthy
   enable_acr_chart_registry             = var.enable_acr_chart_registry
+  pull_only_registry_token_name         = var.pull_only_registry_token_name
+  pull_only_registry_token_password     = var.pull_only_registry_token_password
   dns_resources_enabled                 = var.dns_resources_enabled
   default_suk_bool                      = var.default_suk_bool
   enable_defender_analytics             = var.enable_defender_analytics

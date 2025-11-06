@@ -459,6 +459,19 @@ variable "enable_mqube_tech_acr_readonly" {
   default     = false
 }
 
+variable "pull_only_registry_token_name" {
+  description = "Token name for pull-only access to MQube container registry."
+  type        = string
+  default     = ""
+}
+
+variable "pull_only_registry_token_password" {
+  description = "Token password for pull-only access to MQube container registry. "
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
 variable "oss_acr_enabled" {
   description = "Flag to indicate whether to provision Open Source ACR"
   type        = bool
