@@ -11,16 +11,6 @@ variable "container_registry_name" {
   type        = string
   default     = ""
 }
-variable "container_registry_scope_map_name" {
-  description = "Name of scope map for MQube's container registry"
-  type        = string
-  default     = ""
-}
-variable "container_registry_token_name" {
-  description = "Name of pull-only token for MQube's container registry"
-  type        = string
-  default     = ""
-}
 variable "resource_group_name" {
   description = "Resource group in which to create registry"
   type        = string
@@ -51,10 +41,4 @@ variable "use_existing_acr_resource_group_name" {
 variable "acr_enabled" {
   description = "additional toggle to enable/disable acr creation"
   type        = string
-}
-
-variable "enable_mqube_tech_acr_readonly" {
-  description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
-  type        = bool
-  default     = false
 }

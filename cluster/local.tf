@@ -10,11 +10,14 @@ locals {
   registry_secrets = {
     jx-dev-registry-username : module.registry.admin_username,
     jx-dev-registry-password : module.registry.admin_password,
-    mqube-tech-registry-username : module.registry.mqube_registry_token_name,
-    mqube-tech-registry-password : module.registry.mqube_registry_token_password,
   }
 
-  merged_secrets = merge(local.registry_secrets)
+  mqube_registry_secrets = var.enable_mqube_tech_acr_readonly ? {
+    mqube-tech-registry-username : var.pull_only_registry_token_name,
+    mqube-tech-registry-password : var.pull_only_registry_token_password,
+  } : {}
+
+  merged_secrets = merge({}, local.registry_secrets, local.mqube_registry_secrets)
 
   job_secret_env_vars_vault = var.key_vault_enabled ? {
     AZURE_TENANT_ID       = module.secrets.tenant_id
@@ -32,8 +35,8 @@ locals {
   } : {}
 
   job_secret_env_vars_mqube_tech = var.enable_mqube_tech_acr_readonly ? {
-    MQUBE_TECH_USERNAME = local.registry_secrets["mqube-tech-registry-username"]
-    MQUBE_TECH_PASSWORD = local.registry_secrets["mqube-tech-registry-password"]
+    MQUBE_TECH_USERNAME = local.mqube_registry_secrets["mqube-tech-registry-username"]
+    MQUBE_TECH_PASSWORD = local.mqube_registry_secrets["mqube-tech-registry-password"]
   } : {}
 
   job_secret_env_vars = merge({}, local.job_secret_env_vars_vault, local.job_secret_env_vars_acr, local.job_secret_env_vars_mqube_tech)
