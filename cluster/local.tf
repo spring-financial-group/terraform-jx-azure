@@ -13,8 +13,8 @@ locals {
   }
 
   mqube_registry_secrets = var.enable_mqube_tech_acr_readonly ? {
-    mqube-tech-registry-username : var.pull_only_registry_token_name,
-    mqube-tech-registry-password : var.pull_only_registry_token_password,
+    mqube-tech-reg-username : var.pull_only_registry_token_name,
+    mqube-tech-reg-password : var.pull_only_registry_token_password,
   } : {}
 
   merged_secrets = merge({}, local.registry_secrets, local.mqube_registry_secrets)
@@ -35,8 +35,8 @@ locals {
   } : {}
 
   job_secret_env_vars_mqube_tech = var.enable_mqube_tech_acr_readonly ? {
-    MQUBE_TECH_USERNAME = local.mqube_registry_secrets["mqube-tech-registry-username"]
-    MQUBE_TECH_PASSWORD = local.mqube_registry_secrets["mqube-tech-registry-password"]
+    MQUBE_TECH_USERNAME = local.mqube_registry_secrets["mqube-tech-reg-username"]
+    MQUBE_TECH_PASSWORD = local.mqube_registry_secrets["mqube-tech-reg-password"]
   } : {}
 
   job_secret_env_vars = merge({}, local.job_secret_env_vars_vault, local.job_secret_env_vars_acr, local.job_secret_env_vars_mqube_tech)
