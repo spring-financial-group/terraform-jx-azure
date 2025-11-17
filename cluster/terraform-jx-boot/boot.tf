@@ -18,6 +18,10 @@ resource "helm_release" "jx-git-operator" {
     name  = "resources.requests.cpu"
     value = "20m"
   }
+  set {
+    name  = "resources.limits.cpu"
+    value = ""
+  }
 
   set {
     name  = "bootServiceAccount.enabled"
