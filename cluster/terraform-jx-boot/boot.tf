@@ -20,7 +20,7 @@ resource "helm_release" "jx-git-operator" {
   }
   set {
     name  = "resources.limits.cpu"
-    value = ""
+    value = "null"
   }
 
   set {
