@@ -91,7 +91,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   auto_scaling_enabled        = var.max_ml_node_count == null ? false : true
   node_taints                 = ["sku=gpu:NoSchedule"]
   node_labels                 = { key = "gpu_ready" }
-  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.ml_node_zones
   temporary_name_for_rotation = "tempml"
 
   lifecycle { ignore_changes = [node_taints, node_count, node_labels] }
