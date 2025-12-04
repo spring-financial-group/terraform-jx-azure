@@ -22,35 +22,36 @@ provider "azurerm" {
 }
 
 provider "kubernetes" {
-  host = module.cluster.cluster_endpoint
+  host = module.cluster[0].cluster_endpoint
   cluster_ca_certificate = base64decode(
-    module.cluster.ca_certificate,
+    module.cluster[0].ca_certificate,
   )
   client_certificate = base64decode(
-    module.cluster.client_certificate,
+    module.cluster[0].client_certificate,
   )
   client_key = base64decode(
-    module.cluster.client_key,
+    module.cluster[0].client_key,
   )
 }
 
 provider "helm" {
   kubernetes {
 
-    host = module.cluster.cluster_endpoint
+    host = module.cluster[0].cluster_endpoint
     cluster_ca_certificate = base64decode(
-      module.cluster.ca_certificate,
+      module.cluster[0].ca_certificate,
     )
     client_certificate = base64decode(
-      module.cluster.client_certificate,
+      module.cluster[0].client_certificate,
     )
     client_key = base64decode(
-      module.cluster.client_key,
+      module.cluster[0].client_key,
     )
   }
 }
 
 module "cluster" {
+  count = var.cluster_enabled ? 1 : 0
   source                                = "./terraform-jx-cluster-aks"
   cluster_name                          = local.cluster_name
   sku_tier                              = var.sku_tier
@@ -109,7 +110,7 @@ module "cluster" {
   vnet_cidr                             = var.vnet_cidr
   azure_policy_bool                     = var.azure_policy_bool
   cost_analysis_bool                    = var.cost_analysis_bool
-  microsoft_defender_log_id             = module.cluster.microsoft_defender_log_id
+  microsoft_defender_log_id             = module.cluster[0].microsoft_defender_log_id
   default_suk_bool                      = var.default_suk_bool
   enable_defender_analytics             = var.enable_defender_analytics
   orchestrator_version                  = var.orchestrator_version
@@ -122,7 +123,7 @@ module "cluster" {
 module "registry" {
   source                               = "./terraform-jx-registry-acr"
   cluster_name                         = local.cluster_name
-  principal_id                         = module.cluster.kubelet_identity_id
+  principal_id                         = module.cluster[0].kubelet_identity_id
   location                             = var.location
   external_registry_url                = var.external_registry_url
   use_existing_acr_name                = var.use_existing_acr_name
@@ -134,7 +135,7 @@ module "oss_registry" {
   source               = "./terraform-jx-registry-acr-oss"
   depends_on           = [module.registry]
   resource_group_name  = module.registry.resource_group_name
-  principal_id         = module.cluster.kubelet_identity_id
+  principal_id         = module.cluster[0].kubelet_identity_id
   location             = var.location
   oss_acr_enabled      = var.oss_acr_enabled
   oss_acr_pull_enabled = var.oss_acr_pull_enabled
@@ -159,7 +160,7 @@ module "dns" {
   cluster_name                    = local.cluster_name
   subdomain                       = var.subdomain
   location                        = var.location
-  principal_id                    = module.cluster.kubelet_identity_id
+  principal_id                    = module.cluster[0].kubelet_identity_id
   resource_group_name             = var.dns_resource_group_name
   dns_resources_enabled           = var.dns_resources_enabled
 }
@@ -167,8 +168,8 @@ module "dns" {
 module "secrets" {
   source              = "./terraform-jx-azurekeyvault"
   enabled             = var.key_vault_enabled
-  principal_id        = module.cluster.kubelet_identity_id
-  kubelet_client_id   = module.cluster.kubelet_client_id
+  principal_id        = module.cluster[0].kubelet_identity_id
+  kubelet_client_id   = module.cluster[0].kubelet_client_id
   cluster_name        = local.cluster_name
   resource_group_name = var.key_vault_resource_group_name
   key_vault_name      = var.key_vault_name
@@ -182,15 +183,15 @@ module "storage" {
   resource_group_name  = var.storage_resource_group_name
   cluster_name         = local.cluster_name
   location             = var.location
-  storage_principal_id = module.cluster.kubelet_identity_id
+  storage_principal_id = module.cluster[0].kubelet_identity_id
 }
 
 output "connect" {
   description = "Connect to cluster"
-  value       = module.cluster.connect
+  value       = module.cluster[0].connect
 }
 
 output "kube_config_admin" {
-  value     = module.cluster.kube_config_admin_raw
+  value     = module.cluster[0].kube_config_admin_raw
   sensitive = true
 }
