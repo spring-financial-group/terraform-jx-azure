@@ -9,6 +9,11 @@ variable "location" {
   description = "The Azure region in to which to provision the cluster"
 }
 
+variable "default_rg" {
+  type    = string
+  default = "DefaultResourceGroup-SUK"
+}
+
 // ----------------------------------------------------------------------------
 // JX Boot variables
 // ----------------------------------------------------------------------------

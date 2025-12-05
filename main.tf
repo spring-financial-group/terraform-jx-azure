@@ -16,6 +16,7 @@ module "cluster" {
   apex_resource_group_name              = var.apex_resource_group_name
   cluster_name                          = var.cluster_name
   sku_tier                              = var.sku_tier
+  default_rg                            = var.default_rg
   cluster_network_model                 = var.cluster_network_model
   cluster_node_resource_group_name      = var.cluster_node_resource_group_name
   cluster_resource_group_name           = var.cluster_resource_group_name
