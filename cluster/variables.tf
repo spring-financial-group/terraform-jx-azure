@@ -9,12 +9,6 @@ variable "location" {
   description = "The Azure region in to which to provision the cluster"
 }
 
-variable "cluster_enabled" {
-  type        = bool
-  description = "Flag to indicate whether to provision the AKS cluster"
-  default     = true
-}
-
 variable "default_rg" {
   type    = string
   default = "DefaultResourceGroup-SUK"
