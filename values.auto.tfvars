@@ -27,42 +27,49 @@ enable_defender_analytics        = true
 enable_auto_upgrades             = true
 oss_acr_enabled                  = true
 oss_acr_pull_enabled             = false
-enable_node_zone_spanning        = false
-# Machines
-min_node_count = 5
-max_node_count = 50
-node_size      = "Standard_D8s_v5"
+
+# Default nodes
+enable_default_node_zone_spanning = false
+min_node_count                    = 5
+max_node_count                    = 50
+node_size                         = "Standard_D8s_v5"
+
 
 
 # Ml nodes
-use_spot_ml       = true
-ml_node_size      = "Standard_NV24s_v3"
-min_ml_node_count = 2
-max_ml_node_count = 6
+enabled_ml_node_spanning = false
+use_spot_ml              = true
+ml_node_size             = "Standard_NV24s_v3"
+min_ml_node_count        = 2
+max_ml_node_count        = 6
 
 # LLM nodes
-use_spot_llm       = true
-llm_node_size      = "Standard_NC40ads_H100_v5"
-min_llm_node_count = 0
-max_llm_node_count = 2
+enable_llm_node_spanning = false
+use_spot_llm             = true
+llm_node_size            = "Standard_NC40ads_H100_v5"
+min_llm_node_count       = 0
+max_llm_node_count       = 2
 
 # Build Spot Nodes
-use_spot             = true
-build_node_size      = "Standard_D8s_v5"
-min_build_node_count = 0
-max_build_node_count = 6
+enable_build_node_spanning = false
+use_spot                   = true
+build_node_size            = "Standard_D8s_v5"
+min_build_node_count       = 0
+max_build_node_count       = 6
 
 #Infra Node
-use_spot_infra       = false
-infra_node_size      = "Standard_D8s_v5"
-min_infra_node_count = 3
-max_infra_node_count = 6
+enable_infa_node_spanning = false
+use_spot_infra            = false
+infra_node_size           = "Standard_D8s_v5"
+min_infra_node_count      = 3
+max_infra_node_count      = 6
 
 # MLbuild Node
-use_spot_mlbuild       = true
-mlbuild_node_size      = "Standard_NC4as_T4_v3"
-min_mlbuild_node_count = 0
-max_mlbuild_node_count = 5
+enable_mlbuild_node_spanning = false
+use_spot_mlbuild             = true
+mlbuild_node_size            = "Standard_NC4as_T4_v3"
+min_mlbuild_node_count       = 0
+max_mlbuild_node_count       = 5
 
 # Bot stuff in now in terraform
 
