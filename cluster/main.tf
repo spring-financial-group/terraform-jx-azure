@@ -13,13 +13,6 @@ terraform {
   }
 }
 
-provider "azurerm" {
-  features {
-    key_vault {
-      purge_soft_delete_on_destroy = false
-    }
-  }
-}
 
 provider "kubernetes" {
   host = module.cluster.cluster_endpoint
