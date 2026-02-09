@@ -102,6 +102,7 @@ module "cluster" {
   microsoft_defender_log_analytics_name = var.microsoft_defender_log_analytics_name
   gpu_driver_llm                        = var.gpu_driver_llm
   gpu_driver_ml                         = var.gpu_driver_ml
+  enable_cluster_user_rbac              = var.enable_cluster_user_rbac
 }
 
 output "connect" {

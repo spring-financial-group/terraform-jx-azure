@@ -10,6 +10,10 @@ terraform {
     azurerm = {
       version = ">=4.23.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">=3.6.0"
+    }
   }
 }
 
@@ -194,4 +198,9 @@ output "connect" {
 output "kube_config_admin" {
   value     = module.cluster.kube_config_admin_raw
   sensitive = true
+}
+
+output "cluster_id" {
+  description = "The ID of the AKS cluster"
+  value = module.cluster.cluster_id
 }
