@@ -2,7 +2,6 @@
 # tfsec:ignore:azure-container-logging
 # tfsec:ignore:azure-container-use-rbac-permissions
 # tfsec:ignore:azure-container-configured-network-policy
-
 resource "azurerm_kubernetes_cluster" "aks" {
   name                             = var.cluster_name
   sku_tier                         = var.sku_tier
