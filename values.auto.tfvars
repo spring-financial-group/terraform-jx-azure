@@ -69,6 +69,6 @@ max_mlbuild_node_count = 5
 # External registry not used at the moment
 external_registry_url = ""
 oss_registry_name     = "mqubeoss"
-
+oss_registry_resource_group = "rg-registry-jx3-mqube-build"
 
 server_side_apply_enabled = false
