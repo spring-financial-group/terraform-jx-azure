@@ -59,7 +59,7 @@ resource "azurerm_role_assignment" "jx_dev_cluster_user_role" {
   count                = local.enable_cluster_user_rbac ? 1 : 0
   scope                = module.cluster.cluster_id
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = data.azuread_group.jx_dev_team[0].id
+  principal_id         = data.azuread_group.jx_dev_team[0].object_id
   depends_on = [
     module.cluster
   ]
@@ -69,7 +69,7 @@ resource "azurerm_role_assignment" "jx_readonly_cluster_user_role" {
   count                = local.enable_cluster_user_rbac ? 1 : 0
   scope                = module.cluster.cluster_id
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = data.azuread_group.jx_readonly_team[0].id
+  principal_id         = data.azuread_group.jx_readonly_team[0].object_id
 }
 
 resource "kubernetes_manifest" "jx_dev_cluster_role" {
