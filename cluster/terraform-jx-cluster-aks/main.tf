@@ -112,6 +112,7 @@ module "cluster" {
   microsoft_defender_log_analytics_name = var.microsoft_defender_log_analytics_name
   gpu_driver_llm                        = var.gpu_driver_llm
   gpu_driver_ml                         = var.gpu_driver_ml
+  admin_group_object_ids                = var.admin_group_object_ids
 }
 
 // ----------------------------------------------------------------------------

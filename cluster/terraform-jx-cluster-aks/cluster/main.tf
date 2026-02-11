@@ -9,6 +9,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name              = var.resource_group_name
   node_resource_group              = var.node_resource_group_name
   dns_prefix                       = var.dns_prefix
+
   kubernetes_version               = var.cluster_version
   azure_policy_enabled             = var.azure_policy_bool
   cost_analysis_enabled            = var.cost_analysis_bool
@@ -32,6 +33,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   azure_active_directory_role_based_access_control {
     azure_rbac_enabled = false
     tenant_id          = var.tenant_id
+    admin_group_object_ids = local.admin_group_object_ids
   }
 
   microsoft_defender {

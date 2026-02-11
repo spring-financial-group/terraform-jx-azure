@@ -21,7 +21,8 @@ locals {
   jx_requirements_compact_content = compact(local.jx_requirements_split_content)
   jx_requirements_content         = join("\n", local.jx_requirements_compact_content)
 
-  enable_cluster_user_rbac = var.enable_cluster_user_rbac
+  enable_cluster_user_rbac  = var.enable_cluster_user_rbac
+  enable_cluster_admin_rbac = var.enable_cluster_admin_rbac
 }
 
 data "azuread_group" "jx_dev_team" {
@@ -32,6 +33,11 @@ data "azuread_group" "jx_dev_team" {
 data "azuread_group" "jx_readonly_team" {
   count        = local.enable_cluster_user_rbac ? 1 : 0
   display_name = "JX Readonly Team"
+}
+
+data "azuread_group" "jx_admin_team" {
+  count        = local.enable_cluster_admin_rbac ? 1 : 0
+  display_name = "Cluster Admin Team"
 }
 
 resource "kubernetes_config_map" "jenkins_x_requirements" {

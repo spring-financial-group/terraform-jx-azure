@@ -329,3 +329,9 @@ variable "enable_node_zone_spanning" {
   default     = false
   description = "Whether zone spanning is enabled for the node pools"
 }
+
+variable "admin_group_object_ids" {
+  type        = list(string)
+  default     = []
+  description = "List of Azure AD admin group object IDs for cluster RBAC"
+}

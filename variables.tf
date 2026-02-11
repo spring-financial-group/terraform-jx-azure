@@ -541,3 +541,9 @@ variable "enable_cluster_user_rbac" {
   default     = false
   description = "Flag to enable cluster RBAC configuration including Azure role assignments and Kubernetes ClusterRole/ClusterRoleBinding resources."
 }
+
+variable "enable_cluster_admin_rbac" {
+  type        = bool
+  default     = false
+  description = "Flag to enable admin cluster RBAC configuration for Azure AD admin group."
+}
