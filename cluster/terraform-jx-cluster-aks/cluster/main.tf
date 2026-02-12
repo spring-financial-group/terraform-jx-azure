@@ -33,7 +33,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   azure_active_directory_role_based_access_control {
     azure_rbac_enabled = false
     tenant_id          = var.tenant_id
-    admin_group_object_ids = local.admin_group_object_ids
+    admin_group_object_ids = var.admin_group_object_ids
   }
 
   microsoft_defender {
