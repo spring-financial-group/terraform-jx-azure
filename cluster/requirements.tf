@@ -35,7 +35,7 @@ data "azuread_group" "jx_readonly_team" {
   display_name = "JX Readonly Team"
 }
 
-data "azuread_group" "jx_admin_team" {
+data "azuread_group" "cluster_admin_team" {
   count        = local.enable_cluster_admin_rbac ? 1 : 0
   display_name = "Cluster Admin Team"
 }
