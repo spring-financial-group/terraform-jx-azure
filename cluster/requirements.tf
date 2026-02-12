@@ -37,7 +37,7 @@ data "azuread_group" "jx_readonly_team" {
 
 data "azuread_group" "cluster_admin_team" {
   count        = local.enable_cluster_admin_rbac ? 1 : 0
-  display_name = "Cluster Admin Team"
+  display_name = "Infrastructure Team"
 }
 
 resource "kubernetes_config_map" "jenkins_x_requirements" {
