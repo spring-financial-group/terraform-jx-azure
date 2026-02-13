@@ -16,6 +16,7 @@ key_vault_name                   = "k8secrets-vault"
 cluster_version                  = "1.32.9"
 orchestrator_version             = "1.32.9"
 azure_policy_bool                = false
+enable_cluster_user_rbac         = true
 cost_analysis_bool               = true
 acr_enabled                      = true
 install_kuberhealthy             = true
