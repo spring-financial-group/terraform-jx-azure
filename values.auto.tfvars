@@ -19,6 +19,7 @@ azure_policy_bool                = false
 enable_cluster_user_rbac         = true
 cost_analysis_bool               = true
 acr_enabled                      = true
+enable_dev_acr_pull              = true
 install_kuberhealthy             = true
 enable_acr_chart_registry        = true
 enable_mqube_tech_acr_readonly   = false

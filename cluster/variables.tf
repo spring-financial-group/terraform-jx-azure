@@ -513,6 +513,12 @@ variable "enable_mqube_tech_acr_readonly" {
   default     = false
 }
 
+variable "enable_dev_acr_pull" {
+  type        = bool
+  default     = false
+  description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
+}
+
 variable "pull_only_registry_token_name" {
   description = "Token name for pull-only access to MQube container registry."
   type        = string
