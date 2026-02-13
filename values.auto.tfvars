@@ -18,6 +18,7 @@ orchestrator_version             = "1.32.9"
 azure_policy_bool                = false
 cost_analysis_bool               = true
 acr_enabled                      = true
+enable_dev_acr_pull              = true
 install_kuberhealthy             = true
 enable_acr_chart_registry        = true
 enable_mqube_tech_acr_readonly   = false
