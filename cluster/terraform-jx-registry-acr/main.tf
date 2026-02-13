@@ -39,7 +39,7 @@ data "azurerm_container_registry" "acr_existing" {
 }
 
 data "azuread_group" "mqube_product_eng_team" {
-  count        = var.enable_dev_acr_pull && var.acr_enabled && var.external_registry_url == "" ? 1 : 0
+  count        = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
   display_name = "MQube Product Engineering Team"
 }
 
@@ -58,7 +58,7 @@ resource "azurerm_role_assignment" "acrpush" {
 }
 
 resource "azurerm_role_assignment" "dev_acrpull" {
-  count                = var.enable_dev_acr_pull && var.acr_enabled && var.external_registry_url == "" ? 1 : 0
+  count                = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
   scope                = var.use_existing_acr_name == null ? azurerm_container_registry.acr[0].id : data.azurerm_container_registry.acr_existing[0].id
   role_definition_name = "AcrPull"
   principal_id         = data.azuread_group.mqube_product_eng_team[0].object_id
