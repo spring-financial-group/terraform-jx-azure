@@ -464,6 +464,12 @@ variable "use_existing_acr_resource_group_name" {
   default     = null
 }
 
+variable "enable_dev_acr_pull" {
+    description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
+    type        = bool
+    default     = false
+}
+
 variable "enable_mqube_tech_acr_readonly" {
   description = "If true, create scope map and token to allow read-only access to MQube's ACR for charts"
   type        = bool
