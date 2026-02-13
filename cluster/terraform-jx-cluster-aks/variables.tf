@@ -345,3 +345,9 @@ variable "enable_node_zone_spanning" {
   type    = bool
   default = false
 }
+
+variable "admin_group_object_ids" {
+  type        = list(string)
+  default     = []
+  description = "List of Azure AD admin group object IDs for cluster RBAC"
+}

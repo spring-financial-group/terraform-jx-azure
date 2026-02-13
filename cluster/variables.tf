@@ -384,6 +384,12 @@ variable "enable_cluster_user_rbac" {
   description = "Flag to enable cluster RBAC configuration."
 }
 
+variable "enable_cluster_admin_rbac" {
+  type        = bool
+  default     = false
+  description = "Flag to enable admin cluster RBAC configuration."
+}
+
 // ----------------------------------------------------------------------------
 // DNS variables
 // ---------------------------------------------------------------------------

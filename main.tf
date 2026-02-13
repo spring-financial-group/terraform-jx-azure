@@ -103,6 +103,7 @@ module "cluster" {
   gpu_driver_llm                        = var.gpu_driver_llm
   gpu_driver_ml                         = var.gpu_driver_ml
   enable_cluster_user_rbac              = var.enable_cluster_user_rbac
+  enable_cluster_admin_rbac             = var.enable_cluster_admin_rbac
 }
 
 output "connect" {
