@@ -509,7 +509,7 @@ variable "enable_mqube_tech_acr_readonly" {
 
 variable "enable_dev_acr_pull" {
   type        = bool
-  default     = true
+  default     = false
   description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
 }
 
