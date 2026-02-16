@@ -65,6 +65,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     network_plugin = var.cluster_network_model
+
+    load_balancer_sku  = "standard"
+    outbound_type      = "loadBalancer"
+
+    load_balancer_profile {
+      managed_outbound_ip_count = 3
+    }
   }
 
   identity {
