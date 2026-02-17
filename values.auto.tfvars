@@ -29,6 +29,8 @@ enable_auto_upgrades             = true
 oss_acr_enabled                  = true
 oss_acr_pull_enabled             = false
 enable_node_zone_spanning        = false
+cluster_managed_outbound_ip_count = 1
+
 # Machines
 min_node_count = 5
 max_node_count = 50
