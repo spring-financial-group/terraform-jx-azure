@@ -71,7 +71,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     load_balancer_profile {
       managed_outbound_ip_count = var.cluster_managed_outbound_ip_count
-      idle_timeout_in_minutes = 10
     }
   }
 
