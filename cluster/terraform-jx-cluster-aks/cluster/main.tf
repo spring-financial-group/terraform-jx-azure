@@ -82,6 +82,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   lifecycle { ignore_changes = [maintenance_window_node_os[0].utc_offset] }
 }
 
+data "azurerm_public_ip" "outbound" {
+  for_each            = toset(azurerm_kubernetes_cluster.aks.network_profile[0].load_balancer_profile[0].effective_outbound_ips)
+  name                = split("/", each.value)[8]
+  resource_group_name = azurerm_kubernetes_cluster.aks.node_resource_group
+}
+
 resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   count                       = var.ml_node_size == "" ? 0 : 1
   name                        = "mlnode"
