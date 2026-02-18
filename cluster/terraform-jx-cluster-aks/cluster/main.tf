@@ -1,3 +1,13 @@
+resource "azurerm_public_ip" "cluster_outbound" {
+  count               = var.cluster_managed_outbound_ip_count
+  name                = "${var.cluster_name}-outbound-${count.index}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  zones               = ["1", "2", "3"]
+}
+
 # tfsec:ignore:azure-container-limit-authorized-ips
 # tfsec:ignore:azure-container-logging
 # tfsec:ignore:azure-container-use-rbac-permissions
@@ -70,7 +80,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     outbound_type      = "loadBalancer"
 
     load_balancer_profile {
-      managed_outbound_ip_count = var.cluster_managed_outbound_ip_count
+      outbound_ip_address_ids = azurerm_public_ip.cluster_outbound[*].id
       idle_timeout_in_minutes = var.cluster_loadbalancer_idle_timeout_in_minutes
     }
   }
@@ -80,12 +90,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   lifecycle { ignore_changes = [maintenance_window_node_os[0].utc_offset] }
-}
-
-data "azurerm_public_ip" "outbound" {
-  for_each            = toset(azurerm_kubernetes_cluster.aks.network_profile[0].load_balancer_profile[0].effective_outbound_ips)
-  name                = split("/", each.value)[8]
-  resource_group_name = azurerm_kubernetes_cluster.aks.node_resource_group
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
