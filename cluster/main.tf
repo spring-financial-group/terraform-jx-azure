@@ -123,6 +123,7 @@ module "cluster" {
   gpu_driver_llm                        = var.gpu_driver_llm
   gpu_driver_ml                         = var.gpu_driver_ml
   admin_group_object_ids                = local.enable_cluster_admin_rbac ? [data.azuread_group.cluster_admin_team[0].object_id] : []
+  cluster_managed_outbound_ip_count = var.cluster_managed_outbound_ip_count
 }
 
 module "registry" {

@@ -31,3 +31,6 @@ output "microsoft_defender_log_id" {
 output "cluster_id" {
   value = module.cluster.cluster_id
 }
+output "cluster_outbound_ip_addresses" {
+  value = module.cluster.cluster_outbound_ip_addresses
+}

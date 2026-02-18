@@ -351,3 +351,8 @@ variable "admin_group_object_ids" {
   default     = []
   description = "List of Azure AD admin group object IDs for cluster RBAC"
 }
+
+variable "cluster_managed_outbound_ip_count" {
+  type        = number
+  description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+}

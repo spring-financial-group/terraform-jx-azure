@@ -383,6 +383,11 @@ variable "cost_analysis_bool" {
   description = "Flag to indicate whether to enable cost analysis for cluster"
 }
 
+variable "cluster_managed_outbound_ip_count" {
+  type        = number
+  description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+}
+
 // ----------------------------------------------------------------------------
 // DNS variables
 // ---------------------------------------------------------------------------

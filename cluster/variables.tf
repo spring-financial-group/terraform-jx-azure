@@ -548,3 +548,8 @@ variable "enable_node_zone_spanning" {
   description = "Flag to indicate whether to enable node zone spanning for cluster"
   default     = false
 }
+
+variable "cluster_managed_outbound_ip_count" {
+  type        = number
+  description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+}
