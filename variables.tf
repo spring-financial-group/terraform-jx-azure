@@ -552,3 +552,4 @@ variable "enable_cluster_admin_rbac" {
   default     = false
   description = "Flag to enable admin cluster RBAC configuration for Azure AD admin group."
 }
+
