@@ -37,3 +37,6 @@ output "microsoft_defender_log_id" {
 output "cluster_id" {
   value = azurerm_kubernetes_cluster.aks.id
 }
+output "cluster_outbound_ip_addresses" {
+  value = azurerm_public_ip.cluster_outbound[*].ip_address
+}

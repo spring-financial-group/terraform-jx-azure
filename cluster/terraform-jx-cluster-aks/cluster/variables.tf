@@ -335,3 +335,15 @@ variable "admin_group_object_ids" {
   default     = []
   description = "List of Azure AD admin group object IDs for cluster RBAC"
 }
+
+variable "cluster_managed_outbound_ip_count" {
+    type        = number
+    default     = 1
+    description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+}
+
+variable "cluster_loadbalancer_idle_timeout_in_minutes" {
+    type        = number
+    default     = 30
+    description = "The idle timeout in minutes for the cluster load balancer outbound rules"
+}

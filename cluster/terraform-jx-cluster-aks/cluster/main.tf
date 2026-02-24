@@ -1,3 +1,13 @@
+resource "azurerm_public_ip" "cluster_outbound" {
+  count               = var.cluster_managed_outbound_ip_count
+  name                = "${var.cluster_name}-outbound-${count.index}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  zones               = ["1", "2", "3"]
+}
+
 # tfsec:ignore:azure-container-limit-authorized-ips
 # tfsec:ignore:azure-container-logging
 # tfsec:ignore:azure-container-use-rbac-permissions
@@ -65,6 +75,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     network_plugin = var.cluster_network_model
+
+    load_balancer_sku  = "standard"
+    outbound_type      = "loadBalancer"
+
+    load_balancer_profile {
+      outbound_ip_address_ids = azurerm_public_ip.cluster_outbound[*].id
+      idle_timeout_in_minutes = var.cluster_loadbalancer_idle_timeout_in_minutes
+    }
   }
 
   identity {
