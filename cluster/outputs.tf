@@ -12,3 +12,7 @@ output "kubelet_identity_id" {
 output "cluster_outbound_ip_addresses" {
   value = module.cluster.cluster_outbound_ip_addresses
 }
+
+output "cluster_subnet_id" {
+  value = module.cluster.cluster_subnet_id
+}
