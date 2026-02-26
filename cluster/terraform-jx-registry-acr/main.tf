@@ -8,6 +8,10 @@ terraform {
     azurerm = {
       version = ">=4.23.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">=3.6.0"
+    }
   }
 }
 
@@ -34,6 +38,11 @@ data "azurerm_container_registry" "acr_existing" {
   resource_group_name = var.use_existing_acr_resource_group_name
 }
 
+data "azuread_group" "jx_dev_team" {
+  count        = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
+  display_name = "JX Dev Team"
+}
+
 resource "azurerm_role_assignment" "acrpull" {
   count                = var.acr_enabled && var.external_registry_url == "" ? 1 : 0
   scope                = var.use_existing_acr_name == null ? azurerm_container_registry.acr[0].id : data.azurerm_container_registry.acr_existing[0].id
@@ -46,6 +55,13 @@ resource "azurerm_role_assignment" "acrpush" {
   scope                = var.use_existing_acr_name == null ? azurerm_container_registry.acr[0].id : data.azurerm_container_registry.acr_existing[0].id
   role_definition_name = "AcrPush"
   principal_id         = var.principal_id
+}
+
+resource "azurerm_role_assignment" "dev_acrpull" {
+  count                = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
+  scope                = var.use_existing_acr_name == null ? azurerm_container_registry.acr[0].id : data.azurerm_container_registry.acr_existing[0].id
+  role_definition_name = "AcrPull"
+  principal_id         = data.azuread_group.jx_dev_team[0].object_id
 }
 
 # Pullthrough cache rules for public registries

@@ -42,3 +42,9 @@ variable "acr_enabled" {
   description = "additional toggle to enable/disable acr creation"
   type        = string
 }
+
+variable "enable_dev_acr_pull" {
+  description = "Flag to grant JX Dev Team ACR pull permissions"
+  type        = bool
+  default     = false
+}
