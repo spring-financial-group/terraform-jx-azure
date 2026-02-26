@@ -34,7 +34,7 @@ cluster_managed_outbound_ip_count = 2
 # Machines
 min_node_count = 5
 max_node_count = 50
-node_size      = "Standard_D8s_v5"
+node_size      = "Standard_E4s_v5"
 
 
 # Ml nodes
