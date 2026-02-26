@@ -105,7 +105,9 @@ module "cluster" {
   gpu_driver_ml                         = var.gpu_driver_ml
   enable_cluster_user_rbac              = var.enable_cluster_user_rbac
   enable_cluster_admin_rbac             = var.enable_cluster_admin_rbac
-  cluster_managed_outbound_ip_count = var.cluster_managed_outbound_ip_count
+  cluster_managed_outbound_ip_count            = var.cluster_managed_outbound_ip_count
+  cluster_loadbalancer_idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
+  enable_loadbalancer_outbound_ports_allocation = var.enable_loadbalancer_outbound_ports_allocation
 }
 
 output "connect" {
