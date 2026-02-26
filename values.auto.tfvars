@@ -1,40 +1,42 @@
-jx_git_url                       = "https://github.com/spring-financial-group/JX3_Azure_Vault_Dev_Cluster"
-cluster_name                     = "jx3-mqube-build"
-location                         = "uksouth"
-network_resource_group_name      = "mqubejx3build-network_rsg"
-cluster_resource_group_name      = "mqubejx3build-cluster_rsg"
-cluster_node_resource_group_name = "jx3build-cluster-nodes-rsg"
-network_name                     = "jx3-build-networks"
-apex_domain_integration_enabled  = true
-apex_domain                      = "mqube.build"
-subdomain                        = "jx"
-apex_resource_group_name         = "jx3build-apex-dns-rsg"
-dns_resource_group_name          = "jx3build-dns-rsg"
-key_vault_enabled                = false
-key_vault_resource_group_name    = "jx3key-vault-rsg"
-key_vault_name                   = "k8secrets-vault"
-cluster_version                  = "1.32.9"
-orchestrator_version             = "1.32.9"
-azure_policy_bool                = false
-enable_cluster_user_rbac         = true
-cost_analysis_bool               = true
-acr_enabled                      = true
-enable_dev_acr_pull              = true
-install_kuberhealthy             = true
-enable_acr_chart_registry        = true
-enable_mqube_tech_acr_readonly   = false
-dns_resources_enabled            = true
-default_suk_bool                 = true
-enable_defender_analytics        = true
-enable_auto_upgrades             = true
-oss_acr_enabled                  = true
-oss_acr_pull_enabled             = false
-enable_node_zone_spanning        = false
-cluster_managed_outbound_ip_count = 2
+jx_git_url                                    = "https://github.com/spring-financial-group/JX3_Azure_Vault_Dev_Cluster"
+cluster_name                                  = "jx3-mqube-build"
+location                                      = "uksouth"
+network_resource_group_name                   = "mqubejx3build-network_rsg"
+cluster_resource_group_name                   = "mqubejx3build-cluster_rsg"
+cluster_node_resource_group_name              = "jx3build-cluster-nodes-rsg"
+network_name                                  = "jx3-build-networks"
+apex_domain_integration_enabled               = true
+apex_domain                                   = "mqube.build"
+subdomain                                     = "jx"
+apex_resource_group_name                      = "jx3build-apex-dns-rsg"
+dns_resource_group_name                       = "jx3build-dns-rsg"
+key_vault_enabled                             = false
+key_vault_resource_group_name                 = "jx3key-vault-rsg"
+key_vault_name                                = "k8secrets-vault"
+cluster_version                               = "1.32.9"
+orchestrator_version                          = "1.32.9"
+azure_policy_bool                             = false
+enable_cluster_user_rbac                      = true
+cost_analysis_bool                            = true
+acr_enabled                                   = true
+enable_dev_acr_pull                           = true
+install_kuberhealthy                          = true
+enable_acr_chart_registry                     = true
+enable_mqube_tech_acr_readonly                = false
+dns_resources_enabled                         = true
+default_suk_bool                              = true
+enable_defender_analytics                     = true
+enable_auto_upgrades                          = true
+oss_acr_enabled                               = true
+oss_acr_pull_enabled                          = false
+enable_node_zone_spanning                     = false
+enable_loadbalancer_outbound_ports_allocation = true
+cluster_loadbalancer_idle_timeout_in_minutes  = 10
+cluster_managed_outbound_ip_count             = 2
 
 # Machines
 min_node_count = 5
-max_node_count = 50
+max_node_count = 30
 node_size      = "Standard_D8s_v5"
 
 
@@ -42,7 +44,7 @@ node_size      = "Standard_D8s_v5"
 use_spot_ml       = true
 ml_node_size      = "Standard_NV24s_v3"
 min_ml_node_count = 2
-max_ml_node_count = 6
+max_ml_node_count = 4
 
 # LLM nodes
 use_spot_llm       = true
@@ -66,13 +68,13 @@ max_infra_node_count = 6
 use_spot_mlbuild       = true
 mlbuild_node_size      = "Standard_NC4as_T4_v3"
 min_mlbuild_node_count = 0
-max_mlbuild_node_count = 5
+max_mlbuild_node_count = 2
 
 # Bot stuff in now in terraform
 
 # External registry not used at the moment
-external_registry_url = ""
-oss_registry_name     = "mqubeoss"
+external_registry_url       = ""
+oss_registry_name           = "mqubeoss"
 oss_registry_resource_group = "rg-registry-jx3-mqube-build"
 
 server_side_apply_enabled = false

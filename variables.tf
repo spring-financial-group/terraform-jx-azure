@@ -130,7 +130,7 @@ variable "llm_node_zones" {
 
 variable "gpu_driver_llm" {
   type        = string
-  default = "Install"
+  default     = "Install"
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
@@ -176,7 +176,7 @@ variable "ml_node_zones" {
 }
 variable "gpu_driver_ml" {
   type        = string
-  default = null
+  default     = null
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
@@ -386,6 +386,18 @@ variable "cost_analysis_bool" {
 variable "cluster_managed_outbound_ip_count" {
   type        = number
   description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+}
+
+variable "cluster_loadbalancer_idle_timeout_in_minutes" {
+  type        = number
+  default     = 30
+  description = "The idle timeout in minutes for the cluster load balancer outbound rules."
+}
+
+variable "enable_loadbalancer_outbound_ports_allocation" {
+  type        = bool
+  default     = false
+  description = "Flag to indicate whether to calculate and set outbound ports allocation for the (standard) cluster load balancer."
 }
 
 // ----------------------------------------------------------------------------

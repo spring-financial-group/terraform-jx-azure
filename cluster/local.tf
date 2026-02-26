@@ -7,6 +7,21 @@ data "azurerm_subscription" "current" {
 locals {
   cluster_name = var.cluster_name != "" ? join("", regexall("[A-Za-z0-9\\-]", var.cluster_name)) : join("", regexall("[A-Za-z0-9\\-]", random_pet.name.id))
 
+  total_max_nodes = (
+    var.max_node_count +
+    var.max_ml_node_count +
+    var.max_llm_node_count +
+    var.max_build_node_count +
+    var.max_infra_node_count +
+    var.max_mlbuild_node_count
+  )
+
+  # Allocate node ports based on the maximum number of nodes the cluster can scale to, with 64,000 ports allowed per-outbound IP
+  # ports_allocated = (64000 * number of outbound IPs) / (max total nodes) rounded down to nearest 100
+  cluster_loadbalancer_outbound_ports_allocated = var.enable_loadbalancer_outbound_ports_allocation ? floor(
+    floor(64000 * var.cluster_managed_outbound_ip_count / local.total_max_nodes) / 100
+  ) * 100 : 0
+
   registry_secrets = {
     jx-dev-registry-username : module.registry.admin_username,
     jx-dev-registry-password : module.registry.admin_password,
