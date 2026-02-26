@@ -89,6 +89,7 @@ module "cluster" {
   azure_policy_bool                             = var.azure_policy_bool
   cost_analysis_bool                            = var.cost_analysis_bool
   acr_enabled                                   = var.acr_enabled
+  enable_dev_acr_pull                           = var.enable_dev_acr_pull
   enable_mqube_tech_acr_readonly                = var.enable_mqube_tech_acr_readonly
   install_kuberhealthy                          = var.install_kuberhealthy
   enable_acr_chart_registry                     = var.enable_acr_chart_registry
