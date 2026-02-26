@@ -40,8 +40,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   azure_active_directory_role_based_access_control {
-    azure_rbac_enabled = false
-    tenant_id          = var.tenant_id
+    azure_rbac_enabled     = false
+    tenant_id              = var.tenant_id
     admin_group_object_ids = var.admin_group_object_ids
   }
 
@@ -76,12 +76,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin = var.cluster_network_model
 
-    load_balancer_sku  = "standard"
-    outbound_type      = "loadBalancer"
+    load_balancer_sku = "standard"
+    outbound_type     = "loadBalancer"
 
     load_balancer_profile {
-      outbound_ip_address_ids = azurerm_public_ip.cluster_outbound[*].id
-      idle_timeout_in_minutes = var.cluster_loadbalancer_idle_timeout_in_minutes
+      outbound_ports_allocated = var.cluster_loadbalancer_outbound_ports_allocated
+      outbound_ip_address_ids  = azurerm_public_ip.cluster_outbound[*].id
+      idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
     }
   }
 
