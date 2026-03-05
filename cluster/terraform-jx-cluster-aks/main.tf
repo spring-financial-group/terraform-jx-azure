@@ -116,6 +116,13 @@ module "cluster" {
   cluster_managed_outbound_ip_count = var.cluster_managed_outbound_ip_count
 }
 
+resource "azurerm_role_assignment" "cluster_outbound_network_contributor" {
+  scope                = azurerm_resource_group.cluster.id
+  role_definition_name = "Network Contributor"
+  principal_id         = module.cluster.kubernetes_cluster.identity[0].principal_id
+  depends_on           = [module.cluster]
+}
+
 // ----------------------------------------------------------------------------
 // Setup Azure Vnet in to which to deploy Cluster
 // ----------------------------------------------------------------------------
