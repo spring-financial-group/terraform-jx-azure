@@ -54,7 +54,7 @@ max_llm_node_count = 2
 use_spot             = true
 build_node_size      = "Standard_D8s_v5"
 min_build_node_count = 1
-max_build_node_count = 8
+max_build_node_count = 10
 
 #Infra Node
 use_spot_infra       = false
