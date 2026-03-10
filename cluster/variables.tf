@@ -41,9 +41,9 @@ variable "install_kuberhealthy" {
   default     = true
 }
 variable "enable_acr_chart_registry" {
-    type        = bool
-    default     = false
-    description = "BETA: Flag to indicate whether to pass ACR chart registry credentials to jx boot"
+  type        = bool
+  default     = false
+  description = "BETA: Flag to indicate whether to pass ACR chart registry credentials to jx boot"
 }
 
 // ----------------------------------------------------------------------------
@@ -559,3 +559,15 @@ variable "cluster_managed_outbound_ip_count" {
   type        = number
   description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
 }
+
+variable "cluster_loadbalancer_idle_timeout_in_minutes" {
+  type        = number
+  description = "The idle timeout in minutes for the cluster load balancer outbound rules."
+}
+
+variable "enable_loadbalancer_outbound_ports_allocation" {
+  type        = bool
+  default     = false
+  description = "If true, calculates and sets outbound SNAT ports per node based on max node counts and outbound IP count. Defaults to 0 (Azure-managed) when false."
+}
+
