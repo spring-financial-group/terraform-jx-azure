@@ -52,7 +52,7 @@ max_llm_node_count = 2
 
 # Build Spot Nodes
 use_spot             = true
-build_node_size      = "Standard_D8s_v5"
+build_node_size      = "Standard_D16ls_v5"
 min_build_node_count = 1
 max_build_node_count = 10
 
