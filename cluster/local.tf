@@ -16,11 +16,11 @@ locals {
     var.max_mlbuild_node_count
   ) : 0
 
-  # Allocate node ports based on the maximum number of nodes the cluster can scale to, with 64,000 ports allowed per-outbound IP
-  # ports_allocated = (64000 * number of outbound IPs) / (max total nodes) rounded down to nearest 100
+  # Allocate node ports based on the maximum number of nodes the cluster can scale to, with 64,000 ports allowed per-outbound IP.
+  # Result is the largest multiple of 8 that does not exceed (64000 * outbound_ip_count / max_nodes).
   cluster_loadbalancer_outbound_ports_allocated = var.enable_loadbalancer_outbound_ports_allocation ? floor(
-    floor(64000 * var.cluster_managed_outbound_ip_count / local.total_max_nodes) / 100
-  ) * 100 : 0
+    64000 * var.cluster_managed_outbound_ip_count / local.total_max_nodes / 8
+  ) * 8 : 0
 
   registry_secrets = {
     jx-dev-registry-username : module.registry.admin_username,
