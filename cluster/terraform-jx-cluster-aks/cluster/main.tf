@@ -80,8 +80,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
     outbound_type      = "loadBalancer"
 
     load_balancer_profile {
-      outbound_ip_address_ids = azurerm_public_ip.cluster_outbound[*].id
-      idle_timeout_in_minutes = var.cluster_loadbalancer_idle_timeout_in_minutes
+      outbound_ip_address_ids  = azurerm_public_ip.cluster_outbound[*].id
+      idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
+      outbound_ports_allocated = var.cluster_loadbalancer_outbound_ports_allocated
     }
   }
 

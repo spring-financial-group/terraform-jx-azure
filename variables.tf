@@ -559,3 +559,15 @@ variable "enable_cluster_admin_rbac" {
   description = "Flag to enable admin cluster RBAC configuration for Azure AD admin group."
 }
 
+variable "cluster_loadbalancer_idle_timeout_in_minutes" {
+  type        = number
+  default     = 30
+  description = "The idle timeout in minutes for the cluster load balancer outbound rules."
+}
+
+variable "enable_loadbalancer_outbound_ports_allocation" {
+  type        = bool
+  default     = false
+  description = "If true, calculates and sets outbound SNAT ports per node based on the total max node count and outbound IPs."
+}
+

@@ -113,7 +113,9 @@ module "cluster" {
   gpu_driver_llm                        = var.gpu_driver_llm
   gpu_driver_ml                         = var.gpu_driver_ml
   admin_group_object_ids                = var.admin_group_object_ids
-  cluster_managed_outbound_ip_count = var.cluster_managed_outbound_ip_count
+  cluster_managed_outbound_ip_count             = var.cluster_managed_outbound_ip_count
+  cluster_loadbalancer_idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
+  cluster_loadbalancer_outbound_ports_allocated = var.cluster_loadbalancer_outbound_ports_allocated
 }
 
 resource "azurerm_role_assignment" "cluster_outbound_network_contributor" {

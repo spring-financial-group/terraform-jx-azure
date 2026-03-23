@@ -343,6 +343,10 @@ variable "cluster_managed_outbound_ip_count" {
 
 variable "cluster_loadbalancer_idle_timeout_in_minutes" {
     type        = number
-    default     = 30
     description = "The idle timeout in minutes for the cluster load balancer outbound rules"
+}
+
+variable "cluster_loadbalancer_outbound_ports_allocated" {
+  type        = number
+  description = "The number of outbound ports to be allocated for each node in the cluster load balancer."
 }
