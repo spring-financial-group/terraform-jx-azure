@@ -7,14 +7,14 @@ data "azurerm_subscription" "current" {
 locals {
   cluster_name = var.cluster_name != "" ? join("", regexall("[A-Za-z0-9\\-]", var.cluster_name)) : join("", regexall("[A-Za-z0-9\\-]", random_pet.name.id))
 
-  total_max_nodes = (
+  total_max_nodes = var.enable_loadbalancer_outbound_ports_allocation ? (
     var.max_node_count +
     var.max_ml_node_count +
     var.max_llm_node_count +
     var.max_build_node_count +
     var.max_infra_node_count +
     var.max_mlbuild_node_count
-  )
+  ) : 0
 
   # Allocate node ports based on the maximum number of nodes the cluster can scale to, with 64,000 ports allowed per-outbound IP
   # ports_allocated = (64000 * number of outbound IPs) / (max total nodes) rounded down to nearest 100
