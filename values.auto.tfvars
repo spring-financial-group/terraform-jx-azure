@@ -31,7 +31,7 @@ oss_acr_enabled                               = true
 oss_acr_pull_enabled                          = false
 enable_node_zone_spanning                     = false
 cluster_managed_outbound_ip_count             = 2
-enable_loadbalancer_outbound_ports_allocation = true
+enable_loadbalancer_outbound_ports_allocation = false
 cluster_loadbalancer_idle_timeout_in_minutes  = 10
 
 # Machines
