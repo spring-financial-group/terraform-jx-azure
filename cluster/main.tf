@@ -74,6 +74,7 @@ module "cluster" {
   max_node_count                        = var.max_node_count
   node_size                             = var.node_size
   node_zones                            = var.node_zones
+  max_node_surge                        = var.max_node_surge
   use_spot_ml                           = var.use_spot_ml
   spot_max_price_ml                     = var.spot_max_price_ml
   ml_node_count                         = var.ml_node_count
@@ -102,6 +103,7 @@ module "cluster" {
   min_infra_node_count                  = var.min_infra_node_count
   max_infra_node_count                  = var.max_infra_node_count
   infra_node_zones                      = var.infra_node_zones
+  max_infra_node_surge                  = var.max_infra_node_surge
   use_spot_mlbuild                      = var.use_spot_mlbuild
   spot_max_price_mlbuild                = var.spot_max_price_mlbuild
   mlbuild_node_size                     = var.mlbuild_node_size
