@@ -67,7 +67,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     orchestrator_version = var.orchestrator_version
     auto_scaling_enabled = var.max_node_count == null ? false : true
     upgrade_settings {
-      max_surge = "25%"
+      max_surge = "${floor(var.max_node_surge * 100)}%"
     }
     zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.node_zones
     temporary_name_for_rotation = "tempk8spool"
@@ -179,6 +179,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
   node_taints                 = ["sku=infra:NoSchedule"]
   node_labels                 = { node = "infra" }
   zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.infra_node_zones
+  upgrade_settings {
+    max_surge = "${floor(var.max_infra_node_surge * 100)}%"
+  }
   temporary_name_for_rotation = "tempinfra"
 
   lifecycle { ignore_changes = [node_taints, node_count] }

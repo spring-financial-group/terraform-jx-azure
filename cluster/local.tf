@@ -7,17 +7,20 @@ data "azurerm_subscription" "current" {
 locals {
   cluster_name = var.cluster_name != "" ? join("", regexall("[A-Za-z0-9\\-]", var.cluster_name)) : join("", regexall("[A-Za-z0-9\\-]", random_pet.name.id))
 
+  # The default and infra pools can surge by max_node_surge / max_infra_node_surge during upgrades.
+  # Other pools have no explicit upgrade_settings so AKS defaults to a surge of 1 node each.
+  # We account for both to avoid under-allocating ports.
   total_max_nodes = var.enable_loadbalancer_outbound_ports_allocation ? (
-    var.max_node_count +
-    var.max_ml_node_count +
-    var.max_llm_node_count +
-    var.max_build_node_count +
-    var.max_infra_node_count +
-    var.max_mlbuild_node_count
+    ceil(var.max_node_count * (1 + var.max_node_surge)) +
+    (var.ml_node_size != "" ? coalesce(var.max_ml_node_count, 0) + 1 : 0) +
+    (var.llm_node_size != "" ? coalesce(var.max_llm_node_count, 0) + 1 : 0) +
+    (var.build_node_size != "" ? coalesce(var.max_build_node_count, 0) + 1 : 0) +
+    (var.infra_node_size != "" ? ceil(coalesce(var.max_infra_node_count, 0) * (1 + var.max_infra_node_surge)) : 0) +
+    (var.mlbuild_node_size != "" ? coalesce(var.max_mlbuild_node_count, 0) + 1 : 0)
   ) : 0
 
   # Allocate node ports based on the maximum number of nodes the cluster can scale to, with 64,000 ports allowed per-outbound IP.
-  # Result is the largest multiple of 8 that does not exceed (64000 * outbound_ip_count / max_nodes).
+  # Result is the largest multiple of 8 that does not exceed (64512 * outbound_ip_count / max_nodes).
   cluster_loadbalancer_outbound_ports_allocated = var.enable_loadbalancer_outbound_ports_allocation ? floor(
     64000 * var.cluster_managed_outbound_ip_count / local.total_max_nodes / 8
   ) * 8 : 0
