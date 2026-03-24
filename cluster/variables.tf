@@ -557,16 +557,11 @@ variable "enable_node_zone_spanning" {
 
 variable "cluster_managed_outbound_ip_count" {
   type        = number
-  description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+  description = "The number of public IPs to create for NAT Gateway outbound traffic."
 }
 
-variable "cluster_loadbalancer_idle_timeout_in_minutes" {
+variable "nat_gateway_idle_timeout_in_minutes" {
   type        = number
-  description = "The idle timeout in minutes for the cluster load balancer outbound rules."
-}
-
-variable "enable_loadbalancer_outbound_ports_allocation" {
-  type        = bool
-  default     = false
-  description = "If true, calculates and sets outbound SNAT ports per node based on the total max node count and outbound IPs."
+  default     = 10
+  description = "The idle timeout in minutes for the NAT Gateway."
 }

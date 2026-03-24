@@ -354,15 +354,11 @@ variable "admin_group_object_ids" {
 
 variable "cluster_managed_outbound_ip_count" {
   type        = number
-  description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+  description = "The number of public IPs to create for NAT Gateway outbound traffic."
 }
 
-variable "cluster_loadbalancer_idle_timeout_in_minutes" {
+variable "nat_gateway_idle_timeout_in_minutes" {
   type        = number
-  description = "The idle timeout in minutes for the cluster load balancer outbound rules."
-}
-
-variable "cluster_loadbalancer_outbound_ports_allocated" {
-  type        = number
-  description = "Number of desired SNAT ports per VM in the cluster load balancer. Must be between 0 and 64000 inclusive."
+  default     = 10
+  description = "The idle timeout in minutes for the NAT Gateway."
 }
