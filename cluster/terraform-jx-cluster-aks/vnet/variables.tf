@@ -16,3 +16,12 @@ variable "subnet_name" {
 variable "location" {
   type = string
 }
+variable "enable_apiserver_vnet_integration" {
+  type        = bool
+  default     = false
+  description = "Flag to enable API server VNET integration."
+}
+variable "api_server_subnet_cidr" {
+  type        = string
+  description = "CIDR for the API server VNET integration subnet. Minimum /28."
+}

@@ -33,6 +33,8 @@ enable_node_zone_spanning                     = false
 cluster_managed_outbound_ip_count             = 2
 enable_loadbalancer_outbound_ports_allocation = false
 cluster_loadbalancer_idle_timeout_in_minutes  = 10
+enable_apiserver_vnet_integration             = false
+api_server_subnet_cidr                        = "10.8.1.0/28"
 
 # Machines
 min_node_count = 5
