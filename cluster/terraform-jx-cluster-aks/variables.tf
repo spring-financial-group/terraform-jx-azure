@@ -30,6 +30,10 @@ variable "node_zones" {
   type        = list(string)
   default     = []
 }
+variable "max_node_surge" {
+  description = "The maximum surge for the default node pool during upgrades, as a decimal fraction (e.g. 0.25 for 25%). Used in upgrade_settings and factored into the outbound port allocation calculation."
+  type        = number
+}
 
 // ----------------------------------------------------------------------------
 // Large language model nodepool variables
@@ -197,6 +201,10 @@ variable "infra_node_zones" {
   description = "The list of availability zones for the infra node pool (default: Regional zones)"
   type        = list(string)
   default     = []
+}
+variable "max_infra_node_surge" {
+  description = "The maximum surge for the infra node pool during upgrades, as a decimal fraction (e.g. 0.25 for 25%). Used in upgrade_settings and factored into the outbound port allocation calculation."
+  type        = number
 }
 
 // ----------------------------------------------------------------------------
