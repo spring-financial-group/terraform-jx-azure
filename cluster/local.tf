@@ -22,7 +22,7 @@ locals {
   # Allocate node ports based on the maximum number of nodes the cluster can scale to, with 64,000 ports allowed per-outbound IP.
   # Result is the largest multiple of 8 that does not exceed (64512 * outbound_ip_count / max_nodes).
   cluster_loadbalancer_outbound_ports_allocated = var.enable_loadbalancer_outbound_ports_allocation ? floor(
-    64512 * var.cluster_managed_outbound_ip_count / local.total_max_nodes / 8
+    64000 * var.cluster_managed_outbound_ip_count / local.total_max_nodes / 8
   ) * 8 : 0
 
   registry_secrets = {
