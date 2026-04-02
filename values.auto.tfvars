@@ -37,6 +37,7 @@ cluster_loadbalancer_idle_timeout_in_minutes  = 10
 # Machines
 min_node_count = 5
 max_node_count = 30
+max_node_surge = 0.25
 node_size      = "Standard_D8s_v5"
 
 
