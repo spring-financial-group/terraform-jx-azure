@@ -358,3 +358,9 @@ variable "cluster_loadbalancer_outbound_ports_allocated" {
   type        = number
   description = "The number of outbound ports to be allocated for each node in the cluster load balancer."
 }
+
+variable "api_server_subnet_id" {
+  type        = string
+  default     = null
+  description = "Subnet ID for API server VNET integration. When null, VNET integration is not configured."
+}

@@ -374,3 +374,15 @@ variable "cluster_loadbalancer_outbound_ports_allocated" {
   type        = number
   description = "Number of desired SNAT ports per VM in the cluster load balancer. Must be between 0 and 64000 inclusive."
 }
+
+variable "enable_apiserver_vnet_integration" {
+  type        = bool
+  default     = false
+  description = "Flag to enable API server VNET integration."
+}
+
+variable "api_server_subnet_cidr" {
+  type        = string
+  default     = "10.8.1.0/28"
+  description = "CIDR for the API server VNET integration subnet."
+}

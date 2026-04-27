@@ -128,6 +128,8 @@ module "cluster" {
   cluster_managed_outbound_ip_count             = var.cluster_managed_outbound_ip_count
   cluster_loadbalancer_idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
   cluster_loadbalancer_outbound_ports_allocated = local.cluster_loadbalancer_outbound_ports_allocated
+  enable_apiserver_vnet_integration              = var.enable_apiserver_vnet_integration
+  api_server_subnet_cidr                        = var.api_server_subnet_cidr
 }
 
 module "registry" {
