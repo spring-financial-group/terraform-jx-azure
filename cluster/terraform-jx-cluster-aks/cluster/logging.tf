@@ -8,11 +8,11 @@ resource "azurerm_log_analytics_workspace" "cluster" {
 }
 
 resource "azurerm_log_analytics_workspace" "microsoft_defender" {
-  count               = var.enable_defender_analytics ? 1 : 0
-  name                = var.microsoft_defender_log_analytics_name
+  count                        = var.enable_defender_analytics ? 1 : 0
+  name                         = var.microsoft_defender_log_analytics_name
   local_authentication_enabled = true
-  location            = var.location
-  resource_group_name = var.defender_resource_group
-  sku                 = "PerGB2018"
-  retention_in_days   = var.logging_retention_days
+  location                     = var.location
+  resource_group_name          = var.defender_resource_group
+  sku                          = "PerGB2018"
+  retention_in_days            = var.logging_retention_days
 }
