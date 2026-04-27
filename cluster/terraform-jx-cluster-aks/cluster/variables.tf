@@ -273,7 +273,6 @@ variable "orchestrator_version" {
 variable "os_sku" {
   description = "The OS SKU to use for the cluster. Options can be found here: https://learn.microsoft.com/en-us/azure/aks/upgrade-os-version#supported-os-versions"
   type        = string
-  default     = "Ubuntu"
 }
 
 
