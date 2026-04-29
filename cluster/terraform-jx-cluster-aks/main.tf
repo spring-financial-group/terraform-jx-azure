@@ -110,6 +110,7 @@ module "cluster" {
   enable_defender_analytics             = var.enable_defender_analytics
   tenant_id                             = data.azurerm_subscription.current.tenant_id
   orchestrator_version                  = var.orchestrator_version
+  os_sku                                = var.os_sku
   enable_auto_upgrades                  = var.enable_auto_upgrades
   microsoft_defender_log_analytics_name = var.microsoft_defender_log_analytics_name
   gpu_driver_llm                        = var.gpu_driver_llm

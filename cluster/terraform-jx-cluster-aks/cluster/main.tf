@@ -65,6 +65,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     min_count            = var.min_node_count
     max_count            = var.max_node_count
     orchestrator_version = var.orchestrator_version
+    os_sku               = var.os_sku
     auto_scaling_enabled = var.max_node_count == null ? false : true
     upgrade_settings {
       max_surge = "${floor(var.max_node_surge * 100)}%"
@@ -108,6 +109,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   min_count                   = var.min_ml_node_count
   max_count                   = var.max_ml_node_count
   orchestrator_version        = var.orchestrator_version
+  os_sku                      = var.os_sku
   auto_scaling_enabled        = var.max_ml_node_count == null ? false : true
   node_taints                 = ["sku=gpu:NoSchedule"]
   node_labels                 = { key = "gpu_ready" }
@@ -132,6 +134,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "llmnode" {
   min_count                   = var.min_llm_node_count
   max_count                   = var.max_llm_node_count
   orchestrator_version        = var.orchestrator_version
+  os_sku                      = var.os_sku
   auto_scaling_enabled        = var.max_llm_node_count == null ? false : true
   node_taints                 = ["sku=gpu:NoSchedule"]
   node_labels                 = { node = "llm", key = "gpu_ready" }
@@ -154,6 +157,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
   min_count                   = var.min_build_node_count
   max_count                   = var.max_build_node_count
   orchestrator_version        = var.orchestrator_version
+  os_sku                      = var.os_sku
   auto_scaling_enabled        = var.max_build_node_count == null ? false : true
   node_taints                 = ["sku=build:NoSchedule"]
   zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.build_node_zones
@@ -175,6 +179,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
   min_count                   = var.min_infra_node_count
   max_count                   = var.max_infra_node_count
   orchestrator_version        = var.orchestrator_version
+  os_sku                      = var.os_sku
   auto_scaling_enabled        = var.max_infra_node_count == null ? false : true
   node_taints                 = ["sku=infra:NoSchedule"]
   node_labels                 = { node = "infra" }
@@ -197,6 +202,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlbuildnode" {
   vm_size                     = var.mlbuild_node_size
   vnet_subnet_id              = var.vnet_subnet_id
   orchestrator_version        = var.orchestrator_version
+  os_sku                      = var.os_sku
   node_count                  = var.use_spot_mlbuild ? 0 : var.mlbuild_node_count
   min_count                   = var.min_mlbuild_node_count
   max_count                   = var.max_mlbuild_node_count
