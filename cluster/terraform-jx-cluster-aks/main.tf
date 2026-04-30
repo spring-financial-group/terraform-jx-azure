@@ -6,7 +6,7 @@ terraform {
   required_version = ">= 1.4.6"
   required_providers {
     azurerm = {
-      version = ">=4.23.0"
+      version = ">=4.46.0"
     }
   }
 }
@@ -119,10 +119,19 @@ module "cluster" {
   cluster_managed_outbound_ip_count             = var.cluster_managed_outbound_ip_count
   cluster_loadbalancer_idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
   cluster_loadbalancer_outbound_ports_allocated = var.cluster_loadbalancer_outbound_ports_allocated
+  api_server_subnet_id                          = var.enable_apiserver_vnet_integration ? module.vnet.api_server_subnet_id : null
 }
 
 resource "azurerm_role_assignment" "cluster_outbound_network_contributor" {
   scope                = azurerm_resource_group.cluster.id
+  role_definition_name = "Network Contributor"
+  principal_id         = module.cluster.kubernetes_cluster.identity[0].principal_id
+  depends_on           = [module.cluster]
+}
+
+resource "azurerm_role_assignment" "cluster_api_server_subnet_network_contributor" {
+  count                = var.enable_apiserver_vnet_integration ? 1 : 0
+  scope                = module.vnet.api_server_subnet_id
   role_definition_name = "Network Contributor"
   principal_id         = module.cluster.kubernetes_cluster.identity[0].principal_id
   depends_on           = [module.cluster]
@@ -133,11 +142,13 @@ resource "azurerm_role_assignment" "cluster_outbound_network_contributor" {
 // ----------------------------------------------------------------------------
 
 module "vnet" {
-  source         = "./vnet"
-  resource_group = azurerm_resource_group.network.name
-  vnet_cidr      = var.vnet_cidr
-  subnet_cidr    = var.subnet_cidr
-  network_name   = local.network_name
-  subnet_name    = local.subnet_name
-  location       = var.location
+  source                            = "./vnet"
+  resource_group                    = azurerm_resource_group.network.name
+  vnet_cidr                         = var.vnet_cidr
+  subnet_cidr                       = var.subnet_cidr
+  network_name                      = local.network_name
+  subnet_name                       = local.subnet_name
+  location                          = var.location
+  enable_apiserver_vnet_integration = var.enable_apiserver_vnet_integration
+  api_server_subnet_cidr            = var.api_server_subnet_cidr
 }
