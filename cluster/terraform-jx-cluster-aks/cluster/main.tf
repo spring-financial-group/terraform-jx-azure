@@ -91,6 +91,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 
+  dynamic "api_server_access_profile" {
+    for_each = var.api_server_subnet_id != null ? [1] : []
+    content {
+      virtual_network_integration_enabled = true
+      subnet_id                           = var.api_server_subnet_id
+    }
+  }
+
   lifecycle { ignore_changes = [maintenance_window_node_os[0].utc_offset] }
 }
 

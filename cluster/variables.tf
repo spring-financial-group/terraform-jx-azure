@@ -583,3 +583,15 @@ variable "enable_loadbalancer_outbound_ports_allocation" {
   default     = false
   description = "If true, calculates and sets outbound SNAT ports per node based on the total max node count and outbound IPs."
 }
+
+variable "enable_apiserver_vnet_integration" {
+  type        = bool
+  default     = false
+  description = "Flag to enable API server VNET integration."
+}
+
+variable "api_server_subnet_cidr" {
+  type        = string
+  default     = "10.8.1.0/28"
+  description = "CIDR for the API server VNET integration subnet."
+}

@@ -587,3 +587,15 @@ variable "enable_loadbalancer_outbound_ports_allocation" {
   description = "If true, calculates and sets outbound SNAT ports per node based on the total max node count and outbound IPs."
 }
 
+variable "enable_apiserver_vnet_integration" {
+  type        = bool
+  default     = false
+  description = "Flag to enable API server VNET integration. When true, creates a dedicated API server subnet and enables the api_server_access_profile on the AKS cluster. This is irreversible once applied."
+}
+
+variable "api_server_subnet_cidr" {
+  type        = string
+  default     = "10.8.1.0/28"
+  description = "CIDR for the dedicated API server VNET integration subnet. Minimum /28."
+}
+
