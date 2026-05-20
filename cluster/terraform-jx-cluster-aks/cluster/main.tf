@@ -22,18 +22,22 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version               = var.cluster_version
   azure_policy_enabled             = var.azure_policy_bool
   cost_analysis_enabled            = var.cost_analysis_bool
+  node_os_upgrade_type             = var.node_os_upgrade_type
+  node_maintenance_window_day    = var.node_maintenance_window_day
+  node_maintenance_window_start_time = var.node_maintenance_window_start_time
+  node_maintenance_window_duration = var.node_maintenance_window_duration
   http_application_routing_enabled = false
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
 
-  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
+  node_os_upgrade_channel = var.enable_auto_upgrades ? var.node_os_upgrade_type : "None"
 
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
-      day_of_week = "Saturday"
-      start_time  = "19:00"
-      duration    = 4
+      day_of_week = var.node_maintenance_window_day
+      start_time  = var.node_maintenance_window_start_time
+      duration    = var.node_maintenance_window_duration
       frequency   = "Weekly"
       interval    = 1
     }
