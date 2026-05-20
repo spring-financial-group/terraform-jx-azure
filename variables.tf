@@ -357,9 +357,9 @@ variable "node_maintenance_window_start_time" {
 }
 
 variable "node_maintenance_window_duration" {
-    description = "The duration in hours for the weekly node OS upgrade maintenance window."
-    type        = number
-    default     = 4
+  description = "The duration in hours for the weekly node OS upgrade maintenance window."
+  type        = number
+  default     = 4
 }
 
 variable "network_resource_group_name" {
