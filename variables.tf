@@ -341,7 +341,7 @@ variable "os_sku" {
 variable "node_os_upgrade_type" {
   description = "The upgrade channel for node OS image upgrades. Options: None, NodeImage, SecurityPatch, Unmanaged."
   type        = string
-  default     = "NodeImage"
+  default     = "SecurityPatch"
 }
 
 variable "node_maintenance_window_day" {
