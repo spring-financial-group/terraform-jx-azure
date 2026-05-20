@@ -13,22 +13,18 @@ resource "azurerm_public_ip" "cluster_outbound" {
 # tfsec:ignore:azure-container-use-rbac-permissions
 # tfsec:ignore:azure-container-configured-network-policy
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                               = var.cluster_name
-  sku_tier                           = var.sku_tier
-  location                           = var.location
-  resource_group_name                = var.resource_group_name
-  node_resource_group                = var.node_resource_group_name
-  dns_prefix                         = var.dns_prefix
-  kubernetes_version                 = var.cluster_version
-  azure_policy_enabled               = var.azure_policy_bool
-  cost_analysis_enabled              = var.cost_analysis_bool
-  node_os_upgrade_type               = var.node_os_upgrade_type
-  node_maintenance_window_day        = var.node_maintenance_window_day
-  node_maintenance_window_start_time = var.node_maintenance_window_start_time
-  node_maintenance_window_duration   = var.node_maintenance_window_duration
-  http_application_routing_enabled   = false
-  image_cleaner_interval_hours       = 48
-  image_cleaner_enabled              = false
+  name                             = var.cluster_name
+  sku_tier                         = var.sku_tier
+  location                         = var.location
+  resource_group_name              = var.resource_group_name
+  node_resource_group              = var.node_resource_group_name
+  dns_prefix                       = var.dns_prefix
+  kubernetes_version               = var.cluster_version
+  azure_policy_enabled             = var.azure_policy_bool
+  cost_analysis_enabled            = var.cost_analysis_bool
+  http_application_routing_enabled = false
+  image_cleaner_interval_hours     = 48
+  image_cleaner_enabled            = false
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? var.node_os_upgrade_type : "None"
 
