@@ -18,7 +18,9 @@ variable "default_rg" {
 variable "azure_k8s_rbac_enabled" {
   type = string
   description = "Enable authentication with Entra and k8s RBAC (ClusterRole and ClusterRoleBinding)"
+  default = false
 }
+
 
 // ----------------------------------------------------------------------------
 // JX Boot variables
