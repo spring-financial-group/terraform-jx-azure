@@ -25,6 +25,35 @@ provider "azurerm" {
   }
 }
 
+provider "kubernetes" {
+  host = module.cluster.cluster_endpoint
+  cluster_ca_certificate = base64decode(
+    module.cluster.ca_certificate,
+  )
+  client_certificate = base64decode(
+    module.cluster.client_certificate,
+  )
+  client_key = base64decode(
+    module.cluster.client_key,
+  )
+}
+
+provider "helm" {
+  kubernetes {
+
+    host = module.cluster.cluster_endpoint
+    cluster_ca_certificate = base64decode(
+      module.cluster.ca_certificate,
+    )
+    client_certificate = base64decode(
+      module.cluster.client_certificate,
+    )
+    client_key = base64decode(
+      module.cluster.client_key,
+    )
+  }
+}
+
 module "cluster" {
   source                                = "./terraform-jx-cluster-aks"
   cluster_name                          = local.cluster_name
