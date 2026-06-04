@@ -2,22 +2,25 @@ output "fqdn" {
   value = azurerm_kubernetes_cluster.aks.fqdn
 }
 output "cluster_endpoint" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config.host
+  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].host, null)
 }
+
 output "client_certificate" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config.client_certificate
+  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].client_certificate, null)
 }
+
 output "client_key" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config.client_key
+  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].client_key, null)
 }
+
 output "ca_certificate" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config.cluster_ca_certificate
+  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].cluster_ca_certificate, null)
 }
 output "kube_config_admin_raw" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config_raw
+  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config_raw, null)
 }
 output "kube_config_admin" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config
+  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0], null)
 }
 output "node_resource_group" {
   value = azurerm_kubernetes_cluster.aks.node_resource_group
