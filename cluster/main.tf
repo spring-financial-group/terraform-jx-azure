@@ -5,52 +5,21 @@ terraform {
       version = ">=3.0.0"
     }
     kubernetes = {
-      version = ">=1.13.3"
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.0"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.0"
     }
     azurerm = {
+      source  = "hashicorp/azurerm"
       version = ">=4.23.0"
     }
     azuread = {
       source  = "hashicorp/azuread"
       version = ">=3.6.0"
     }
-  }
-}
-
-provider "azurerm" {
-  features {
-    key_vault {
-      purge_soft_delete_on_destroy = false
-    }
-  }
-}
-
-provider "kubernetes" {
-  host = module.cluster.cluster_endpoint
-  cluster_ca_certificate = base64decode(
-    module.cluster.ca_certificate,
-  )
-  client_certificate = base64decode(
-    module.cluster.client_certificate,
-  )
-  client_key = base64decode(
-    module.cluster.client_key,
-  )
-}
-
-provider "helm" {
-  kubernetes {
-
-    host = module.cluster.cluster_endpoint
-    cluster_ca_certificate = base64decode(
-      module.cluster.ca_certificate,
-    )
-    client_certificate = base64decode(
-      module.cluster.client_certificate,
-    )
-    client_key = base64decode(
-      module.cluster.client_key,
-    )
   }
 }
 
