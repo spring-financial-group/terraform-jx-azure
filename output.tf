@@ -13,3 +13,7 @@ output "cluster_outbound_ip_addresses" {
 output "cluster_subnet_id" {
   value = module.cluster.cluster_subnet_id
 }
+
+output "cluster_vnet_id" {
+  value = module.cluster.cluster_vnet_id
+}
