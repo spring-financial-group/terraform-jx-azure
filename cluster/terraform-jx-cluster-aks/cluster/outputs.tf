@@ -12,19 +12,19 @@ output "fqdn" {
 }
 
 output "cluster_endpoint" {
-  value = local.active_kube_config.host
+  value = try(local.active_kube_config.host, null)
 }
 
 output "client_certificate" {
-  value = var.azure_k8s_rbac_enabled ? null : local.active_kube_config.client_certificate
+  value = var.azure_k8s_rbac_enabled ? null : try(local.active_kube_config.client_certificate, null)
 }
 
 output "client_key" {
-  value = var.azure_k8s_rbac_enabled ? null : local.active_kube_config.client_key
+  value = var.azure_k8s_rbac_enabled ? null : try(local.active_kube_config.client_key, null)
 }
 
 output "ca_certificate" {
-  value = local.active_kube_config.cluster_ca_certificate
+  value = try(local.active_kube_config.cluster_ca_certificate, null)
 }
 
 output "kube_config_admin_raw" {
