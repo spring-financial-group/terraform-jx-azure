@@ -379,3 +379,8 @@ variable "cluster_loadbalancer_outbound_ports_allocated" {
   type        = number
   description = "Number of desired SNAT ports per VM in the cluster load balancer. Must be between 0 and 64000 inclusive."
 }
+
+variable "azure_k8s_rbac_enabled" {
+  type = string
+  description = "Enable authentication with Entra and k8s RBAC (ClusterRole and ClusterRoleBinding)"
+}

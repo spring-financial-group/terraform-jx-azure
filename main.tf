@@ -111,6 +111,7 @@ module "cluster" {
   cluster_managed_outbound_ip_count             = var.cluster_managed_outbound_ip_count
   cluster_loadbalancer_idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
   enable_loadbalancer_outbound_ports_allocation = var.enable_loadbalancer_outbound_ports_allocation
+  azure_k8s_rbac_enabled                        = var.azure_k8s_rbac_enabled
 }
 
 output "connect" {

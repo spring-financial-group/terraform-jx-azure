@@ -119,6 +119,7 @@ module "cluster" {
   cluster_managed_outbound_ip_count             = var.cluster_managed_outbound_ip_count
   cluster_loadbalancer_idle_timeout_in_minutes  = var.cluster_loadbalancer_idle_timeout_in_minutes
   cluster_loadbalancer_outbound_ports_allocated = var.cluster_loadbalancer_outbound_ports_allocated
+  azure_k8s_rbac_enabled                        = var.azure_k8s_rbac_enabled
 }
 
 resource "azurerm_role_assignment" "cluster_outbound_network_contributor" {

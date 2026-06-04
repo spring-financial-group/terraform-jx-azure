@@ -363,3 +363,8 @@ variable "cluster_loadbalancer_outbound_ports_allocated" {
   type        = number
   description = "The number of outbound ports to be allocated for each node in the cluster load balancer."
 }
+
+variable "azure_k8s_rbac_enabled" {
+  type = string
+  description = "Enable authentication with Entra and k8s RBAC (ClusterRole and ClusterRoleBinding)"
+}

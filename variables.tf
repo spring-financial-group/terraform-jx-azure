@@ -15,6 +15,10 @@ variable "default_rg" {
   default = "DefaultResourceGroup-SUK"
 }
 
+variable "azure_k8s_rbac_enabled" {
+  type = string
+  description = "Enable authentication with Entra and k8s RBAC (ClusterRole and ClusterRoleBinding)"
+}
 
 // ----------------------------------------------------------------------------
 // JX Boot variables
