@@ -28,7 +28,11 @@ terraform {
 }
 
 module "cluster" {
-  source                                        = "./cluster"
+  source = "./cluster"
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
   apex_domain_integration_enabled               = var.apex_domain_integration_enabled
   apex_domain                                   = var.apex_domain
   apex_resource_group_name                      = var.apex_resource_group_name
