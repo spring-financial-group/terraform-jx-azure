@@ -38,3 +38,7 @@ output "cluster_outbound_ip_addresses" {
 output "cluster_subnet_id" {
   value = module.vnet.subnet_id
 }
+
+output "cluster_vnet_id" {
+  value = module.vnet.vnet_id
+}
