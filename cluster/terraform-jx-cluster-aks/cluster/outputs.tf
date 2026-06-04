@@ -1,7 +1,9 @@
 locals {
   # When azure_k8s_rbac_enabled = true, local_account_disabled = true and
   # kube_admin_config is empty. Fall back to the user kube_config (AAD-auth).
-  active_kube_config     = var.azure_k8s_rbac_enabled ? azurerm_kubernetes_cluster.aks.kube_config[0] : azurerm_kubernetes_cluster.aks.kube_admin_config[0]
+  # try() is needed because Terraform evaluates both branches of the ternary,
+  # and whichever block is empty for the active mode would otherwise error on [0].
+  active_kube_config     = var.azure_k8s_rbac_enabled ? try(azurerm_kubernetes_cluster.aks.kube_config[0], null) : try(azurerm_kubernetes_cluster.aks.kube_admin_config[0], null)
   active_kube_config_raw = var.azure_k8s_rbac_enabled ? azurerm_kubernetes_cluster.aks.kube_config_raw : azurerm_kubernetes_cluster.aks.kube_admin_config_raw
 }
 
