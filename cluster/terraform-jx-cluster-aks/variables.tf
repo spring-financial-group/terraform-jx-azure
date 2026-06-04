@@ -381,6 +381,6 @@ variable "cluster_loadbalancer_outbound_ports_allocated" {
 }
 
 variable "azure_k8s_rbac_enabled" {
-  type = string
+  type = bool
   description = "Enable authentication with Entra and k8s RBAC (ClusterRole and ClusterRoleBinding)"
 }
