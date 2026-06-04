@@ -1,28 +1,38 @@
+locals {
+  # When azure_k8s_rbac_enabled = true, local_account_disabled = true and
+  # kube_admin_config is empty. Fall back to the user kube_config (AAD-auth).
+  active_kube_config     = var.azure_k8s_rbac_enabled ? azurerm_kubernetes_cluster.aks.kube_config[0] : azurerm_kubernetes_cluster.aks.kube_admin_config[0]
+  active_kube_config_raw = var.azure_k8s_rbac_enabled ? azurerm_kubernetes_cluster.aks.kube_config_raw : azurerm_kubernetes_cluster.aks.kube_admin_config_raw
+}
+
 output "fqdn" {
   value = azurerm_kubernetes_cluster.aks.fqdn
 }
 
 output "cluster_endpoint" {
-  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].host, null)
+  value = local.active_kube_config.host
 }
 
 output "client_certificate" {
-  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].client_certificate, null)
+  value = var.azure_k8s_rbac_enabled ? null : local.active_kube_config.client_certificate
 }
 
 output "client_key" {
-  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].client_key, null)
+  value = var.azure_k8s_rbac_enabled ? null : local.active_kube_config.client_key
 }
 
 output "ca_certificate" {
-  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0].cluster_ca_certificate, null)
+  value = local.active_kube_config.cluster_ca_certificate
 }
+
 output "kube_config_admin_raw" {
-  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config_raw, null)
+  value = local.active_kube_config_raw
 }
+
 output "kube_config_admin" {
-  value = try(azurerm_kubernetes_cluster.aks.kube_admin_config[0], null)
+  value = local.active_kube_config
 }
+
 output "node_resource_group" {
   value = azurerm_kubernetes_cluster.aks.node_resource_group
 }
