@@ -25,7 +25,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   http_application_routing_enabled = false
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
-  local_account_disabled = var.azure_k8s_rbac_enabled ? 0 : 1
+  local_account_disabled = var.azure_k8s_rbac_enabled
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
@@ -41,7 +41,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   azure_active_directory_role_based_access_control {
-    azure_rbac_enabled = var.azure_k8s_rbac_enabled ? 0 : 1
+    azure_rbac_enabled = var.azure_k8s_rbac_enabled
     tenant_id          = var.tenant_id
     admin_group_object_ids = var.admin_group_object_ids
   }
