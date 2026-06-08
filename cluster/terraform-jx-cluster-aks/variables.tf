@@ -379,3 +379,8 @@ variable "cluster_loadbalancer_outbound_ports_allocated" {
   type        = number
   description = "Number of desired SNAT ports per VM in the cluster load balancer. Must be between 0 and 64000 inclusive."
 }
+
+variable "enable_cluster_admin_rbac" {
+  type        = bool
+  description = "Flag to enable admin cluster RBAC configuration."
+}
