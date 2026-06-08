@@ -399,7 +399,6 @@ variable "enable_cluster_user_rbac" {
 
 variable "enable_cluster_admin_rbac" {
   type        = bool
-  default     = false
   description = "Flag to enable admin cluster RBAC configuration."
 }
 
