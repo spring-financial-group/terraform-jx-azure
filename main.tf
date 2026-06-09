@@ -102,6 +102,10 @@ module "cluster" {
   enable_defender_analytics                     = var.enable_defender_analytics
   orchestrator_version                          = var.orchestrator_version
   os_sku                                        = var.os_sku
+  node_os_upgrade_type                          = var.node_os_upgrade_type
+  node_maintenance_window_day                   = var.node_maintenance_window_day
+  node_maintenance_window_start_time            = var.node_maintenance_window_start_time
+  node_maintenance_window_duration              = var.node_maintenance_window_duration
   enable_auto_upgrades                          = var.enable_auto_upgrades
   microsoft_defender_log_analytics_name         = var.microsoft_defender_log_analytics_name
   gpu_driver_llm                                = var.gpu_driver_llm

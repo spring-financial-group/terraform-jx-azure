@@ -41,9 +41,9 @@ variable "install_kuberhealthy" {
   default     = true
 }
 variable "enable_acr_chart_registry" {
-    type        = bool
-    default     = false
-    description = "BETA: Flag to indicate whether to pass ACR chart registry credentials to jx boot"
+  type        = bool
+  default     = false
+  description = "BETA: Flag to indicate whether to pass ACR chart registry credentials to jx boot"
 }
 
 // ----------------------------------------------------------------------------
@@ -323,6 +323,26 @@ variable "orchestrator_version" {
 variable "os_sku" {
   description = "The OS SKU to use for the cluster. Options can be found here: https://learn.microsoft.com/en-us/azure/aks/upgrade-os-version#supported-os-versions"
   type        = string
+}
+
+variable "node_os_upgrade_type" {
+  description = "The upgrade channel for node OS image upgrades. Options: None, NodeImage, SecurityPatch, Unmanaged."
+  type        = string
+}
+
+variable "node_maintenance_window_day" {
+  description = "The day of the week for the weekly node OS upgrade maintenance window."
+  type        = string
+}
+
+variable "node_maintenance_window_start_time" {
+  description = "The start time (HH:mm, UTC) for the weekly node OS upgrade maintenance window."
+  type        = string
+}
+
+variable "node_maintenance_window_duration" {
+  description = "The duration in hours for the weekly node OS upgrade maintenance window."
+  type        = number
 }
 
 variable "network_resource_group_name" {

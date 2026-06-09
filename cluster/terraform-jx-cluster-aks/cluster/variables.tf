@@ -275,6 +275,26 @@ variable "os_sku" {
   type        = string
 }
 
+variable "node_os_upgrade_type" {
+  description = "The upgrade channel for node OS image upgrades. Options: None, NodeImage, SecurityPatch, Unmanaged."
+  type        = string
+}
+
+variable "node_maintenance_window_day" {
+  description = "The day of the week for the weekly node OS upgrade maintenance window."
+  type        = string
+}
+
+variable "node_maintenance_window_start_time" {
+  description = "The start time (HH:mm, UTC) for the weekly node OS upgrade maintenance window."
+  type        = string
+}
+
+variable "node_maintenance_window_duration" {
+  description = "The duration in hours for the weekly node OS upgrade maintenance window."
+  type        = number
+}
+
 
 variable "location" {
   type = string
@@ -350,13 +370,13 @@ variable "admin_group_object_ids" {
 }
 
 variable "cluster_managed_outbound_ip_count" {
-    type        = number
-    description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
+  type        = number
+  description = "The number of outbound IPs to be used for the cluster when using a standard load balancer."
 }
 
 variable "cluster_loadbalancer_idle_timeout_in_minutes" {
-    type        = number
-    description = "The idle timeout in minutes for the cluster load balancer outbound rules"
+  type        = number
+  description = "The idle timeout in minutes for the cluster load balancer outbound rules"
 }
 
 variable "cluster_loadbalancer_outbound_ports_allocated" {

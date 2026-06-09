@@ -275,6 +275,26 @@ variable "os_sku" {
   type        = string
 }
 
+variable "node_os_upgrade_type" {
+  description = "The upgrade channel for node OS image upgrades. Options: None, NodeImage, SecurityPatch, Unmanaged."
+  type        = string
+}
+
+variable "node_maintenance_window_day" {
+  description = "The day of the week for the weekly node OS upgrade maintenance window."
+  type        = string
+}
+
+variable "node_maintenance_window_start_time" {
+  description = "The start time (HH:mm, UTC) for the weekly node OS upgrade maintenance window."
+  type        = string
+}
+
+variable "node_maintenance_window_duration" {
+  description = "The duration in hours for the weekly node OS upgrade maintenance window."
+  type        = number
+}
+
 variable "location" {
   type    = string
   default = "australiaeast"
