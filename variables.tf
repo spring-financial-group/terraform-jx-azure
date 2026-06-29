@@ -135,7 +135,7 @@ variable "llm_node_zones" {
 
 variable "gpu_driver_llm" {
   type        = string
-  default = "Install"
+  default     = "Install"
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
@@ -181,7 +181,7 @@ variable "ml_node_zones" {
 }
 variable "gpu_driver_ml" {
   type        = string
-  default = null
+  default     = null
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
@@ -338,6 +338,30 @@ variable "os_sku" {
   default     = "Ubuntu"
 }
 
+variable "node_os_upgrade_type" {
+  description = "The upgrade channel for node OS image upgrades. Options: None, NodeImage, SecurityPatch, Unmanaged."
+  type        = string
+  default     = "SecurityPatch"
+}
+
+variable "node_maintenance_window_day" {
+  description = "The day of the week for the weekly node OS upgrade maintenance window."
+  type        = string
+  default     = "Saturday"
+}
+
+variable "node_maintenance_window_start_time" {
+  description = "The start time (HH:mm, UTC) for the weekly node OS upgrade maintenance window."
+  type        = string
+  default     = "19:00"
+}
+
+variable "node_maintenance_window_duration" {
+  description = "The duration in hours for the weekly node OS upgrade maintenance window."
+  type        = number
+  default     = 4
+}
+
 variable "network_resource_group_name" {
   type        = string
   default     = ""
@@ -481,9 +505,9 @@ variable "use_existing_acr_resource_group_name" {
 }
 
 variable "enable_dev_acr_pull" {
-    description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
-    type        = bool
-    default     = false
+  description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
+  type        = bool
+  default     = false
 }
 
 variable "enable_mqube_tech_acr_readonly" {

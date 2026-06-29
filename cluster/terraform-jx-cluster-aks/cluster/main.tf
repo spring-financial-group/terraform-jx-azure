@@ -26,22 +26,22 @@ resource "azurerm_kubernetes_cluster" "aks" {
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
 
-  node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
+  node_os_upgrade_channel = var.enable_auto_upgrades ? var.node_os_upgrade_type : "None"
 
   dynamic "maintenance_window_node_os" {
     for_each = var.enable_auto_upgrades ? [1] : []
     content {
-      day_of_week = "Saturday"
-      start_time  = "19:00"
-      duration    = 4
+      day_of_week = var.node_maintenance_window_day
+      start_time  = var.node_maintenance_window_start_time
+      duration    = var.node_maintenance_window_duration
       frequency   = "Weekly"
       interval    = 1
     }
   }
 
   azure_active_directory_role_based_access_control {
-    azure_rbac_enabled = false
-    tenant_id          = var.tenant_id
+    azure_rbac_enabled     = false
+    tenant_id              = var.tenant_id
     admin_group_object_ids = var.admin_group_object_ids
   }
 
@@ -77,8 +77,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin = var.cluster_network_model
 
-    load_balancer_sku  = "standard"
-    outbound_type      = "loadBalancer"
+    load_balancer_sku = "standard"
+    outbound_type     = "loadBalancer"
 
     load_balancer_profile {
       outbound_ip_address_ids  = azurerm_public_ip.cluster_outbound[*].id
@@ -167,23 +167,23 @@ resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "infranode" {
-  count                       = var.infra_node_size == "" ? 0 : 1
-  name                        = "infranode"
-  priority                    = var.use_spot_infra ? "Spot" : "Regular"
-  eviction_policy             = var.use_spot_infra ? "Deallocate" : null
-  spot_max_price              = var.use_spot_infra ? var.spot_max_price_infra : null
-  kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
-  vm_size                     = var.infra_node_size
-  vnet_subnet_id              = var.vnet_subnet_id
-  node_count                  = var.use_spot_infra ? 0 : var.infra_node_count
-  min_count                   = var.min_infra_node_count
-  max_count                   = var.max_infra_node_count
-  orchestrator_version        = var.orchestrator_version
-  os_sku                      = var.os_sku
-  auto_scaling_enabled        = var.max_infra_node_count == null ? false : true
-  node_taints                 = ["sku=infra:NoSchedule"]
-  node_labels                 = { node = "infra" }
-  zones                       = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.infra_node_zones
+  count                 = var.infra_node_size == "" ? 0 : 1
+  name                  = "infranode"
+  priority              = var.use_spot_infra ? "Spot" : "Regular"
+  eviction_policy       = var.use_spot_infra ? "Deallocate" : null
+  spot_max_price        = var.use_spot_infra ? var.spot_max_price_infra : null
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+  vm_size               = var.infra_node_size
+  vnet_subnet_id        = var.vnet_subnet_id
+  node_count            = var.use_spot_infra ? 0 : var.infra_node_count
+  min_count             = var.min_infra_node_count
+  max_count             = var.max_infra_node_count
+  orchestrator_version  = var.orchestrator_version
+  os_sku                = var.os_sku
+  auto_scaling_enabled  = var.max_infra_node_count == null ? false : true
+  node_taints           = ["sku=infra:NoSchedule"]
+  node_labels           = { node = "infra" }
+  zones                 = var.enable_node_zone_spanning ? ["1", "2", "3"] : var.infra_node_zones
   upgrade_settings {
     max_surge = "${floor(var.max_infra_node_surge * 100)}%"
   }
