@@ -45,7 +45,7 @@ node_size      = "Standard_D8s_v5"
 
 # Ml nodes
 use_spot_ml       = true
-ml_node_size      = "Standard_NV24s_v3"
+ml_node_size      = "Standard_NC4as_T4_v3"
 min_ml_node_count = 2
 max_ml_node_count = 6
 
