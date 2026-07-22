@@ -135,7 +135,7 @@ variable "llm_node_zones" {
 
 variable "gpu_driver_llm" {
   type        = string
-  default = "Install"
+  default     = "Install"
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
@@ -181,7 +181,7 @@ variable "ml_node_zones" {
 }
 variable "gpu_driver_ml" {
   type        = string
-  default = null
+  default     = "Install"
   description = "The GPU driver to use for the LLM nodepool. Options are 'nvidia' or 'amd'."
 }
 
@@ -481,9 +481,9 @@ variable "use_existing_acr_resource_group_name" {
 }
 
 variable "enable_dev_acr_pull" {
-    description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
-    type        = bool
-    default     = false
+  description = "Flag to grant MQube Product Engineering Team ACR pull permissions"
+  type        = bool
+  default     = false
 }
 
 variable "enable_mqube_tech_acr_readonly" {
