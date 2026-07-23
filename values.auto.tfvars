@@ -48,7 +48,7 @@ use_spot_ml        = true
 ml_node_size       = "Standard_NC4as_T4_v3"
 gpu_driver_ml      = "Install"
 min_ml_node_count  = 2
-max_ml_node_count  = 6
+max_ml_node_count  = 12
 ml_eviction_policy = "Delete"
 ml_node_zones      = ["1", "2", "3"]
 
