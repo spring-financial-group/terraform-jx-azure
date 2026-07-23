@@ -50,6 +50,7 @@ gpu_driver_ml      = "Install"
 min_ml_node_count  = 2
 max_ml_node_count  = 6
 ml_eviction_policy = "Delete"
+ml_node_zones      = ["1", "2", "3"]
 
 # LLM nodes
 use_spot_llm       = true
