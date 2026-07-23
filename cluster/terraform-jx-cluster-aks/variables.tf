@@ -94,6 +94,12 @@ variable "spot_max_price_ml" {
   default     = -1
   description = "The maximum price you're willing to pay in USD per virtual machine, -1 to go to the maximum price"
 }
+
+variable "ml_eviction_policy" {
+  type        = string
+  description = "Eviction policy for the ML spot node pool. 'Delete' is recommended by Azure for AKS spot pools; 'Deallocate' preserves the pre-existing behaviour."
+}
+
 variable "ml_node_size" {
   type        = string
   default     = ""

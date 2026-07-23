@@ -44,11 +44,12 @@ node_size      = "Standard_D8s_v5"
 
 
 # Ml nodes
-use_spot_ml       = true
-ml_node_size      = "Standard_NC4as_T4_v3"
-gpu_driver_ml     = "Install"
-min_ml_node_count = 2
-max_ml_node_count = 6
+use_spot_ml        = true
+ml_node_size       = "Standard_NC4as_T4_v3"
+gpu_driver_ml      = "Install"
+min_ml_node_count  = 2
+max_ml_node_count  = 6
+ml_eviction_policy = "Delete"
 
 # LLM nodes
 use_spot_llm       = true
