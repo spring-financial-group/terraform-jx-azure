@@ -98,7 +98,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mlnode" {
   count                       = var.ml_node_size == "" ? 0 : 1
   name                        = "mlnode"
   priority                    = var.use_spot_ml ? "Spot" : "Regular"
-  eviction_policy             = var.use_spot_ml ? "Deallocate" : null
+  eviction_policy             = var.use_spot_ml ? var.ml_eviction_policy : null
   spot_max_price              = var.use_spot_ml ? var.spot_max_price_ml : null
   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
   vm_size                     = var.ml_node_size

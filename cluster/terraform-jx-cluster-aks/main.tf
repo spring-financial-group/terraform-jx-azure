@@ -69,6 +69,7 @@ module "cluster" {
   max_node_surge                        = var.max_node_surge
   use_spot_ml                           = var.use_spot_ml
   spot_max_price_ml                     = var.spot_max_price_ml
+  ml_eviction_policy                    = var.ml_eviction_policy
   ml_node_count                         = var.ml_node_count
   min_ml_node_count                     = var.min_ml_node_count
   max_ml_node_count                     = var.max_ml_node_count
