@@ -91,6 +91,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 
+  node_provisioning_profile {
+    mode = "Manual"
+  }
+
   lifecycle { ignore_changes = [maintenance_window_node_os[0].utc_offset] }
 }
 
