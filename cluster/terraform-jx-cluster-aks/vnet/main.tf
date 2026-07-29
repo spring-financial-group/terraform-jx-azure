@@ -12,5 +12,8 @@ resource "azurerm_subnet" "cluster_subnet" {
   virtual_network_name              = azurerm_virtual_network.cluster.name
   address_prefixes                  = [var.subnet_cidr]
   private_endpoint_network_policies = "Enabled"
-  service_endpoints                 = ["Microsoft.Storage"]
+
+  service_endpoint {
+    service = "Microsoft.Storage"
+  }
 }
