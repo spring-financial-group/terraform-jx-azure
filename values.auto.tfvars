@@ -59,10 +59,11 @@ min_llm_node_count = 0
 max_llm_node_count = 2
 
 # Build Spot Nodes
-use_spot             = true
-build_node_size      = "Standard_D8s_v5"
-min_build_node_count = 1
-max_build_node_count = 20
+use_spot              = true
+build_eviction_policy = "Delete"
+build_node_size       = "Standard_D8s_v5"
+min_build_node_count  = 1
+max_build_node_count  = 20
 
 #Infra Node
 use_spot_infra       = false

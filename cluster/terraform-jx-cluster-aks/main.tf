@@ -85,6 +85,7 @@ module "cluster" {
   llm_node_zones                        = var.llm_node_zones
   use_spot                              = var.use_spot
   spot_max_price                        = var.spot_max_price
+  build_eviction_policy                 = var.build_eviction_policy
   build_node_size                       = var.build_node_size
   build_node_count                      = var.build_node_count
   min_build_node_count                  = var.min_build_node_count

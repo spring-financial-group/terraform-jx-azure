@@ -149,6 +149,11 @@ variable "ml_eviction_policy" {
   description = "Eviction policy for the ML spot node pool. 'Delete' is recommended by Azure for AKS spot pools; 'Deallocate' preserves the pre-existing behaviour."
 }
 
+variable "build_eviction_policy" {
+  type        = string
+  description = "Eviction policy for the build spot node pool. 'Delete' is recommended by Azure for AKS spot pools; 'Deallocate' preserves the pre-existing behaviour."
+}
+
 variable "ml_node_size" {
   type        = string
   default     = ""
