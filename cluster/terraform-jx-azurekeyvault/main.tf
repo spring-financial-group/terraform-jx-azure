@@ -6,7 +6,8 @@ terraform {
   required_version = ">= 1.4.6"
   required_providers {
     azurerm = {
-      version = ">=4.23.0"
+      source  = "hashicorp/azurerm"
+      version = "=5.0"
     }
   }
 }
@@ -44,6 +45,7 @@ resource "azurerm_key_vault" "jx" {
   tenant_id                  = local.tenant_id
   purge_protection_enabled   = true
   soft_delete_retention_days = 90
+  rbac_authorization_enabled = false
 }
 
 resource "azurerm_key_vault_access_policy" "jx" {

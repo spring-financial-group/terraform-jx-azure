@@ -25,6 +25,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   http_application_routing_enabled = false
   image_cleaner_interval_hours     = 48
   image_cleaner_enabled            = false
+  oidc_issuer_enabled              = false
+  
 
   node_os_upgrade_channel = var.enable_auto_upgrades ? "SecurityPatch" : "None"
 
@@ -89,6 +91,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   identity {
     type = "SystemAssigned"
+  }
+
+  node_provisioning_profile {
+    mode = "Manual"
   }
 
   lifecycle { ignore_changes = [maintenance_window_node_os[0].utc_offset] }
