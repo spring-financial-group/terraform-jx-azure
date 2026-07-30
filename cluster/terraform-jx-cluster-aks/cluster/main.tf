@@ -154,7 +154,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "buildnode" {
   count                       = var.build_node_size == "" ? 0 : 1
   name                        = "buildnode"
   priority                    = var.use_spot ? "Spot" : "Regular"
-  eviction_policy             = var.use_spot ? "Deallocate" : null
+  eviction_policy             = var.use_spot ? var.build_eviction_policy : null
   spot_max_price              = var.use_spot ? var.spot_max_price : null
   kubernetes_cluster_id       = azurerm_kubernetes_cluster.aks.id
   vm_size                     = var.build_node_size
