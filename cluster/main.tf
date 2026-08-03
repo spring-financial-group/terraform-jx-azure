@@ -5,6 +5,7 @@ terraform {
       version = "=3.9.0"
     }
     kubernetes = {
+      source = "hashicorp/kubernetes"
       version = "=3.2.1"
     }
     azurerm = {
