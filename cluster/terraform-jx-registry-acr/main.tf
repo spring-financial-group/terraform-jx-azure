@@ -4,16 +4,6 @@
 // ----------------------------------------------------------------------------
 terraform {
   required_version = ">= 1.3.2"
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=5.0"
-    }
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "=3.9.0"
-    }
-  }
 }
 
 resource "azurerm_resource_group" "acr" {
