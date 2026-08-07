@@ -31,8 +31,6 @@ provider "azurerm" {
   }
 }
 
-provider "azuread" {}
-
 provider "kubernetes" {
   host = module.cluster.cluster_endpoint
   cluster_ca_certificate = base64decode(
