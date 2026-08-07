@@ -29,9 +29,9 @@ data "azurerm_container_registry" "acr_existing" {
   resource_group_name = var.use_existing_acr_resource_group_name
 }
 
-data "azuread_group" "jx_dev_team" {
-  count        = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
-  display_name = "JX Dev Team"
+data "azuread_groups" "jx_dev_team" {
+  count         = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
+  display_names = ["JX Dev Team"]
 }
 
 resource "azurerm_role_assignment" "acrpull" {
@@ -52,7 +52,7 @@ resource "azurerm_role_assignment" "dev_acrpull" {
   count                = var.enable_dev_acr_pull && var.acr_enabled ? 1 : 0
   scope                = var.use_existing_acr_name == null ? azurerm_container_registry.acr[0].id : data.azurerm_container_registry.acr_existing[0].id
   role_definition_name = "AcrPull"
-  principal_id         = data.azuread_group.jx_dev_team[0].object_id
+  principal_id         = data.azuread_groups.jx_dev_team[0].object_ids[0]
 }
 
 # Pullthrough cache rules for public registries

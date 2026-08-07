@@ -25,19 +25,19 @@ locals {
   enable_cluster_admin_rbac = var.enable_cluster_admin_rbac
 }
 
-data "azuread_group" "jx_dev_team" {
-  count        = local.enable_cluster_user_rbac ? 1 : 0
-  display_name = "JX Dev Team"
+data "azuread_groups" "jx_dev_team" {
+  count         = local.enable_cluster_user_rbac ? 1 : 0
+  display_names = ["JX Dev Team"]
 }
 
-data "azuread_group" "jx_readonly_team" {
-  count        = local.enable_cluster_user_rbac ? 1 : 0
-  display_name = "JX Readonly Team"
+data "azuread_groups" "jx_readonly_team" {
+  count         = local.enable_cluster_user_rbac ? 1 : 0
+  display_names = ["JX Readonly Team"]
 }
 
-data "azuread_group" "cluster_admin_team" {
-  count        = local.enable_cluster_admin_rbac ? 1 : 0
-  display_name = "Infrastructure Team"
+data "azuread_groups" "cluster_admin_team" {
+  count         = local.enable_cluster_admin_rbac ? 1 : 0
+  display_names = ["Infrastructure Team"]
 }
 
 resource "kubernetes_config_map" "jenkins_x_requirements" {
@@ -59,13 +59,11 @@ resource "kubernetes_config_map" "jenkins_x_requirements" {
   ]
 }
 
-
-
 resource "azurerm_role_assignment" "jx_dev_cluster_user_role" {
   count                = local.enable_cluster_user_rbac ? 1 : 0
   scope                = module.cluster.cluster_id
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = data.azuread_group.jx_dev_team[0].object_id
+  principal_id         = data.azuread_groups.jx_dev_team[0].object_ids[0]
   depends_on = [
     module.cluster
   ]
@@ -75,7 +73,7 @@ resource "azurerm_role_assignment" "jx_readonly_cluster_user_role" {
   count                = local.enable_cluster_user_rbac ? 1 : 0
   scope                = module.cluster.cluster_id
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = data.azuread_group.jx_readonly_team[0].object_id
+  principal_id         = data.azuread_groups.jx_readonly_team[0].object_ids[0]
 }
 
 resource "kubernetes_manifest" "jx_dev_cluster_role" {
@@ -91,7 +89,7 @@ resource "kubernetes_manifest" "jx_dev_cluster_role_binding" {
   manifest = yamldecode(templatefile(
     "${path.module}/terraform-jx-cluster-aks/rbac/dev/jx-dev-crb.yaml",
     {
-      group_object_id = data.azuread_group.jx_dev_team[0].object_id
+      group_object_id = data.azuread_groups.jx_dev_team[0].object_ids[0]
   }))
   depends_on = [
     module.cluster
@@ -111,7 +109,7 @@ resource "kubernetes_manifest" "jx_readonly_cluster_role_binding" {
   manifest = yamldecode(templatefile(
     "${path.module}/terraform-jx-cluster-aks/rbac/readonly/jx-readonly-crb.yaml",
     {
-      group_object_id = data.azuread_group.jx_readonly_team[0].object_id
+      group_object_id = data.azuread_groups.jx_readonly_team[0].object_ids[0]
   }))
   depends_on = [
     module.cluster
