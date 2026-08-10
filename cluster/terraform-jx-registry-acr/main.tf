@@ -66,6 +66,15 @@ resource "azurerm_container_registry_cache_rule" "cache_rule" {
   credential_set_id     = "${azurerm_container_registry.acr[0].id}/credentialSets/dockerhub-cred"
 }
 
+resource "azurerm_container_registry_cache_rule" "cache_rule_dhi" {
+  count                 = var.acr_enabled && var.external_registry_url == "" && var.use_existing_acr_name == null ? 1 : 0
+  name                  = "dhi-io"
+  container_registry_id = azurerm_container_registry.acr[0].id
+  target_repo           = "dhi-io/*"
+  source_repo           = "dhi.io/*"
+  credential_set_id     = "${azurerm_container_registry.acr[0].id}/credentialSets/dockerhub-cred"
+}
+
 resource "azurerm_container_registry_cache_rule" "cache_rule_mcr" {
   count                 = var.acr_enabled && var.external_registry_url == "" && var.use_existing_acr_name == null ? 1 : 0
   name                  = "mcr-microsoft-com"
