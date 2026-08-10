@@ -72,6 +72,7 @@ resource "azurerm_container_registry_cache_rule" "cache_rule_dhi" {
   container_registry_id = azurerm_container_registry.acr[0].id
   target_repo           = "dhi-io/*"
   source_repo           = "dhi.io/*"
+  credential_set_id     = "${azurerm_container_registry.acr[0].id}/credentialSets/dockerhub-cred"
 }
 
 resource "azurerm_container_registry_cache_rule" "cache_rule_mcr" {
