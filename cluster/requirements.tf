@@ -40,7 +40,7 @@ data "azuread_groups" "cluster_admin_team" {
   display_names = ["Infrastructure Team"]
 }
 
-resource "kubernetes_config_map" "jenkins_x_requirements" {
+resource "kubernetes_config_map_v1" "jenkins_x_requirements" {
   metadata {
     name      = "terraform-jx-requirements"
     namespace = "default"
