@@ -2,3 +2,5 @@ approvers:
 - infrastructure
 reviewers:
 - infrastructure
+
+minimum_reviewers: 2
