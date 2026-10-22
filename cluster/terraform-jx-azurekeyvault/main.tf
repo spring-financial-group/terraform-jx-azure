@@ -29,7 +29,7 @@ resource "azurerm_resource_group" "key_vault" {
 // Setup Azure Resources
 // ----------------------------------------------------------------------------
 
-# tfsec:ignore:azure-keyvault-specify-network-acl -- to be fixed: add network_acls block with bypass = ["AzureServices"] to restrict public endpoint; TFC access is via service principal and will be unaffected
+# tfsec:ignore:azure-keyvault-specify-network-acl -- configure network_acls with default_action = "Deny" and bypass = "AzureServices"; provide an allowed network path for TFC runners because service-principal authentication does not bypass the firewall
 resource "azurerm_key_vault" "jx" {
   count                      = var.enabled ? 1 : 0
   location                   = var.location
