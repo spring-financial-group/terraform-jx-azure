@@ -29,7 +29,7 @@ resource "azurerm_resource_group" "key_vault" {
 // Setup Azure Resources
 // ----------------------------------------------------------------------------
 
-# tfsec:ignore:azure-keyvault-specify-network-acl
+# tfsec:ignore:azure-keyvault-specify-network-acl -- the access to the key vault is managed by ID. we need to review TFC access requirements
 resource "azurerm_key_vault" "jx" {
   count                      = var.enabled ? 1 : 0
   location                   = var.location
