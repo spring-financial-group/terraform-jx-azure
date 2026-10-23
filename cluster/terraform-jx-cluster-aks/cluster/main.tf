@@ -8,10 +8,10 @@ resource "azurerm_public_ip" "cluster_outbound" {
   zones               = ["1", "2", "3"]
 }
 
-# tfsec:ignore:azure-container-limit-authorized-ips
-# tfsec:ignore:azure-container-logging
-# tfsec:ignore:azure-container-use-rbac-permissions
-# tfsec:ignore:azure-container-configured-network-policy
+# tfsec:ignore:azure-container-limit-authorized-ips -- API server access is not IP-restricted; accessed by JX pipelines, TFC runners, Lens and kubectl from developer laptops with dynamic IPs
+# tfsec:ignore:azure-container-logging -- tfsec cannot resolve the dynamic oms_agent block; Container Insights logging is optional and controlled by enable_log_analytics (default false); microsoft_defender provides separate security monitoring, not replacement container/workload logging
+# tfsec:ignore:azure-container-use-rbac-permissions -- Azure RBAC is disabled; access is managed via AAD admin groups using admin_group_object_ids
+# tfsec:ignore:azure-container-configured-network-policy -- No network-policy provider is configured; enabling enforcement does not create default-deny rules, but existing and planned NetworkPolicy resources must be checked for required pod connectivity
 resource "azurerm_kubernetes_cluster" "aks" {
   name                             = var.cluster_name
   sku_tier                         = var.sku_tier

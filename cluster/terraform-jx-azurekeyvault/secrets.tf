@@ -1,4 +1,4 @@
-# tfsec:ignore:azure-keyvault-ensure-secret-expiry
+# tfsec:ignore:azure-keyvault-ensure-secret-expiry -- JX bootstrap secrets are long-lived by design; a static expiry_date is not compatible with operational rotation
 resource "azurerm_key_vault_secret" "secret" {
   depends_on   = [azurerm_key_vault_access_policy.terraform]
   for_each     = local.secret_map
